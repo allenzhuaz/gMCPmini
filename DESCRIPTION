@@ -1,0 +1,14 @@
+Package: gMCPmini
+Type: Package
+Title: Graph Based Multiple Comparison Procedures (Mini Version)
+Version: 0.8-14
+Authors@R: c(person("Yilong", "Zhang", role = c("aut", "cre"),  email = "yilong.zhang@merck.com") )
+Maintainer: Kornelius Rohmeyer <rohmeyer@small-projects.de>
+Description: Selected Functions From gMCP package to support gsDesign and remove JAVA dependency. The 
+  package version is the same as the gMCP package version.
+Depends:
+    R (>= 3.0.0),
+    methods
+License: GPL (>= 2)
+Encoding: UTF-8
+RoxygenNote: 6.1.0
