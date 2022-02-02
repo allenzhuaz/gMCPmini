@@ -1,9 +1,14 @@
 # gMCPmini
 
-`gMCPmini` contains a subset of functions from `gMCP`. The purpose is to remove package dependency of gMCP package including `rJAVA`. The selected functions ensure `simtrial` can produce multiple comparision graph using `hGraph` function. 
+`gMCPmini` contains a subset of functions from `gMCP`. The purpose is to remove package dependency of gMCP package including `rJAVA`. The selected functions ensure `gsDesign` can produce multiple comparision graph using `hGraph` function. 
 
 ## Installation
 
-Please follow one of the methods in the link below. 
+Please make sure to install the `devtools` package at first:
 
-[https://share.merck.com/display/RUG/How+to+install+R+package+hoststed+by+Merck+Bitbucket#space-menu-link-content](https://share.merck.com/display/RUG/How+to+install+R+package+hoststed+by+Merck+Bitbucket#space-menu-link-content)
+```r
+# install.packages("devtools") if you have not installed the package
+devtools::install_github("allenzhuaz/gMCPmini")
+
+# devtools::install_github("Merck/gMCPmini") Placeholder for future moving to Merck's repository
+```
