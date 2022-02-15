@@ -12,4 +12,7 @@ Depends:
     methods
 License: GPL (>= 2)
 Encoding: UTF-8
-RoxygenNote: 6.1.0
+RoxygenNote: 7.1.2
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
