@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>/404.html</loc>
+  </url>
+  <url>
+    <loc>/authors.html</loc>
+  </url>
+  <url>
+    <loc>/index.html</loc>
+  </url>
+  <url>
+    <loc>/reference/BonferroniHolm.html</loc>
+  </url>
+  <url>
+    <loc>/reference/gMCP.html</loc>
+  </url>
+  <url>
+    <loc>/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>/reference/matrix2graph.html</loc>
+  </url>
+  <url>
+    <loc>/reference/rejectNode.html</loc>
+  </url>
+  <url>
+    <loc>/reference/substituteEps.html</loc>
+  </url>
+</urlset>
