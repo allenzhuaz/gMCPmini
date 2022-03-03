@@ -3,8 +3,10 @@ Type: Package
 Title: Graph Based Multiple Comparison Procedures (Mini Version)
 Version: 0.8-15
 Authors@R: c(person("Yilong", "Zhang", role = c("aut", "cre"),  email = "yilong.zhang@merck.com"),
-             person("Yalin", "Zhu", role = c("aut"),  email = "yalin.zhu@merck.com"))
-Maintainer: Kornelius Rohmeyer <rohmeyer@small-projects.de>
+             person("Yalin", "Zhu", role = c("aut"),  email = "yalin.zhu@merck.com"),
+             person("Xuan", "Deng", role = c("aut"),  email = "xuan.deng@merck.com"),
+             person("Keaven", "Anderson", role = c("aut"),  email = "keaven_anderson@merck.com"))
+Maintainer: Yalin Zhu <yalin.zhu@merck.com>
 Description: Selected Functions From gMCP package to support gsDesign and remove JAVA dependency. The 
   package version is the same as the gMCP package version.
 Depends:
