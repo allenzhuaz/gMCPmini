@@ -21,6 +21,15 @@ Substitute Epsilon with a given value.
 \details{
 For details see the given references.
 }
+\examples{
+
+
+graph <- improvedParallelGatekeeping()
+graph
+substituteEps(graph, eps=0.01)
+
+
+}
 \seealso{
 \code{\link{graphMCP}}, \code{\link{entangledMCP}}
 }

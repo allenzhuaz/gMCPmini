@@ -1,16 +1,16 @@
 ## Graph representation in gMCP
-setClass("graphMCP",	
-		representation(m="matrix", 
-				weights="numeric", 
-				nodeAttr="list", 
+setClass("graphMCP",
+		representation(m="matrix",
+				weights="numeric",
+				nodeAttr="list",
 				edgeAttr="list"),
 		validity=function(object) validWeightedGraph(object))
 
 setMethod("initialize", "graphMCP",
-		function(.Object, m, weights, nodeAttr=list(), edgeAttr=list()) {			
-			if (length(weights)) {			
+		function(.Object, m, weights, nodeAttr=list(), edgeAttr=list()) {
+			if (length(weights)) {
 				checkValidWeights(weights)
-			}			
+			}
       if (is.null(rownames(m))) {
         rownames(m) <- paste("H", 1:dim(m)[1], sep="")
       }
@@ -33,7 +33,7 @@ validWeightedGraph <- function(object) {
 	return(TRUE)
 }
 
-setClass("gMCPResult",		
+setClass("gMCPResult",
 		representation(graphs="list",
 				pvalues="numeric",
 				alpha="numeric",
@@ -45,26 +45,26 @@ setMethod("print", "gMCPResult",
 		function(x, ...) {
 			callNextMethod(x, ...)
 			#for (node in getNodes(x)) {
-			#	cat(paste(node, " (",ifelse(unlist(nodeAttr(x, node, "rejected")),"rejected","not rejected"),", alpha=",format(unlist(nodeAttr(x, node, "nodeWeight")), digits=4 ,drop0trailing=TRUE),")\n", sep=""))	
+			#	cat(paste(node, " (",ifelse(unlist(nodeAttr(x, node, "rejected")),"rejected","not rejected"),", alpha=",format(unlist(nodeAttr(x, node, "nodeWeight")), digits=4 ,drop0trailing=TRUE),")\n", sep=""))
 			#}
-			#cat(paste("alpha=",paste(format(getWeights(x), digits=4 ,drop0trailing=TRUE),collapse="+"),"=",sum(getWeights(x)),"\n", sep=""))			
+			#cat(paste("alpha=",paste(format(getWeights(x), digits=4 ,drop0trailing=TRUE),collapse="+"),"=",sum(getWeights(x)),"\n", sep=""))
 		})
 
 setMethod("show", "gMCPResult",
 		function(object) {
 			# callNextMethod(x, ...)
-			cat("gMCP-Result\n")			
+			cat("gMCP-Result\n")
 			cat("\nInitial graph:\n")
 			print(object@graphs[[1]])
 			cat("\nP-values:\n")
-			print(object@pvalues)						
+			print(object@pvalues)
 			if (length(object@adjPValues)>0) {
 				cat("\nAdjusted p-values:\n")
 				print(object@adjPValues)
 			}
 			cat(paste("\nAlpha:",object@alpha,"\n"))
 			if (all(!object@rejected)) {
-				cat("\nNo hypotheses could be rejected.\n")				
+				cat("\nNo hypotheses could be rejected.\n")
 			} else {
 				cat("\nHypothesis rejected:\n")
 				print(object@rejected)
@@ -72,18 +72,18 @@ setMethod("show", "gMCPResult",
 			if (length(object@graphs)>1) {
 				cat("\nFinal graph after", length(object@graphs)-1 ,"steps:\n")
 				print(object@graphs[[length(object@graphs)]])
-			}			
+			}
 		})
 
 setMethod("plot", "gMCPResult",
 		function(x, y, ...) {
-			# TODO Show visualization of graph			
+			# TODO Show visualization of graph
 		})
 
 setGeneric("getNodes", function(object, ...) standardGeneric("getNodes"))
 
 setMethod("getNodes", c("graphMCP"),
-		function(object, ...) {			
+		function(object, ...) {
 			return(rownames(object@m))
 		})
 
@@ -95,8 +95,10 @@ setMethod("getMatrix", c("graphMCP"),
 			return(m)
 		})
 
+#' @export
 setGeneric("getWeights", function(object, node, ...) standardGeneric("getWeights"))
 
+#' @export
 setMethod("getWeights", c("graphMCP"),
 		function(object, node, ...) {
 			weights <- object@weights
@@ -107,20 +109,23 @@ setMethod("getWeights", c("graphMCP"),
 			return(weights)
 		})
 
+#' @export
 setGeneric("setWeights", function(object, weights, node, ...) standardGeneric("setWeights"))
 
+#' @export
 setMethod("setWeights", c("graphMCP"),
 		function(object, weights, node, ...) {
 			if (missing(node)) {
 				node <- getNodes(object)
 			}
-			object@weights[node] <- weights			
+			object@weights[node] <- weights
 			return(object)
 		})
 
+#' @export
 setMethod("getWeights", c("gMCPResult"),
 		function(object, node, ...) {
-			graph <- object@graphs[[length(object@graphs)]]			
+			graph <- object@graphs[[length(object@graphs)]]
 			return(getWeights(graph, node))
 		})
 
@@ -152,9 +157,9 @@ setMethod("edgeAttr", signature(self="graphMCP", from="character", to="character
 setReplaceMethod("edgeAttr",
 		signature(self="graphMCP", from="character", to="character", attr="character", value="ANY"),
 		function(self, from, to, attr, value) {
-			if (is.null(self@edgeAttr[[attr]])) self@edgeAttr[[attr]] <- matrix(NA, nrow=dim(self@m)[1], ncol=dim(self@m)[2])			
+			if (is.null(self@edgeAttr[[attr]])) self@edgeAttr[[attr]] <- matrix(NA, nrow=dim(self@m)[1], ncol=dim(self@m)[2])
 			rownames(self@edgeAttr[[attr]]) <- colnames(self@edgeAttr[[attr]]) <- getNodes(self)
-			self@edgeAttr[[attr]][from, to] <- value		
+			self@edgeAttr[[attr]][from, to] <- value
 			self
 		})
 
@@ -170,7 +175,7 @@ setReplaceMethod("nodeAttr",
 		signature(self="graphMCP", n="character", attr="character", value="ANY"),
 		function(self, n, attr, value) {
 			if (is.null(self@nodeAttr[[attr]])) self@nodeAttr[[attr]] <- logical(length=length(getNodes(self)))
-			self@nodeAttr[[attr]][n] <- value			
+			self@nodeAttr[[attr]][n] <- value
 			self
 		})
 
@@ -184,7 +189,7 @@ setMethod("getRejected", c("graphMCP"), function(object, node, ...) {
 			return(rejected)
 		})
 
-setMethod("getRejected", c("gMCPResult"), function(object, node, ...) {			
+setMethod("getRejected", c("gMCPResult"), function(object, node, ...) {
 			rejected <- object@rejected
 			if (!missing(node)) {
 				return(rejected[node])
@@ -200,7 +205,7 @@ setMethod("setRejected", c("graphMCP"),
 			if (missing(node)) {
 				node <- getNodes(object)
 			}
-			object@nodeAttr$rejected[node] <- value			
+			object@nodeAttr$rejected[node] <- value
 			return(object)
 		})
 
@@ -209,7 +214,7 @@ setReplaceMethod("setRejected", c("graphMCP"),
 			if (missing(node)) {
 				node <- getNodes(object)
 			}
-			object@nodeAttr$rejected[node] <- value			
+			object@nodeAttr$rejected[node] <- value
 			return(object)
 		})
 
@@ -237,7 +242,7 @@ setMethod("getYCoordinates", c("graphMCP"), function(graph, node) {
 			return(y)
 		})
 
-canBeRejected <- function(graph, node, alpha, pvalues) {	
+canBeRejected <- function(graph, node, alpha, pvalues) {
 	return(getWeights(graph)[[node]]*alpha>pvalues[[node]] | (all.equal(getWeights(graph)[[node]]*alpha,pvalues[[node]])[1]==TRUE));
 }
 
@@ -245,9 +250,9 @@ setMethod("print", "graphMCP",
 		function(x, ...) {
 			callNextMethod(x, ...)
 			#for (node in getNodes(x)) {
-			#	cat(paste(node, " (",ifelse(unlist(nodeAttr(x, node, "rejected")),"rejected","not rejected"),", alpha=",format(unlist(nodeAttr(x, node, "nodeWeight")), digits=4 ,drop0trailing=TRUE),")\n", sep=""))	
+			#	cat(paste(node, " (",ifelse(unlist(nodeAttr(x, node, "rejected")),"rejected","not rejected"),", alpha=",format(unlist(nodeAttr(x, node, "nodeWeight")), digits=4 ,drop0trailing=TRUE),")\n", sep=""))
 			#}
-			#cat(paste("alpha=",paste(format(getWeights(x), digits=4 ,drop0trailing=TRUE),collapse="+"),"=",sum(getWeights(x)),"\n", sep=""))			
+			#cat(paste("alpha=",paste(format(getWeights(x), digits=4 ,drop0trailing=TRUE),collapse="+"),"=",sum(getWeights(x)),"\n", sep=""))
 		})
 
 setMethod("show", "graphMCP",
@@ -257,7 +262,7 @@ setMethod("show", "graphMCP",
 			cat("A graphMCP graph\n")
 			if (!isTRUE(all.equal(sum(getWeights(object)),1))) {
 				cat(paste("Sum of weight: ",sum(getWeights(object)),"\n", sep=""))
-			}			
+			}
 			for (node in getNodes(object)) {
 				cat(paste(node, " (",ifelse(nodeAttr(object, node, "rejected"),"rejected, ",""),"weight=",format(object@weights[node], digits=4, drop0trailing=TRUE),")\n", sep=""))
 			}
@@ -283,7 +288,7 @@ setMethod("show", "graphMCP",
 )
 
 getWeightStr <- function(graph, from, to, LaTeX=FALSE) {
-	weight <- graph@m[from,to]	
+	weight <- graph@m[from,to]
 	if (LaTeX) {
 		if (is.numeric(weight)) {
 			return(getLaTeXFraction(weight))
@@ -295,11 +300,11 @@ getWeightStr <- function(graph, from, to, LaTeX=FALSE) {
 		}
 		# TODO / Bonus: Parse fractions in polynomials
 		return(weight)
-	}	
+	}
 	if (is.numeric(weight)) {
 		return(getFractionString(weight))
 	}
-	return(as.character(weight))	
+	return(as.character(weight))
 }
 
 getFractionString <- function(x, eps=1e-07) {
@@ -310,7 +315,7 @@ getFractionString <- function(x, eps=1e-07) {
 
 setMethod("plot", "graphMCP",
 		function(x, y, ...) {
-			# TODO Show visualization of graph			
+			# TODO Show visualization of graph
 		})
 
 setGeneric("simConfint", function(object, pvalues, confint, alternative=c("less", "greater"), estimates, df, alpha=0.05, mu=0) standardGeneric("simConfint"))
@@ -318,9 +323,9 @@ setGeneric("simConfint", function(object, pvalues, confint, alternative=c("less"
 setMethod("simConfint", c("graphMCP"), function(object, pvalues, confint, alternative=c("less", "greater"), estimates, df, alpha=0.05, mu=0) {
 			result <- gMCP(object, pvalues, alpha=alpha)
 			if (all(getRejected(result))) {
-				alpha <- getWeights(object)*alpha				
+				alpha <- getWeights(object)*alpha
 			} else {
-				alpha <- getWeights(result)*alpha				
+				alpha <- getWeights(result)*alpha
 			}
 			if (class(confint)=="function") {
 				f <- function(node, alpha, rejected) {
@@ -328,7 +333,7 @@ setMethod("simConfint", c("graphMCP"), function(object, pvalues, confint, altern
 					if (rejected && alternative=="greater") return(c(mu, Inf))
 					return(confint(node, alpha))
 				}
-				m <- mapply(f, getNodes(object), alpha, getRejected(result))	
+				m <- mapply(f, getNodes(object), alpha, getRejected(result))
 				m <- rbind(m[1,], estimates, m[2,])
 				rownames(m) <- c("lower bound", "estimate", "upper bound")
 				return(t(m))
@@ -339,14 +344,14 @@ setMethod("simConfint", c("graphMCP"), function(object, pvalues, confint, altern
 			} else {
 				stop('Parameter confint has to be a function or "t" or "normal".')
 			}
-			if (alternative=="greater") {			
+			if (alternative=="greater") {
 				stderr <- abs(estimates/dist(1-pvalues))
-				lb <- estimates+dist(alpha)*stderr				
-				lb <- ifelse(getRejected(result), max(0,lb), lb) 
+				lb <- estimates+dist(alpha)*stderr
+				lb <- ifelse(getRejected(result), max(0,lb), lb)
 				ub <- rep(Inf,length(lb))
-			} else if (alternative=="less") {			
-				stderr <- abs(estimates/dist(pvalues))								 
-				ub <- estimates+dist(1-alpha)*stderr				
+			} else if (alternative=="less") {
+				stderr <- abs(estimates/dist(pvalues))
+				ub <- estimates+dist(1-alpha)*stderr
 				ub <- ifelse(getRejected(result), min(0,ub), ub)
 				lb <- rep(-Inf,length(ub))
 			} else {
@@ -370,7 +375,7 @@ setClass("gPADInterim",
 setMethod("print", "gPADInterim",
 		function(x, ...) {
 			callNextMethod(x, ...)
-			
+
 		})
 
 
@@ -399,8 +404,8 @@ setMethod("show","gPADInterim",
 ############################## Entangled graphs #################################
 
 ## Entangled graph representation in gMCP
-setClass("entangledMCP",	
-		representation(subgraphs="list", 
+setClass("entangledMCP",
+		representation(subgraphs="list",
 				weights="numeric",
 				graphAttr="list"),
 		validity=function(object) validEntangledGraph(object))
@@ -422,6 +427,7 @@ setMethod("getMatrices", c("entangledMCP"),
 			return(result)
 		})
 
+#' @export
 setMethod("getWeights", c("entangledMCP"),
 		function(object, node, ...) {
 			result <- c()
@@ -432,11 +438,11 @@ setMethod("getWeights", c("entangledMCP"),
 		})
 
 setMethod("getNodes", c("entangledMCP"),
-		function(object, ...) {			
+		function(object, ...) {
 			return(getNodes(object@subgraphs[[1]]))
 		})
 
-setMethod("getXCoordinates", c("entangledMCP"), function(graph, node) {			
+setMethod("getXCoordinates", c("entangledMCP"), function(graph, node) {
 			return(getXCoordinates(graph@subgraphs[[1]], node))
 		})
 
