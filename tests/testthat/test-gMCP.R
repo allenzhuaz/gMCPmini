@@ -17,7 +17,6 @@ test_that("Testing case using Bonferroni-based Test", {
 
 })
 
-
 test_that("Testing case using weighted Simes' Test", {
   m <- matrix(0, nrow = 4, ncol = 4)
   m[1,3] <- m[2,4] <- m[3,2] <- m[4,1] <- 1
