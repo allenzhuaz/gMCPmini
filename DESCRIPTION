@@ -24,6 +24,6 @@ Suggests:
     gsDesign,
     kableExtra,
     gt,
-    tibbile
+    tibble
 Config/testthat/edition: 3
 VignetteBuilder: knitr
