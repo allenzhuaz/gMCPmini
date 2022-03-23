@@ -4,16 +4,40 @@
     <loc>/404.html</loc>
   </url>
   <url>
+    <loc>/articles/GraphicalMultiplicity.html</loc>
+  </url>
+  <url>
+    <loc>/articles/index.html</loc>
+  </url>
+  <url>
     <loc>/authors.html</loc>
   </url>
   <url>
     <loc>/index.html</loc>
   </url>
   <url>
-    <loc>/reference/BonferroniHolm.html</loc>
+    <loc>/reference/bdiagNA.html</loc>
+  </url>
+  <url>
+    <loc>/reference/bonferroni.test.html</loc>
+  </url>
+  <url>
+    <loc>/reference/bonferroni.trimmed.simes.test.html</loc>
+  </url>
+  <url>
+    <loc>/reference/exampleGraphs.html</loc>
+  </url>
+  <url>
+    <loc>/reference/gMCP.extended.html</loc>
   </url>
   <url>
     <loc>/reference/gMCP.html</loc>
+  </url>
+  <url>
+    <loc>/reference/generatePvals.html</loc>
+  </url>
+  <url>
+    <loc>/reference/generateWeights.html</loc>
   </url>
   <url>
     <loc>/reference/hGraph.html</loc>
@@ -22,12 +46,33 @@
     <loc>/reference/index.html</loc>
   </url>
   <url>
+    <loc>/reference/joinGraphs.html</loc>
+  </url>
+  <url>
     <loc>/reference/matrix2graph.html</loc>
+  </url>
+  <url>
+    <loc>/reference/parametric.test.html</loc>
   </url>
   <url>
     <loc>/reference/rejectNode.html</loc>
   </url>
   <url>
+    <loc>/reference/replaceVariables.html</loc>
+  </url>
+  <url>
+    <loc>/reference/simes.on.subsets.test.html</loc>
+  </url>
+  <url>
+    <loc>/reference/simes.test.html</loc>
+  </url>
+  <url>
+    <loc>/reference/subgraph.html</loc>
+  </url>
+  <url>
     <loc>/reference/substituteEps.html</loc>
+  </url>
+  <url>
+    <loc>/reference/weighted.test.functions.html</loc>
   </url>
 </urlset>

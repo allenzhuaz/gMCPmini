@@ -25,6 +25,16 @@
       <ul class="nav navbar-nav"><li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu"><li>
+      <a href="../articles/GraphicalMultiplicity.html">Graphical testing for group sequential design</a>
+    </li>
+  </ul></li>
       </ul><ul class="nav navbar-nav navbar-right"></ul></div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -72,6 +82,47 @@
     <p>Kornelius Rohmeyer <a href="mailto:rohmeyer@small-projects.de">rohmeyer@small-projects.de</a></p>
     </div>
 
+    <div id="ref-examples">
+    <h2>Examples</h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"></span>
+<span class="r-in"></span>
+<span class="r-in"><span class="va">graph</span> <span class="op">&lt;-</span> <span class="fu"><a href="exampleGraphs.html">improvedParallelGatekeeping</a></span><span class="op">(</span><span class="op">)</span></span>
+<span class="r-in"><span class="va">graph</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> A graphMCP graph</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> H1 (weight=0.5)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> H2 (weight=0.5)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> H3 (weight=0)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> H4 (weight=0)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Edges:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> H1  -( 0.5 )-&gt;  H3 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> H1  -( 0.5 )-&gt;  H4 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> H2  -( 0.5 )-&gt;  H3 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> H2  -( 0.5 )-&gt;  H4 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> H3  -( \epsilon )-&gt;  H1 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> H3  -( 1-\epsilon )-&gt;  H4 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> H4  -( \epsilon )-&gt;  H2 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> H4  -( 1-\epsilon )-&gt;  H3 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-in"><span class="fu">substituteEps</span><span class="op">(</span><span class="va">graph</span>, eps<span class="op">=</span><span class="fl">0.01</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> A graphMCP graph</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> H1 (weight=0.5)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> H2 (weight=0.5)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> H3 (weight=0)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> H4 (weight=0)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Edges:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> H1  -( 0.5 )-&gt;  H3 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> H1  -( 0.5 )-&gt;  H4 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> H2  -( 0.5 )-&gt;  H3 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> H2  -( 0.5 )-&gt;  H4 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> H3  -( 0.01 )-&gt;  H1 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> H3  -( 0.99 )-&gt;  H4 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> H4  -( 0.01 )-&gt;  H2 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> H4  -( 0.99 )-&gt;  H3 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-in"></span>
+<span class="r-in"></span>
+</code></pre></div>
+    </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top"><h2 data-toc-skip>Contents</h2>
