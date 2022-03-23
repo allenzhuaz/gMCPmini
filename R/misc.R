@@ -1,38 +1,3 @@
-#' Example Graph
-#'
-#' @export
-BonferroniHolm <- function(n, weights=rep(1/n, n)) {
-  if (missing(n)) { stop("Please provide the number of hypotheses as parameter n.") }
-  hnodes <- paste("H", 1:n, sep="")
-  m <- matrix(1/(n-1), nrow=n, ncol=n)
-  diag(m) <- 0
-  rownames(m) <- colnames(m) <- hnodes
-  BonferroniHolm <- new("graphMCP", m=m, weights=weights)
-  # Visualization settings
-  nodeX <- 100+(0:(n-1))*200
-  nodeY <- rep(200, n)
-  BonferroniHolm@nodeAttr$X <- nodeX
-  BonferroniHolm@nodeAttr$Y <- nodeY
-  # Label settings
-  for (i in 1:n) {
-    n1 <- hnodes[i]
-    for (j in (1:n)[-i]) {
-      n2 <- hnodes[j]
-      x <- ((i+j)*200-200)/2
-      y <- 200 + ((i-j)*50)
-      edgeAttr(BonferroniHolm, n1, n2, "labelX") <- x
-      edgeAttr(BonferroniHolm, n1, n2, "labelY") <- y
-    }
-  }
-  attr(BonferroniHolm, "description") <- paste("Graph representing the (unweighted) Bonferroni-Holm-Procedure",
-                                               "",
-                                               #"Most powerful test procedure (without further assumptions) that treats all hypotheses equally.",
-                                               "The graph is a complete graph, where all nodes have the same weights and each edge weight is 1/(n-1).",
-                                               "",
-                                               "Literature: Holm, S. (1979). A simple sequentally rejective multiple test procedure. Scandinavian Journal of Statistics 6, 65-70.", sep="\n")
-  return(BonferroniHolm)
-}
-
 checkValidWeights <- function(weights) {
   if(!is.numeric(weights)) {
     stop("Weights have to be numeric!")
@@ -61,6 +26,12 @@ checkValidWeights <- function(weights) {
 #' @author Kornelius Rohmeyer \email{rohmeyer@@small-projects.de}
 #' @seealso \code{\link{graphMCP}}, \code{\link{entangledMCP}}
 #' @keywords print graphs
+#' @examples
+#'
+#'
+#' graph <- improvedParallelGatekeeping()
+#' graph
+#' substituteEps(graph, eps=0.01)
 #'
 #'
 #' @export substituteEps
@@ -85,4 +56,241 @@ substituteEps <- function(graph, eps=10^(-3)) {
   rownames(m) <- colnames(m) <- getNodes(graph)
   graph@m <- m
   return(graph)
+}
+
+#' Replaces variables in a general graph with specified numeric values
+#'
+#' Given a list of variables and real values a general graph is processed and
+#' each variable replaced with the specified numeric value.
+#'
+#'
+#' @param graph A graph of class \code{\link{graphMCP}} or class
+#' \code{\link{entangledMCP}}.
+#' @param variables A named list with one or more specified real values, for example
+#' \code{list(a=0.5, b=0.8, "tau"=0.5)} or \code{list(a=c(0.5, 0.8), b=0.8, "tau"=0.5)}.
+#' If \code{ask=TRUE} and this list is
+#' missing at all or single variables are missing from the list, the user is
+#' asked for the values (if the session is not interactive an error is thrown).
+#' For interactively entered values only single numbers are supported.
+#' @param ask If \code{FALSE} all variables that are not specified are not
+#' replaced.
+#' @param partial IF \code{TRUE} only specified variables are replaced and
+#' parameter \code{ask} is ignored.
+#' @param expand Used internally. Don't use yourself.
+#' @param list If \code{TRUE} the result will always be a list, even if only one
+#' graph is returned in this list.
+#' @return A graph or a matrix with variables replaced by the specified numeric
+#' values. Or a list of theses graphs and matrices if a variable had more than one value.
+#' @author Kornelius Rohmeyer \email{rohmeyer@@small-projects.de}
+#' @seealso \code{\link{graphMCP}}, \code{\link{entangledMCP}}
+#' @keywords print graphs
+#' @examples
+#'
+#'
+#' graph <- HungEtWang2010()
+#' \dontrun{
+#' replaceVariables(graph)
+#' }
+#' replaceVariables(graph, list("tau"=0.5,"omega"=0.5, "nu"=0.5))
+#' replaceVariables(graph, list("tau"=c(0.1, 0.5, 0.9),"omega"=c(0.2, 0.8), "nu"=0.4))
+#'
+#' @export replaceVariables
+replaceVariables <-function(graph, variables=list(), ask=TRUE, partial=FALSE, expand=TRUE, list=FALSE) {
+  if (expand) variables <- varcombs(variables)
+  if (is.list(variables[[1]])) {
+    result <- list()
+    for (v in variables) {
+      r2 <- replaceVariables(graph, variables=v, ask=ask, partial=partial, expand=FALSE)
+      attr(r2, "label") <- attr(v, "label")
+      attr(r2, "variables") <- unlist(v)
+      result <- c(result, list(r2))
+    }
+    if (length(result)==1 && !list) return(result[[1]])
+    return(result)
+  }
+  # Call this function recursivly for entangled graphs.
+  if ("entangledMCP" %in% class(graph)) {
+    for(i in 1:length(graph@subgraphs)) {
+      graph@subgraphs[[i]] <- replaceVariables(graph@subgraphs[[i]], variables=variables, ask=ask,   partial=partial)
+    }
+    return(graph)
+  }
+  # Real function:
+  greek <- c("alpha", "beta", "gamma", "delta", "epsilon", "zeta", "eta",
+             "theta", "iota", "kappa", "lambda", "mu", "nu", "xi",
+             "omicron", "pi", "rho", "sigma", "tau", "nu", "phi",
+             "chi", "psi", "omega")
+  if (is.matrix(graph)) { m <- graph } else {m <- graph@m}
+  for (g in c(greek,  letters)) {
+    if (length(grep(g, m))!=0) {
+      if (is.null(answer <- variables[[g]])) {
+        if (!partial && ask) {
+          if(interactive()) {
+            answer <- readline(paste("Value for variable ",g,"? ", sep=""))
+          } else {
+            stop(paste("Value for variable",g,"not specified."))
+          }
+        }
+      }
+      if(!is.null(answer)) {
+        m <- gsub(paste(ifelse(nchar(g)==1,"","\\\\"), g, sep=""), answer, m)
+      }
+    }
+  }
+  if (is.matrix(graph)) return(parse2numeric(m))
+  graph@m <- m
+  return(parse2numeric(graph))
+}
+
+# Parses matrices of graphs (simple and entangled)
+#
+# Parses matrices of graphs (simple and entangled) when values are of type character, e.g. "1/3".
+#
+# @param g Graph of class \code{\link{graphMCP}} or \code{\link{entangledMCP}}.
+# @param force Logical whether conversion to numeric should be forced or not.
+# If forced all values that could not be parsed will be \code{NA}.
+# Otherwise the original unchanged graph will be returned.
+# @author Kornelius Rohmeyer \email{rohmeyer@@small-projects.de}
+# @keywords Converted graph (if all values could be parsed or \code{force=TRUE}) or original graph.
+# @examples
+#
+# # Nothing changes:
+# gMCP:::parse2numeric(HungEtWang2010())
+# # Note that other methods like printing don't handle NAs well:
+# gMCP:::parse2numeric(HungEtWang2010(), force=TRUE)
+#
+parse2numeric <- function(graph, force=FALSE) {
+  # Call this function recursivly for entangled graphs.
+  if ("entangledMCP" %in% class(graph)) {
+    for(i in 1:length(graph@subgraphs)) {
+      graph@subgraphs[[i]] <- parse2numeric(graph@subgraphs[[i]])
+    }
+    return(graph)
+  }
+  # Real function:
+  if (is.matrix(graph)) { m <- graph } else {m <- graph@m}
+  names <- rownames(m)
+  m <- matrix(sapply(m, function(x) {
+    result <- try(eval(parse(text=x)), silent=TRUE);
+    ifelse(class(result)=="try-error",NA,result)
+  }), nrow=dim(m)[1])
+  if (!force && any(is.na(m))) return(graph)
+  rownames(m) <- colnames(m) <- names
+  if (is.matrix(graph)) return(m)
+  graph@m <- m
+  return(graph)
+}
+
+isEpsilon <- function(w) {
+  x <- try(eval(parse(text = gsub("\\\\epsilon", 0, w)), envir = baseenv()), silent=TRUE)
+  if ("try-error" %in% class(x)) return(FALSE)
+  return(x==0)
+}
+
+# For testing purposes: variables <- list(a=c(1,2), b=(3), x=c(2,3,4), d=c(1,2))
+varcombs <- function(variables) {
+  combs <- list()
+  m <- do.call(expand.grid, lapply(variables, function(x){1:length(x)}))
+  for (i in 1:dim(m)[1]) {
+    variablesII <- rep(0, length(variables))
+    for(k in 1:length(variables)) {
+      variablesII[k] <- variables[[k]][m[i,k]]
+    }
+    names(variablesII) <- names(variables)
+    x <- as.list(variablesII)
+    attr(x, "label") <- paste(paste(names(variables),"=",variablesII,sep=""), collapse=", ")
+    combs <- c(combs, list(x))
+  }
+  # GII <- replaceVariables(G, as.list(variablesII))
+  # additionalLabel <- paste(",", paste(paste(names(variables),"=",variablesII,sep=""), collapse=", "))
+  return(combs)
+}
+
+#' Create a Block Diagonal Matrix with NA outside the diagonal
+#'
+#' Build a block diagonal matrix with NA values outside the diagonal given
+#' several building block matrices.
+#'
+#' This function is usefull to build the correlation matrices, when only
+#' partial knowledge of the correlation exists.
+#'
+#' @param ...  individual matrices or a \code{list} of matrices.
+#' @return A block diagonal matrix with NA values outside the diagonal.
+#' @author Kornelius Rohmeyer \email{rohmeyer@@small-projects.de}
+#' @seealso \code{\link{gMCP}}
+#' @examples
+#'
+#'
+#' bdiagNA(diag(3), matrix(1/2,nr=3,nc=3), diag(2))
+#'
+#'
+#' @export bdiagNA
+bdiagNA <- function(...) {
+  if (nargs() == 0)
+    return(matrix(nrow=0, ncol=0))
+  if (nargs() == 1 && !is.list(...))
+    return(as.matrix(...))
+  asList <- if (nargs() == 1 && is.list(...)) list(...)[[1]] else list(...)
+  if (length(asList) == 1)
+    return(as.matrix(asList[[1]]))
+  n <- 0
+  for (m in asList) {
+    if (!is.matrix(m)) {
+      stop("Only matrices are allowed as arguments.")
+    }
+    if (dim(m)[1]!=dim(m)[2]) {
+      stop("Only quadratic matrices are allowed.")
+    }
+    n <- n + dim(m)[1]
+  }
+  M <- matrix(NA, nrow=n, ncol=n)
+  k <- 0
+  for (m in asList) {
+    for (i in 1:dim(m)[1]) {
+      for (j in 1:dim(m)[1]) {
+        M[i+k,j+k] <- m[i,j]
+      }
+    }
+    k <- k + dim(m)[1]
+  }
+  return(M)
+}
+
+
+# Checks the following properties:
+# Values must be between -1 and 1.
+# Diagonal must be equal to 1.
+# Matrix must be symmetric.
+#' @export
+checkCorrelation <- function(m, returnMessage=FALSE, na.allowed=TRUE) {
+  if (!na.allowed && any(is.na(m))) {
+    if (returnMessage) return("Matrix can not contain NAs.")
+    return(FALSE)
+  }
+  if (!is.numeric(m) || !is.matrix(m)) {
+    if (returnMessage) return("Matrix must be a numeric matirx.")
+    return(FALSE)
+  }
+  if (!isTRUE(all.equal(1, max(1, max(abs(m)[!is.na(m)]))))) {
+    if (returnMessage) return("Values must be between -1 and 1.")
+    return(FALSE)
+  }
+  if (!isTRUE(all.equal(diag(m), rep(1, dim(m)[1]),check.attributes=FALSE))) {
+    if (returnMessage) return("Diagonal must be equal to 1.")
+    return(FALSE)
+  }
+  if (!isSymmetric(unname(m))) {
+    if (returnMessage) return("Matrix must be symmetric.")
+    return(FALSE)
+  }
+  return(TRUE)
+}
+
+# Calculation time note: n=22 needs 12 seconds on my computer.
+# With each further step calculation time nearly doubles.
+
+#'
+#' @export
+permutations <- function(n) {
+  outer((1:(2^n))-1, (n:1)-1, FUN=function(x,y) {(x%/%2^y)%%2})
 }
