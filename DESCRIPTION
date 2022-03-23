@@ -23,6 +23,7 @@ Suggests:
     rmarkdown,
     gsDesign,
     kableExtra,
-    gt
+    gt,
+    tibbile
 Config/testthat/edition: 3
 VignetteBuilder: knitr
