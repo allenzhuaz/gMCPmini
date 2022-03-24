@@ -105,8 +105,7 @@ weights are scaled so that the sum equals 1.</p>
 <span class="r-in"><span class="va">g1</span> <span class="op">&lt;-</span> <span class="fu"><a href="exampleGraphs.html">BonferroniHolm</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span></span>
 <span class="r-in"><span class="va">g2</span> <span class="op">&lt;-</span> <span class="fu"><a href="exampleGraphs.html">BonferroniHolm</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span></span>
 <span class="r-in"></span>
-<span class="r-in"><span class="fu">joinGraphs</span><span class="op">(</span><span class="va">g1</span>, <span class="va">g2</span><span class="op">)</span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>The two graphs have the following identical nodes: H1, H2. The nodes of the second graph will be renamed.</span>
+<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/warning.html" class="external-link">suppressWarnings</a></span><span class="op">(</span><span class="fu">joinGraphs</span><span class="op">(</span><span class="va">g1</span>, <span class="va">g2</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> A graphMCP graph</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> H1 (weight=0.25)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> H2 (weight=0.25)</span>
