@@ -17,11 +17,13 @@ URL: https://allenzhuaz.github.io/gMCPmini, https://github.com/allenzhuaz/gMCPmi
 Encoding: UTF-8
 RoxygenNote: 7.1.2
 Imports: 
-    dplyr, 
-    ggplot2, 
-    tidyr, 
-    magrittr, 
-    graphics
+    ggplot2,
+    grDevices,
+    grid,
+    magrittr,
+    dplyr,
+    tidyr,
+    mvtnorm
 Suggests: 
     testthat (>= 3.0.0),
     stats,
