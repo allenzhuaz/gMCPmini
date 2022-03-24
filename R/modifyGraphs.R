@@ -1,15 +1,15 @@
 #' Joins two graphMCP objects
-#' 
+#'
 #' Creates a new graphMCP object by joining two given graphMCP objects.
-#' 
+#'
 #' If \code{graph1} and \code{graph2} have duplicates in the node names, the
 #' nodes of the second graph will be renamed.
-#' 
+#'
 #' If and only if the sum of the weights of graph1 and graph2 exceeds 1, the
 #' weights are scaled so that the sum equals 1.
-#' 
+#'
 #' A description attribute of either graph will be discarded.
-#' 
+#'
 #' @param graph1 A graph of class \code{graphMCP}.
 #' @param graph2 A graph of class \code{graphMCP}.
 #' @param xOffset A numeric specifying an offset (on the x-axis) for placing
@@ -22,16 +22,16 @@
 #' @seealso \code{graphMCP}
 #' @keywords graphs
 #' @examples
-#' 
-#' 
+#'
+#'
 #' g1 <- BonferroniHolm(2)
 #' g2 <- BonferroniHolm(3)
-#' 
-#' joinGraphs(g1, g2)
-#' 
-#' 
+#'
+#' suppressWarnings(joinGraphs(g1, g2))
+#'
+#'
 #' @export joinGraphs
-#' 
+#'
 joinGraphs <- function(graph1, graph2, xOffset=0, yOffset=200) {
 	m1 <- graph2matrix(graph1)
 	m2 <- graph2matrix(graph2)
@@ -54,7 +54,7 @@ joinGraphs <- function(graph1, graph2, xOffset=0, yOffset=200) {
 	}
 	rownames(m) <- nNames
 	colnames(m) <- nNames
-	graph <- matrix2graph(m)	
+	graph <- matrix2graph(m)
 	weights <- c(getWeights(graph1), getWeights(graph2))
 	if (sum(weights)>1) {
 		weights <- weights / sum(weights)
@@ -63,13 +63,13 @@ joinGraphs <- function(graph1, graph2, xOffset=0, yOffset=200) {
 	if (is.null(getXCoordinates(graph1)) || is.null(getXCoordinates(graph2))) {
 	  nodeX <- NULL
 	} else {
-	  nodeX <- c(getXCoordinates(graph1), getXCoordinates(graph2) + xOffset) 
+	  nodeX <- c(getXCoordinates(graph1), getXCoordinates(graph2) + xOffset)
 	  names(nodeX) <- nNames
 	}
 	if (is.null(getYCoordinates(graph1)) || is.null(getYCoordinates(graph2))) {
 	  nodeY <- NULL
 	} else {
-	  nodeY <- c(getYCoordinates(graph1), getYCoordinates(graph2) + yOffset) 
+	  nodeY <- c(getYCoordinates(graph1), getYCoordinates(graph2) + yOffset)
 	  names(nodeY) <- nNames
 	}
 	graph@nodeAttr$X <- nodeX
@@ -78,11 +78,11 @@ joinGraphs <- function(graph1, graph2, xOffset=0, yOffset=200) {
 }
 
 #' Get a subgraph
-#' 
+#'
 #' Given a set of nodes and a graph this function creates the subgraph
 #' containing only the specified nodes.
-#' 
-#' 
+#'
+#'
 #' @param graph A graph of class \code{graphMCP}.
 #' @param subset A logical or character vector specifying the nodes in the
 #' subgraph.
@@ -91,18 +91,18 @@ joinGraphs <- function(graph1, graph2, xOffset=0, yOffset=200) {
 #' @seealso \code{graphMCP}
 #' @keywords print graphs
 #' @examples
-#' 
-#' 
+#'
+#'
 #' graph <- improvedParallelGatekeeping()
 #' subgraph(graph, c(TRUE, FALSE, TRUE, FALSE))
 #' subgraph(graph, c("H1", "H3"))
-#' 
-#' 
+#'
+#'
 #' @export subgraph
-#' 
+#'
 subgraph <- function(graph, subset) {
 	if (is.logical(subset)) {
-		subset <- getNodes(graph)[subset]	
+		subset <- getNodes(graph)[subset]
 	}
 	m <- graph@m
 	w <- getWeights(graph)

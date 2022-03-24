@@ -39,7 +39,7 @@ A description attribute of either graph will be discarded.
 g1 <- BonferroniHolm(2)
 g2 <- BonferroniHolm(3)
 
-joinGraphs(g1, g2)
+suppressWarnings(joinGraphs(g1, g2))
 
 
 }
