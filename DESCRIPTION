@@ -10,8 +10,7 @@ Maintainer: Yalin Zhu <yalin.zhu@merck.com>
 Description: Selected Functions From gMCP package to support gsDesign and remove JAVA dependency. The 
   package version is the same as the gMCP package version.
 Depends:
-    R (>= 3.0.0),
-    methods
+    R (>= 3.6.0)
 License: GPL (>= 2)
 URL: https://allenzhuaz.github.io/gMCPmini, https://github.com/allenzhuaz/gMCPmini
 Encoding: UTF-8
@@ -28,10 +27,10 @@ Imports:
     methods,
     stats,
     graphics, 
-    utils
+    utils,
+    multcomp (>= 1.1)
 Suggests: 
     testthat (>= 3.0.0),
-    stats,
     knitr,
     rmarkdown,
     gsDesign,
