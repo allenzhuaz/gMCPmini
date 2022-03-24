@@ -30,10 +30,11 @@ test_that("Example Graphs Testing", {
 
   set.seed(1234)
   for (graph in graphs) {
-    if (class(graph) != "entangledMCP") # exclude entagleMCP testing for now
+    if (class(graph) != "entangledMCP"){ # exclude entagleMCP testing for now
     p <- runif(length(graph@nodeAttr$rejected))
     result <- gMCP(graph = graph, pvalues = p)
     expect_equal(unname(result@rejected), unname(result@adjPValues < 0.05))
+    }
     }
 
 
