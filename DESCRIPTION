@@ -16,7 +16,12 @@ License: GPL (>= 2)
 URL: https://allenzhuaz.github.io/gMCPmini, https://github.com/allenzhuaz/gMCPmini
 Encoding: UTF-8
 RoxygenNote: 7.1.2
-Imports: dplyr, ggplot2, tidyr, magrittr, graphics
+Imports: 
+    dplyr, 
+    ggplot2, 
+    tidyr, 
+    magrittr, 
+    graphics
 Suggests: 
     testthat (>= 3.0.0),
     stats,
