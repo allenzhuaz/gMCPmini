@@ -23,7 +23,8 @@ Imports:
     magrittr,
     dplyr,
     tidyr,
-    mvtnorm
+    mvtnorm,
+    scales
 Suggests: 
     testthat (>= 3.0.0),
     stats,
