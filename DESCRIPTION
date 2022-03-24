@@ -24,7 +24,8 @@ Imports:
     dplyr,
     tidyr,
     mvtnorm,
-    scales
+    scales,
+    methods
 Suggests: 
     testthat (>= 3.0.0),
     stats,

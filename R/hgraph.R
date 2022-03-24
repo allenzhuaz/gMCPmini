@@ -64,6 +64,7 @@
 #' @importFrom dplyr mutate n filter left_join select
 #' @importFrom tidyr pivot_longer
 #' @importFrom "grDevices" "palette"
+#' @importFrom methods new
 #' @rdname hGraph
 #' @export
 hGraph <- function(
