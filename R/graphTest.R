@@ -49,10 +49,12 @@
 #' for multiple endpoint analyses using sequentially rejective graphical
 #' procedures, to appear in Statistics in Medicine
 #' @keywords htest
-#' @examples
-#'
-#'
-#' #### example from Bretz et al. (2010)
+#' @export graphTest
+#
+# @examples
+#
+#
+# #### example from Bretz et al. (2010)
 # weights <- c(1/3, 1/3, 1/3, 0, 0, 0)
 # graph <- rbind(c(0,       0.5, 0,     0.5, 0,      0),
 #                c(1/3,     0,   1/3,    0,   1/3,    0),
@@ -65,12 +67,11 @@
 #
 # ## observe graphical procedure in detail
 # graphTest(pvals, weights, alpha=0.025, graph, verbose = TRUE)
-#'
-#' ## now use many p-values (useful for power simulations)
-#' pvals <- matrix(rbeta(6e4, 1, 30), ncol = 6)
-#' out <- graphTest(pvals, weights, alpha=0.025, graph)
-#' head(out)
-#'
+#
+# ## now use many p-values (useful for power simulations)
+# pvals <- matrix(rbeta(6e4, 1, 30), ncol = 6)
+# out <- graphTest(pvals, weights, alpha=0.025, graph)
+# head(out)
 ## example using multiple graphs (instead of 1)
 # G1 <- rbind(c(0,0.5,0.5,0,0), c(0,0,1,0,0),
 #             c(0, 0, 0, 1-0.01, 0.01), c(0, 1, 0, 0, 0),
@@ -81,13 +82,12 @@
 # weights <- rbind(c(1, 0, 0, 0, 0), c(0, 1, 0, 0, 0))
 # pvals <- c(0.012, 0.025, 0.005, 0.0015, 0.0045)
 # out <- graphTest(pvals, weights, alpha=c(0.0125, 0.0125), G=list(G1, G2), verbose = TRUE)
-#'
-#' ## now again with many p-values
-#' pvals <- matrix(rbeta(5e4, 1, 30), ncol = 5)
-#' out <- graphTest(pvals, weights, alpha=c(0.0125, 0.0125), G=list(G1, G2))
-#' head(out)
-#'
-#' @export graphTest
+#
+# ## now again with many p-values
+# pvals <- matrix(rbeta(5e4, 1, 30), ncol = 5)
+# out <- graphTest(pvals, weights, alpha=c(0.0125, 0.0125), G=list(G1, G2))
+# head(out)
+
 
 graphTest <- function(pvalues, weights = NULL, alpha = 0.05, G = NULL, cr = NULL, graph = NULL, verbose = FALSE, test, upscale=FALSE) {
 	usegraph <- !is.null(graph)
