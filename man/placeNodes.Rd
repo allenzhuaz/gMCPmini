@@ -7,8 +7,8 @@
 placeNodes(graph, nrow, ncol, byrow = TRUE, topdown = TRUE, force = FALSE)
 }
 \arguments{
-\item{graph}{A graph of class \code{\link{graphMCP}} or class
-\code{\link{entangledMCP}}.}
+\item{graph}{A graph of class \code{graphMCP} or class
+\code{entangledMCP}.}
 
 \item{nrow}{The desired number of rows.}
 
@@ -48,7 +48,7 @@ graphGUI(g)
 
 }
 \seealso{
-\code{\link{graphMCP}}, \code{\link{entangledMCP}}
+\code{graphMCP}, \code{entangledMCP}
 }
 \author{
 Kornelius Rohmeyer \email{rohmeyer@small-projects.de}

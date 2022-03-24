@@ -53,7 +53,7 @@
 #' @param nu An optional number in [0,1] specifying the value for variable nu.
 #' @param tau An optional number in [0,1] specifying the value for variable tau.
 #' @param omega An optional number in [0,1] specifying the value for variable omega.
-#' @return A graph of class \code{\link{graphMCP}} that represents a
+#' @return A graph of class \code{graphMCP} that represents a
 #' sequentially rejective multiple test procedure.
 #' @author Kornelius Rohmeyer \email{rohmeyer@@small-projects.de}
 #' @references Holm, S. (1979). A simple sequentally rejective multiple test

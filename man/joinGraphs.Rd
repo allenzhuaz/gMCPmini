@@ -7,9 +7,9 @@
 joinGraphs(graph1, graph2, xOffset = 0, yOffset = 200)
 }
 \arguments{
-\item{graph1}{A graph of class \code{\link{graphMCP}}.}
+\item{graph1}{A graph of class \code{graphMCP}.}
 
-\item{graph2}{A graph of class \code{\link{graphMCP}}.}
+\item{graph2}{A graph of class \code{graphMCP}.}
 
 \item{xOffset}{A numeric specifying an offset (on the x-axis) for placing
 the nodes and edge labels of the second graph.}
@@ -44,7 +44,7 @@ joinGraphs(g1, g2)
 
 }
 \seealso{
-\code{\link{graphMCP}}
+\code{graphMCP}
 }
 \author{
 Kornelius Rohmeyer \email{rohmeyer@small-projects.de}

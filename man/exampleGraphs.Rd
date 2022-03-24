@@ -109,7 +109,7 @@ WangTing2014(nu, tau)
 \item{w}{Further variable weight(s) in graph.}
 }
 \value{
-A graph of class \code{\link{graphMCP}} that represents a
+A graph of class \code{graphMCP} that represents a
 sequentially rejective multiple test procedure.
 }
 \description{

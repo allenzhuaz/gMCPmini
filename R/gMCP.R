@@ -36,7 +36,7 @@
 #'
 #' For further details see the given references.
 #'
-#' @param graph A graph of class \code{\link{graphMCP}}.
+#' @param graph A graph of class \code{graphMCP}.
 #' @param pvalues A numeric vector specifying the p-values for the graph based
 #' MCP. Note the assumptions in the details section for the parametric tests,
 #' when a correlation is specified.
@@ -87,7 +87,7 @@
 #' \item{\code{adjPValues}}{adjusted p-values}
 #' }
 #' @author Kornelius Rohmeyer \email{rohmeyer@@small-projects.de}
-#' @seealso \code{\link{graphMCP}} \code{\link[multcomp:contrMat]{graphNEL}}
+#' @seealso \code{graphMCP} \code{\link[multcomp:contrMat]{graphNEL}}
 #' @references Frank Bretz, Willi Maurer, Werner Brannath, Martin Posch: A
 #' graphical approach to sequentially rejective multiple test procedures.
 #' Statistics in Medicine 2009 vol. 28 issue 4 page 586-604.
@@ -463,7 +463,7 @@ adjPValues <- function(graph, pvalues, upscale=FALSE, verbose=FALSE) {
 #'
 #' For details see the given references.
 #'
-#' @param graph A graph of class \code{\link{graphMCP}} or \code{\link{entangledMCP}}.
+#' @param graph A graph of class \code{graphMCP} or \code{entangledMCP}.
 #' @param node A character string specifying the node to reject.
 #' @param upscale Logical. If \code{upscale=TRUE} then the weights of all non-rejected
 #' nodes are scaled so that the sum is equal to 1. This forces \code{keepWeights=FALSE}
@@ -473,9 +473,9 @@ adjPValues <- function(graph, pvalues, upscale=FALSE, verbose=FALSE) {
 #' @param keepWeights Logical scalar. If \code{FALSE} the weight of a node
 #' without outgoing edges is set to 0 if it is removed.  Otherwise it keeps its
 #' weight.
-#' @return An updated graph of class \code{\link{graphMCP}} or \code{\link{entangledMCP}}.
+#' @return An updated graph of class \code{graphMCP} or \code{entangledMCP}.
 #' @author Kornelius Rohmeyer \email{rohmeyer@@small-projects.de}
-#' @seealso \code{\link{graphMCP}}
+#' @seealso \code{graphMCP}
 #' @references Frank Bretz, Willi Maurer, Werner Brannath, Martin Posch: A
 #' graphical approach to sequentially rejective multiple test procedures.
 #' Statistics in Medicine 2009 vol. 28 issue 4 page 586-604.

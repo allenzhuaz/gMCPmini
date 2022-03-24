@@ -19,12 +19,12 @@ checkValidWeights <- function(weights) {
 #'
 #' For details see the given references.
 #'
-#' @param graph A graph of class \code{\link{graphMCP}} or class
-#' \code{\link{entangledMCP}}.
+#' @param graph A graph of class \code{graphMCP} or class
+#' \code{entangledMCP}.
 #' @param eps A numeric scalar specifying a value for epsilon edges.
 #' @return A graph where all epsilons have been replaced with the given value.
 #' @author Kornelius Rohmeyer \email{rohmeyer@@small-projects.de}
-#' @seealso \code{\link{graphMCP}}, \code{\link{entangledMCP}}
+#' @seealso \code{graphMCP}, \code{entangledMCP}
 #' @keywords print graphs
 #' @examples
 #'
@@ -64,8 +64,8 @@ substituteEps <- function(graph, eps=10^(-3)) {
 #' each variable replaced with the specified numeric value.
 #'
 #'
-#' @param graph A graph of class \code{\link{graphMCP}} or class
-#' \code{\link{entangledMCP}}.
+#' @param graph A graph of class \code{graphMCP} or class
+#' \code{entangledMCP}.
 #' @param variables A named list with one or more specified real values, for example
 #' \code{list(a=0.5, b=0.8, "tau"=0.5)} or \code{list(a=c(0.5, 0.8), b=0.8, "tau"=0.5)}.
 #' If \code{ask=TRUE} and this list is
@@ -82,7 +82,7 @@ substituteEps <- function(graph, eps=10^(-3)) {
 #' @return A graph or a matrix with variables replaced by the specified numeric
 #' values. Or a list of theses graphs and matrices if a variable had more than one value.
 #' @author Kornelius Rohmeyer \email{rohmeyer@@small-projects.de}
-#' @seealso \code{\link{graphMCP}}, \code{\link{entangledMCP}}
+#' @seealso \code{graphMCP}, \code{entangledMCP}
 #' @keywords print graphs
 #' @examples
 #'
@@ -146,7 +146,7 @@ replaceVariables <-function(graph, variables=list(), ask=TRUE, partial=FALSE, ex
 #
 # Parses matrices of graphs (simple and entangled) when values are of type character, e.g. "1/3".
 #
-# @param g Graph of class \code{\link{graphMCP}} or \code{\link{entangledMCP}}.
+# @param g Graph of class \code{graphMCP} or \code{entangledMCP}.
 # @param force Logical whether conversion to numeric should be forced or not.
 # If forced all values that could not be parsed will be \code{NA}.
 # Otherwise the original unchanged graph will be returned.
@@ -303,8 +303,8 @@ permutations <- function(n) {
 #' infer it from the number of nodes of the \code{graph} and the other
 #' parameter.  If neither is given, the graph is placed as a circle.
 #'
-#' @param graph A graph of class \code{\link{graphMCP}} or class
-#' \code{\link{entangledMCP}}.
+#' @param graph A graph of class \code{graphMCP} or class
+#' \code{entangledMCP}.
 #' @param nrow The desired number of rows.
 #' @param ncol The desired number of columns.
 #' @param byrow Logical whether the graph is filled by rows (otherwise by
@@ -314,7 +314,7 @@ permutations <- function(n) {
 #' given the specified new layout.
 #' @return The graph with nodes placed according to the specified layout.
 #' @author Kornelius Rohmeyer \email{rohmeyer@@small-projects.de}
-#' @seealso \code{\link{graphMCP}}, \code{\link{entangledMCP}}
+#' @seealso \code{graphMCP}, \code{entangledMCP}
 #' @keywords graphs
 #' @examples
 #'

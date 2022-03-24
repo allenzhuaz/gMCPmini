@@ -10,8 +10,8 @@
 #' 
 #' A description attribute of either graph will be discarded.
 #' 
-#' @param graph1 A graph of class \code{\link{graphMCP}}.
-#' @param graph2 A graph of class \code{\link{graphMCP}}.
+#' @param graph1 A graph of class \code{graphMCP}.
+#' @param graph2 A graph of class \code{graphMCP}.
 #' @param xOffset A numeric specifying an offset (on the x-axis) for placing
 #' the nodes and edge labels of the second graph.
 #' @param yOffset A numeric specifying an offset (on the y-axis) for placing
@@ -19,7 +19,7 @@
 #' @return A graphMCP object that represents a graph that consists of the two
 #' given graphs.
 #' @author Kornelius Rohmeyer \email{rohmeyer@@small-projects.de}
-#' @seealso \code{\link{graphMCP}}
+#' @seealso \code{graphMCP}
 #' @keywords graphs
 #' @examples
 #' 
@@ -83,12 +83,12 @@ joinGraphs <- function(graph1, graph2, xOffset=0, yOffset=200) {
 #' containing only the specified nodes.
 #' 
 #' 
-#' @param graph A graph of class \code{\link{graphMCP}}.
+#' @param graph A graph of class \code{graphMCP}.
 #' @param subset A logical or character vector specifying the nodes in the
 #' subgraph.
 #' @return A subgraph containing only the specified nodes.
 #' @author Kornelius Rohmeyer \email{rohmeyer@@small-projects.de}
-#' @seealso \code{\link{graphMCP}}
+#' @seealso \code{graphMCP}
 #' @keywords print graphs
 #' @examples
 #' 

@@ -7,7 +7,7 @@
 subgraph(graph, subset)
 }
 \arguments{
-\item{graph}{A graph of class \code{\link{graphMCP}}.}
+\item{graph}{A graph of class \code{graphMCP}.}
 
 \item{subset}{A logical or character vector specifying the nodes in the
 subgraph.}
@@ -29,7 +29,7 @@ subgraph(graph, c("H1", "H3"))
 
 }
 \seealso{
-\code{\link{graphMCP}}
+\code{graphMCP}
 }
 \author{
 Kornelius Rohmeyer \email{rohmeyer@small-projects.de}

@@ -22,7 +22,7 @@ gMCP(
 )
 }
 \arguments{
-\item{graph}{A graph of class \code{\link{graphMCP}}.}
+\item{graph}{A graph of class \code{graphMCP}.}
 
 \item{pvalues}{A numeric vector specifying the p-values for the graph based
 MCP. Note the assumptions in the details section for the parametric tests,
@@ -161,7 +161,7 @@ stepdown procedure and other closed-testing procedures. Biometrical Journal
 2008; 50:678-692.
 }
 \seealso{
-\code{\link{graphMCP}} \code{\link[multcomp:contrMat]{graphNEL}}
+\code{graphMCP} \code{\link[multcomp:contrMat]{graphNEL}}
 }
 \author{
 Kornelius Rohmeyer \email{rohmeyer@small-projects.de}

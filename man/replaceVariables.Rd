@@ -14,8 +14,8 @@ replaceVariables(
 )
 }
 \arguments{
-\item{graph}{A graph of class \code{\link{graphMCP}} or class
-\code{\link{entangledMCP}}.}
+\item{graph}{A graph of class \code{graphMCP} or class
+\code{entangledMCP}.}
 
 \item{variables}{A named list with one or more specified real values, for example
 \code{list(a=0.5, b=0.8, "tau"=0.5)} or \code{list(a=c(0.5, 0.8), b=0.8, "tau"=0.5)}.
@@ -55,7 +55,7 @@ replaceVariables(graph, list("tau"=c(0.1, 0.5, 0.9),"omega"=c(0.2, 0.8), "nu"=0.
 
 }
 \seealso{
-\code{\link{graphMCP}}, \code{\link{entangledMCP}}
+\code{graphMCP}, \code{entangledMCP}
 }
 \author{
 Kornelius Rohmeyer \email{rohmeyer@small-projects.de}

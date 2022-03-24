@@ -7,8 +7,8 @@
 substituteEps(graph, eps = 10^(-3))
 }
 \arguments{
-\item{graph}{A graph of class \code{\link{graphMCP}} or class
-\code{\link{entangledMCP}}.}
+\item{graph}{A graph of class \code{graphMCP} or class
+\code{entangledMCP}.}
 
 \item{eps}{A numeric scalar specifying a value for epsilon edges.}
 }
@@ -31,7 +31,7 @@ substituteEps(graph, eps=0.01)
 
 }
 \seealso{
-\code{\link{graphMCP}}, \code{\link{entangledMCP}}
+\code{graphMCP}, \code{entangledMCP}
 }
 \author{
 Kornelius Rohmeyer \email{rohmeyer@small-projects.de}

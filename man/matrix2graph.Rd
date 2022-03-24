@@ -14,15 +14,15 @@ graph2matrix(graph)
 
 \item{weights}{A numeric for the initial weights.}
 
-\item{graph}{A graph of class \code{\link{graphMCP}}.}
+\item{graph}{A graph of class \code{graphMCP}.}
 }
 \value{
-A graph of class \code{\link{graphMCP}} with the given transition
-matrix for matrix2graph.  The transition matrix of a \code{\link{graphMCP}}
+A graph of class \code{graphMCP} with the given transition
+matrix for matrix2graph.  The transition matrix of a \code{graphMCP}
 graph for graph2matrix.
 }
 \description{
-Creates a graph of class \code{\link{graphMCP}} from a given transition
+Creates a graph of class \code{graphMCP} from a given transition
 matrix or vice versa.
 }
 \details{

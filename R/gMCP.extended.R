@@ -291,7 +291,7 @@ simes.test <- function(pvalues, weights, alpha=0.05, adjPValues=TRUE, verbose=FA
 #' Performs a graph based multiple test procedure for a given graph and unadjusted p-values.
 #'
 #'
-#' @param graph A graph of class \code{\link{graphMCP}}.
+#' @param graph A graph of class \code{graphMCP}.
 #' @param pvalues A numeric vector specifying the p-values for the graph based
 #' MCP. Note the assumptions in the description of the selected test (if there are any -
 #' for example \code{test=bonferroni.test} has no further assumptions, but
@@ -331,7 +331,7 @@ simes.test <- function(pvalues, weights, alpha=0.05, adjPValues=TRUE, verbose=FA
 #' \item{\code{adjPValues}}{adjusted p-values}
 #' }
 #' @author Kornelius Rohmeyer \email{rohmeyer@@small-projects.de}
-#' @seealso \code{\link{graphMCP}} \code{\link[multcomp:contrMat]{graphNEL}}
+#' @seealso \code{graphMCP} \code{\link[multcomp:contrMat]{graphNEL}}
 #' @references Frank Bretz, Willi Maurer, Werner Brannath, Martin Posch: A
 #' graphical approach to sequentially rejective multiple test procedures.
 #' Statistics in Medicine 2009 vol. 28 issue 4 page 586-604.

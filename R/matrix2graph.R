@@ -1,6 +1,6 @@
 #' Matrix2Graph and Graph2Matrix
 #'
-#' Creates a graph of class \code{\link{graphMCP}} from a given transition
+#' Creates a graph of class \code{graphMCP} from a given transition
 #' matrix or vice versa.
 #'
 #' The hypotheses names are the row names or if these are \code{NULL}, the
@@ -12,9 +12,9 @@
 #' @aliases matrix2graph graph2matrix
 #' @param m A transition matrix.
 #' @param weights A numeric for the initial weights.
-#' @param graph A graph of class \code{\link{graphMCP}}.
-#' @return A graph of class \code{\link{graphMCP}} with the given transition
-#' matrix for matrix2graph.  The transition matrix of a \code{\link{graphMCP}}
+#' @param graph A graph of class \code{graphMCP}.
+#' @return A graph of class \code{graphMCP} with the given transition
+#' matrix for matrix2graph.  The transition matrix of a \code{graphMCP}
 #' graph for graph2matrix.
 #' @author Kornelius Rohmeyer \email{rohmeyer@@small-projects.de}
 #' @keywords graphs

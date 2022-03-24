@@ -7,7 +7,7 @@
 rejectNode(graph, node, upscale = FALSE, verbose = FALSE, keepWeights = FALSE)
 }
 \arguments{
-\item{graph}{A graph of class \code{\link{graphMCP}} or \code{\link{entangledMCP}}.}
+\item{graph}{A graph of class \code{graphMCP} or \code{entangledMCP}.}
 
 \item{node}{A character string specifying the node to reject.}
 
@@ -23,7 +23,7 @@ without outgoing edges is set to 0 if it is removed.  Otherwise it keeps its
 weight.}
 }
 \value{
-An updated graph of class \code{\link{graphMCP}} or \code{\link{entangledMCP}}.
+An updated graph of class \code{graphMCP} or \code{entangledMCP}.
 }
 \description{
 Rejects a node/hypothesis and updates the graph accordingly.
@@ -38,7 +38,7 @@ Statistics in Medicine 2009 vol. 28 issue 4 page 586-604.
 \url{http://www.meduniwien.ac.at/fwf_adaptive/papers/bretz_2009_22.pdf}
 }
 \seealso{
-\code{\link{graphMCP}}
+\code{graphMCP}
 }
 \author{
 Kornelius Rohmeyer \email{rohmeyer@small-projects.de}
