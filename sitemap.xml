@@ -40,6 +40,9 @@
     <loc>/reference/generateWeights.html</loc>
   </url>
   <url>
+    <loc>/reference/graphTest.html</loc>
+  </url>
+  <url>
     <loc>/reference/hGraph.html</loc>
   </url>
   <url>
@@ -53,6 +56,9 @@
   </url>
   <url>
     <loc>/reference/parametric.test.html</loc>
+  </url>
+  <url>
+    <loc>/reference/placeNodes.html</loc>
   </url>
   <url>
     <loc>/reference/rejectNode.html</loc>
