@@ -140,29 +140,29 @@ graphTest <- function(pvalues, weights = NULL, alpha = 0.05, G = NULL, cr = NULL
 		    nGraphs <- 1
 		  }
 			if (upscale==TRUE) stop("Upscale=TRUE with list of graphs currently not supported")
-			# if(!is.matrix(pvalues)){
-			#   res <- .C("graphproc", h=double(nH), a=as.double(alphas), G=as.double(G),
-			#             as.double(pvalues), nH, as.double(G), as.integer(nGraphs),
-			#             as.integer(verbose), as.integer(upscale))
-			#   out <- c(H = res$h)
-			#   attr(out, "last.alphas") <- res$a
-			#   attr(out, "last.G") <- matrix(res$G, ncol = nH)
-			#   return(out)
-			# } else {
-			#   nCount <- as.integer(nrow(pvalues))
-			#   res <- .C("graphmult", h=double(nH*nCount), double(nH),
-			#             as.double(alphas), double(nGraphs*nH),
-			#             as.double(G), as.double(G), as.double(G),
-			#             as.double(pvalues), double(nH), nCount, nH,
-			#             as.integer(nGraphs), as.integer(verbose), as.integer(upscale))
-			#   out <- matrix(res$h, nrow = nCount)
-			#   if(is.null(colnames(G))) {
-			#     colnames(out) <- paste("H", 1:nH, sep="")
-			#   } else {
-			#     colnames(out) <- colnames(G)
-			#   }
-			#   return(out)
-			# }
+			if(!is.matrix(pvalues)){
+			  res <- .C("graphproc", h=double(nH), a=as.double(alphas), G=as.double(G),
+			            as.double(pvalues), nH, as.double(G), as.integer(nGraphs),
+			            as.integer(verbose), as.integer(upscale))
+			  out <- c(H = res$h)
+			  attr(out, "last.alphas") <- res$a
+			  attr(out, "last.G") <- matrix(res$G, ncol = nH)
+			  return(out)
+			} else {
+			  nCount <- as.integer(nrow(pvalues))
+			  res <- .C("graphmult", h=double(nH*nCount), double(nH),
+			            as.double(alphas), double(nGraphs*nH),
+			            as.double(G), as.double(G), as.double(G),
+			            as.double(pvalues), double(nH), nCount, nH,
+			            as.integer(nGraphs), as.integer(verbose), as.integer(upscale))
+			  out <- matrix(res$h, nrow = nCount)
+			  if(is.null(colnames(G))) {
+			    colnames(out) <- paste("H", 1:nH, sep="")
+			  } else {
+			    colnames(out) <- colnames(G)
+			  }
+			  return(out)
+			}
 		}
 	  out <- matrix(0, nrow=0, ncol=dim(pvalues)[2])
 	  colnames(out) <- colnames(G)
