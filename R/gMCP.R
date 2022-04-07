@@ -64,7 +64,7 @@
 #' where sum(w) is the sum of all node weights in this subset.
 #' If \code{upscale=TRUE} all weights are upscaled, so that sum(w)=1.
 #'
-#' For backward comptibility the default value is TRUE if a the parameter \code{test}
+#' For backward compatibility the default value is TRUE if a the parameter \code{test}
 #' is missing, but parameter \code{correlation} is specified or if \code{test=="Bretz2011"}.
 #' @param useC Logical scalar. If \code{TRUE} neither adjusted p-values nor
 #' intermediate graphs are returned, but the calculation is sped up by using
@@ -159,7 +159,7 @@ gMCP <- function(graph, pvalues, test, correlation, alpha=0.05,
 		return(result)
 	}
 	output <- ""
-	callFromGUI <- !is.null(list(...)[["callFromGUI"]])
+	#callFromGUI <- !is.null(list(...)[["callFromGUI"]])
   #TODO - Disable checkOptimal as long as it takes > 1 min for some example graphs.
 	#if (verbose) {
 	#	output <- paste(output, checkOptimal(graph, verbose=FALSE), sep="\n")
@@ -238,7 +238,8 @@ gMCP <- function(graph, pvalues, test, correlation, alpha=0.05,
 				result <- new("gMCPResult", graphs=sequence, alpha=alpha, pvalues=pvalues, rejected=getRejected(graph))
 				if (verbose) {
 					output <- paste(output, "All p-values above alpha.", sep="\n")
-					if (!callFromGUI) cat(output,"\n")
+					cat(output,"\n")
+					#if (!callFromGUI) cat(output,"\n")
 					attr(result, "output") <- output
 				}
 				attr(result, "call") <- call2char(match.call())
@@ -250,7 +251,8 @@ gMCP <- function(graph, pvalues, test, correlation, alpha=0.05,
 				result <- new("gMCPResult", graphs=sequence, alpha=alpha, pvalues=pvalues, rejected=rejected)
 				if (verbose) {
 					output <- paste(output, "All p-values below alpha.", sep="\n")
-					if (!callFromGUI) cat(output,"\n")
+					cat(output,"\n")
+					#if (!callFromGUI) cat(output,"\n")
 					attr(result, "output") <- output
 				}
 				attr(result, "call") <- call2char(match.call())
@@ -269,7 +271,8 @@ gMCP <- function(graph, pvalues, test, correlation, alpha=0.05,
 				if (n==2) output <- paste(output, "Only two hypotheses remaining.", sep="\n")
 				if (n==1) output <- paste(output, "Only one hypothesis remaining.", sep="\n")
 				if (n==0) output <- paste(output, "Everything already rejected.", sep="\n")
-				if (!callFromGUI) cat(output,"\n")
+				cat(output,"\n")
+				#if (!callFromGUI) cat(output,"\n")
 				attr(result, "output") <- output
 			}
 			attr(result, "call") <- call2char(match.call())
@@ -322,7 +325,8 @@ gMCP <- function(graph, pvalues, test, correlation, alpha=0.05,
 			result <- new("gMCPResult", graphs=sequence, alpha=alpha, pvalues=pvalues, rejected=getRejected(graph), adjPValues=adjPValuesV)
 			if (verbose) {
 				output <- paste(output, paste(explanation, collapse="\n"), sep="\n")
-				if (!callFromGUI) cat(output,"\n")
+				cat(output,"\n")
+				#if (!callFromGUI) cat(output,"\n")
 				attr(result, "output") <- output
 			}
 			attr(result, "call") <- call2char(match.call())
