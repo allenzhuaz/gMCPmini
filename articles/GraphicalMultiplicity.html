@@ -139,11 +139,21 @@
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://keaven.github.io/gsDesign/" class="external-link">gsDesign</a></span><span class="op">)</span> <span class="co"># Group sequential design capabilities</span>
 <span class="co">#library(gMCPmini) # Multiplicity evaluation</span>
 <span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/load_all.html" class="external-link">load_all</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">## * installing *source* package ‘gMCPmini’ ...</span>
+<span class="co">## ** using staged installation</span>
+<span class="co">## ** libs</span>
+<span class="co">## gcc -I"/opt/R/4.2.0/lib/R/include" -DNDEBUG   -I/usr/local/include   -fpic  -g -O2  -UNDEBUG -Wall -pedantic -g -O0 -fdiagnostics-color=always -c gMCP.c -o gMCP.o</span>
+<span class="co">## gcc -I"/opt/R/4.2.0/lib/R/include" -DNDEBUG   -I/usr/local/include   -fpic  -g -O2  -UNDEBUG -Wall -pedantic -g -O0 -fdiagnostics-color=always -c gMCP_init.c -o gMCP_init.o</span>
+<span class="co">## gcc -I"/opt/R/4.2.0/lib/R/include" -DNDEBUG   -I/usr/local/include   -fpic  -g -O2  -UNDEBUG -Wall -pedantic -g -O0 -fdiagnostics-color=always -c mcp.c -o mcp.o</span>
+<span class="co">## gcc -shared -L/opt/R/4.2.0/lib/R/lib -L/usr/local/lib -o gMCPmini.so gMCP.o gMCP_init.o mcp.o -L/opt/R/4.2.0/lib/R/lib -lR</span>
+<span class="co">## installing to /tmp/RtmpCaLL7B/devtools_install_42ec1dcbcf57/00LOCK-gMCPmini/00new/gMCPmini/libs</span>
+<span class="co">## ** checking absolute paths in shared objects and dynamic libraries</span>
+<span class="co">## * DONE (gMCPmini)</span></code></pre>
 <div class="section level3">
 <h3 id="multiplicity-diagram-for-hypothesis-testing">Multiplicity diagram for hypothesis testing<a class="anchor" aria-label="anchor" href="#multiplicity-diagram-for-hypothesis-testing"></a>
 </h3>
 <p>Following is the multiplicity graph for the trial design. We have arbitrarily split Type I error equally between the subgroup and overall populations. Most <span class="math inline">\(\alpha\)</span> is allocated to OS and the least to ORR, with PFS receiving an intermediate amount. This reflects the priority of the endpoints as well as the practicality to detect clinically significant differences in each population. Reallocation for each endpoint proceeds from the subgroup to the overall population. If the overall population hypothesis is rejected for a given endpoint, the reallocation is split between the two populations for another endpoint. The choice for allocation and reallocation illustrated here is to demonstrate a complex multiplicity scenario; when actually applying this method the allocation and realloation choices should be carefully considered.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">### THIS CODE NEEDS TO BE MODIFIED FOR YOUR STUDY</span>
 <span class="co"># If needed, see help file for gsDesign::hGraph() for explanation of parameters below</span>
 <span class="co"># Hypothesis names</span>
@@ -184,7 +194,7 @@
 <h4 id="h1-os-subgroup">H1: OS, Subgroup<a class="anchor" aria-label="anchor" href="#h1-os-subgroup"></a>
 </h4>
 <p>We assume 50% of the population is in the subgroup of interest. A sample size of 378 is driven by overall survival (OS) in the subgroup where we assume a hazard ratio of 0.65. Here we assume a one-sided group sequential design with no futility bound.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">osmedian</span> <span class="op">&lt;-</span> <span class="fl">12</span> <span class="co"># Median control survival</span>
 <span class="co"># Derive group sequential design for OS in the targeted subroup</span>
 <span class="va">ossub</span> <span class="op">&lt;-</span> <span class="fu">gsDesign</span><span class="fu">::</span><span class="fu"><a href="https://keaven.github.io/gsDesign/reference/nSurv.html" class="external-link">gsSurv</a></span><span class="op">(</span>k <span class="op">=</span> <span class="fl">3</span>, <span class="co"># 3 analyses for OS</span>
@@ -205,7 +215,7 @@
 <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">ossub</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>One-sided group sequential design with 3 analyses, time-to-event outcome with sample size 378 and 284 events required, 90 percent power, 1 percent (1-sided) Type I error to detect a hazard ratio of 0.65. Enrollment and total study durations are assumed to be 18 and 42 months, respectively. Efficacy bounds derived using a Lan-DeMets O’Brien-Fleming approximation spending function with none = 1.</p>
 <p>The above text was automatically generated and could be edited appropriately for description of the design. Following is a summary table describing study bounds.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># tab %&gt;% kable(caption = "Design for OS in the subgroup.") %&gt;% kable_styling()</span>
 <span class="va">tab</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
   <span class="fu"><a href="https://gt.rstudio.com/reference/gt.html" class="external-link">gt</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> 
@@ -213,12 +223,12 @@
   <span class="fu"><a href="https://gt.rstudio.com/reference/cols_align.html" class="external-link">cols_align</a></span><span class="op">(</span>align <span class="op">=</span> <span class="st">"left"</span>, columns <span class="op">=</span> <span class="va">Value</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="https://gt.rstudio.com/reference/tab_footnote.html" class="external-link">tab_footnote</a></span><span class="op">(</span>footnote <span class="op">=</span> <span class="st">"Cumulative boundary crossing probability includes crossing probability at earlier analysis."</span>, locations <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/cells_body.html" class="external-link">cells_body</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="st">"Value"</span>, rows <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">9</span>, <span class="fl">10</span>, <span class="fl">14</span>, <span class="fl">15</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="https://gt.rstudio.com/reference/tab_footnote.html" class="external-link">tab_footnote</a></span><span class="op">(</span>footnote <span class="op">=</span> <span class="st">"Approximate hazard ratio at bound."</span>, locations <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/cells_body.html" class="external-link">cells_body</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="st">"Value"</span>, rows <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">8</span>, <span class="fl">13</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<div id="urpnrrjner" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="aneblpyszw" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#urpnrrjner .gt_table {
+#aneblpyszw .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -243,7 +253,7 @@
   border-left-color: #D3D3D3;
 }
 
-#urpnrrjner .gt_heading {
+#aneblpyszw .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -255,7 +265,7 @@
   border-right-color: #D3D3D3;
 }
 
-#urpnrrjner .gt_title {
+#aneblpyszw .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -267,7 +277,7 @@
   border-bottom-width: 0;
 }
 
-#urpnrrjner .gt_subtitle {
+#aneblpyszw .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -279,13 +289,13 @@
   border-top-width: 0;
 }
 
-#urpnrrjner .gt_bottom_border {
+#aneblpyszw .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#urpnrrjner .gt_col_headings {
+#aneblpyszw .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -300,7 +310,7 @@
   border-right-color: #D3D3D3;
 }
 
-#urpnrrjner .gt_col_heading {
+#aneblpyszw .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -320,7 +330,7 @@
   overflow-x: hidden;
 }
 
-#urpnrrjner .gt_column_spanner_outer {
+#aneblpyszw .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -332,15 +342,15 @@
   padding-right: 4px;
 }
 
-#urpnrrjner .gt_column_spanner_outer:first-child {
+#aneblpyszw .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#urpnrrjner .gt_column_spanner_outer:last-child {
+#aneblpyszw .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#urpnrrjner .gt_column_spanner {
+#aneblpyszw .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -352,7 +362,7 @@
   width: 100%;
 }
 
-#urpnrrjner .gt_group_heading {
+#aneblpyszw .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -377,7 +387,7 @@
   vertical-align: middle;
 }
 
-#urpnrrjner .gt_empty_group_heading {
+#aneblpyszw .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -392,15 +402,15 @@
   vertical-align: middle;
 }
 
-#urpnrrjner .gt_from_md > :first-child {
+#aneblpyszw .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#urpnrrjner .gt_from_md > :last-child {
+#aneblpyszw .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#urpnrrjner .gt_row {
+#aneblpyszw .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -419,7 +429,7 @@
   overflow-x: hidden;
 }
 
-#urpnrrjner .gt_stub {
+#aneblpyszw .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -432,7 +442,7 @@
   padding-right: 5px;
 }
 
-#urpnrrjner .gt_stub_row_group {
+#aneblpyszw .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -446,11 +456,11 @@
   vertical-align: top;
 }
 
-#urpnrrjner .gt_row_group_first td {
+#aneblpyszw .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#urpnrrjner .gt_summary_row {
+#aneblpyszw .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -460,16 +470,16 @@
   padding-right: 5px;
 }
 
-#urpnrrjner .gt_first_summary_row {
+#aneblpyszw .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#urpnrrjner .gt_first_summary_row.thick {
+#aneblpyszw .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#urpnrrjner .gt_last_summary_row {
+#aneblpyszw .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -479,7 +489,7 @@
   border-bottom-color: #D3D3D3;
 }
 
-#urpnrrjner .gt_grand_summary_row {
+#aneblpyszw .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -489,7 +499,7 @@
   padding-right: 5px;
 }
 
-#urpnrrjner .gt_first_grand_summary_row {
+#aneblpyszw .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -499,11 +509,11 @@
   border-top-color: #D3D3D3;
 }
 
-#urpnrrjner .gt_striped {
+#aneblpyszw .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#urpnrrjner .gt_table_body {
+#aneblpyszw .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -512,7 +522,7 @@
   border-bottom-color: #D3D3D3;
 }
 
-#urpnrrjner .gt_footnotes {
+#aneblpyszw .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -526,7 +536,7 @@
   border-right-color: #D3D3D3;
 }
 
-#urpnrrjner .gt_footnote {
+#aneblpyszw .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -535,7 +545,7 @@
   padding-right: 5px;
 }
 
-#urpnrrjner .gt_sourcenotes {
+#aneblpyszw .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -549,7 +559,7 @@
   border-right-color: #D3D3D3;
 }
 
-#urpnrrjner .gt_sourcenote {
+#aneblpyszw .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -557,60 +567,69 @@
   padding-right: 5px;
 }
 
-#urpnrrjner .gt_left {
+#aneblpyszw .gt_left {
   text-align: left;
 }
 
-#urpnrrjner .gt_center {
+#aneblpyszw .gt_center {
   text-align: center;
 }
 
-#urpnrrjner .gt_right {
+#aneblpyszw .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#urpnrrjner .gt_font_normal {
+#aneblpyszw .gt_font_normal {
   font-weight: normal;
 }
 
-#urpnrrjner .gt_font_bold {
+#aneblpyszw .gt_font_bold {
   font-weight: bold;
 }
 
-#urpnrrjner .gt_font_italic {
+#aneblpyszw .gt_font_italic {
   font-style: italic;
 }
 
-#urpnrrjner .gt_super {
+#aneblpyszw .gt_super {
   font-size: 65%;
 }
 
-#urpnrrjner .gt_footnote_marks {
+#aneblpyszw .gt_two_val_uncert {
+  display: inline-block;
+  line-height: 1em;
+  text-align: right;
+  font-size: 60%;
+  vertical-align: -0.25em;
+  margin-left: 0.1em;
+}
+
+#aneblpyszw .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#urpnrrjner .gt_asterisk {
+#aneblpyszw .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#urpnrrjner .gt_slash_mark {
+#aneblpyszw .gt_slash_mark {
   font-size: 0.7em;
   line-height: 0.7em;
   vertical-align: 0.15em;
 }
 
-#urpnrrjner .gt_fraction_numerator {
+#aneblpyszw .gt_fraction_numerator {
   font-size: 0.6em;
   line-height: 0.6em;
   vertical-align: 0.45em;
 }
 
-#urpnrrjner .gt_fraction_denominator {
+#aneblpyszw .gt_fraction_denominator {
   font-size: 0.6em;
   line-height: 0.6em;
   vertical-align: -0.05em;
@@ -726,7 +745,7 @@
 <h4 id="h2-os-all">H2: OS, All<a class="anchor" aria-label="anchor" href="#h2-os-all"></a>
 </h4>
 <p>The total sample size is assumed to be twice the above, N=756. The power and hazard ratio can be adjusted to appropriately size the trial rather than starting with adjusting sample size to reach a targeted power. For this example, we consider altering power (<code>beta</code>) while fixing the hazard ratio at 0.75, representing an increase in median OS from 12 months in the control group to 16 months in the experimental group. For this design, we consider a non-binding futility bound where the trial may be stopped early in the overall population if the bound is crossed. We use a <span class="citation">Hwang, Shih, and De Cani (1990)</span> bound with <span class="math inline">\(\gamma = -3.25\)</span>. Study designers should carefully consider implication for parameter choices, particularly if the futility bounds provide sensible guidance for stopping the trial. Since the futility bounds are non-binding, the efficacy bound is computed assuming the futility bound is ignored which will control Type I error at the targeted level even if a futility bound is crossed and the trial is continued.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">hr</span> <span class="op">&lt;-</span> <span class="fl">.75</span>
 <span class="va">beta</span> <span class="op">&lt;-</span> <span class="fl">.14</span>
 <span class="va">os</span> <span class="op">&lt;-</span> <span class="fu">gsDesign</span><span class="fu">::</span><span class="fu"><a href="https://keaven.github.io/gsDesign/reference/nSurv.html" class="external-link">gsSurv</a></span> <span class="op">(</span>k <span class="op">=</span> <span class="fl">3</span>, test.type <span class="op">=</span> <span class="fl">4</span>, alpha <span class="op">=</span> <span class="fl">0.01</span>, beta <span class="op">=</span> <span class="va">beta</span>, hr <span class="op">=</span> <span class="va">hr</span>, 
@@ -739,7 +758,7 @@
 <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">tab</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">tab</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">os</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>Asymmetric two-sided group sequential design with non-binding futility bound, 3 analyses, time-to-event outcome with sample size 756 and 589 events required, 86 percent power, 1 percent (1-sided) Type I error to detect a hazard ratio of 0.75. Enrollment and total study durations are assumed to be 18 and 42 months, respectively. Efficacy bounds derived using a Lan-DeMets O’Brien-Fleming approximation spending function with none = 1. Futility bounds derived using a Hwang-Shih-DeCani spending function with gamma = -3.25.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tab</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span>caption <span class="op">=</span> <span class="st">"Design for OS in all subjects"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kable_styling.html" class="external-link">kable_styling</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <table class="table table" style="margin-left: auto; margin-right: auto;">
 <caption>
@@ -970,7 +989,7 @@ P(Cross) if HR=0.75
 </tbody>
 </table>
 <p>We can also plot different design characteristics. Here, we plot the approximate hazard ratio to cross each bound which may be helpful for design team discussions.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">os</span>, plottype <span class="op">=</span> <span class="st">"HR"</span>, xlab <span class="op">=</span> <span class="st">"Events"</span><span class="op">)</span></code></pre></div>
 <p><img src="GraphicalMultiplicity_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
 </div>
@@ -978,7 +997,7 @@ P(Cross) if HR=0.75
 <h4 id="h3-pfs-subgroup">H3: PFS, Subgroup<a class="anchor" aria-label="anchor" href="#h3-pfs-subgroup"></a>
 </h4>
 <p>For progression free survival (PFS) we assume a shorter median time to event of 5 months. With an assumed hazard ratio of 0.65, we adjust <code>beta</code> and <code>timing</code> to match the targeted sample size and interim analysis timing. We assume a larger dropout rate for PFS than we did for OS. Here we set up a futility bound for safety. This is an asymmetric 2-sided design with both futility and efficacy boundary crossing probabilities under the null hypothesis. The parameter <code>astar = 0.1</code> specifies total lower bound spending of 10%. The lower <span class="citation">Hwang, Shih, and De Cani (1990)</span> spending bound with <span class="math inline">\(\gamma = -8\)</span> is intended to be conservative in terms of futility at the interim, but still provide a safety bound for the PFS result in this targeted population. This would have to be carefully evaluated by the study design team at the time of design.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">hr</span> <span class="op">&lt;-</span> <span class="fl">.65</span>
 <span class="va">beta</span> <span class="op">&lt;-</span> <span class="fl">.149</span>
 <span class="va">pfssub</span> <span class="op">&lt;-</span> <span class="fu">gsDesign</span><span class="fu">::</span><span class="fu"><a href="https://keaven.github.io/gsDesign/reference/nSurv.html" class="external-link">gsSurv</a></span> <span class="op">(</span>k <span class="op">=</span> <span class="fl">2</span>, test.type <span class="op">=</span> <span class="fl">6</span>, astar <span class="op">=</span> <span class="fl">0.1</span>, alpha <span class="op">=</span> <span class="fl">0.004</span>, beta <span class="op">=</span> <span class="va">beta</span>, hr <span class="op">=</span> <span class="va">hr</span>, 
@@ -991,7 +1010,7 @@ P(Cross) if HR=0.75
 <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">tab</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">tab</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">pfssub</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>Asymmetric two-sided group sequential design with non-binding futility bound, 2 analyses, time-to-event outcome with sample size 378 and 296 events required, 85.1 percent power, 0.4 percent (1-sided) Type I error to detect a hazard ratio of 0.65. Enrollment and total study durations are assumed to be 18 and 32 months, respectively. Efficacy bounds derived using a Lan-DeMets O’Brien-Fleming approximation spending function with none = 1. Futility bounds derived using a Hwang-Shih-DeCani spending function with gamma = -8.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">tab</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span>caption <span class="op">=</span> <span class="st">"Design for PFS in the subgroup"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kable_styling.html" class="external-link">kable_styling</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <table class="table table" style="margin-left: auto; margin-right: auto;">
 <caption>
@@ -1157,7 +1176,7 @@ P(Cross) if HR=0.65
 <h4 id="h4-pfs-all">H4: PFS, All<a class="anchor" aria-label="anchor" href="#h4-pfs-all"></a>
 </h4>
 <p>Finally, we design for PFS in all subjects. In this case, we simplify to a one-sided design. A futility bound could be considered, if appropriate.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">hr</span> <span class="op">&lt;-</span> <span class="fl">.74</span>
 <span class="va">beta</span> <span class="op">&lt;-</span> <span class="fl">.15</span>
 <span class="va">pfs</span> <span class="op">&lt;-</span> <span class="fu">gsDesign</span><span class="fu">::</span><span class="fu"><a href="https://keaven.github.io/gsDesign/reference/nSurv.html" class="external-link">gsSurv</a></span> <span class="op">(</span>k <span class="op">=</span> <span class="fl">2</span>, test.type <span class="op">=</span> <span class="fl">1</span>, alpha <span class="op">=</span> <span class="fl">0.004</span>, beta <span class="op">=</span> <span class="va">beta</span>, hr <span class="op">=</span> <span class="va">hr</span>, 
@@ -1299,11 +1318,11 @@ P(Cross) if HR=0.74
 <h4 id="h5-and-h6-orr">H5 and H6: ORR<a class="anchor" aria-label="anchor" href="#h5-and-h6-orr"></a>
 </h4>
 <p>For objective response rate (ORR), we assume an underlying control rate of 15%. In the subgroup population, we have almost 90% power to detect a 20% improvement.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://keaven.github.io/gsDesign/reference/varBinomial.html" class="external-link">nBinomial</a></span><span class="op">(</span>p1<span class="op">=</span><span class="fl">.35</span>,p2<span class="op">=</span><span class="fl">.15</span>,alpha<span class="op">=</span><span class="fl">.0005</span>,n<span class="op">=</span><span class="fl">378</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## [1] 0.8911724</span></code></pre>
 <p>In the all subjects population, we have approximately 95% power to detect an improvement in ORR from 15% to 30%.</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://keaven.github.io/gsDesign/reference/varBinomial.html" class="external-link">nBinomial</a></span><span class="op">(</span>p1<span class="op">=</span><span class="fl">.3</span>,p2<span class="op">=</span><span class="fl">.15</span>,alpha<span class="op">=</span><span class="fl">.0005</span>,n<span class="op">=</span><span class="fl">756</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## [1] 0.9530369</span></code></pre>
 </div>
@@ -1312,7 +1331,7 @@ P(Cross) if HR=0.74
 <h3 id="design-list">Design list<a class="anchor" aria-label="anchor" href="#design-list"></a>
 </h3>
 <p>Now we associate designs with hypotheses in an ordered list corresponding to the order in the multiplicity graph setup. Since ORR designs are not group sequential, we enter <code>NULL</code> values for those in the last 2 entries of the design list; hit code button to reveal code for this.</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">### THIS NEEDS TO BE MODIFIED TO MATCH STUDY</span>
 <span class="va">gsDlist</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">ossub</span>,<span class="va">os</span>,<span class="va">pfssub</span>,<span class="va">pfs</span>,<span class="cn">NULL</span>,<span class="cn">NULL</span><span class="op">)</span></code></pre></div>
 </div>
@@ -1343,7 +1362,7 @@ P(Cross) if HR=0.74
 <li>The final analysis is scheduled at 24 months after final enrollment (month 22 + 24 = 46) or when 284 events have been observed in the subgroup, whichever comes first; there is also the qualification that the final analysis will be no more than 30 months after final enrollment (6 months after targeted time). We assume the targeted event count is not reached by 6 months after the targeted final analysis time and, thus, the final analysis cutoff is set at month 22 + 30 = 52 and that at that time 270 OS events have been observed in the subgroup.</li>
 </ul>
 <p>All of the above leads to event counts and spending for PFS and OS as follows:</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">### THIS NEEDS TO BE MODIFIED TO MATCH YOUR STUDY</span>
 <span class="co"># PFS, overall population</span>
 <span class="va">pfs</span><span class="op">$</span><span class="va">n.I</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">675</span>,<span class="fl">750</span><span class="op">)</span>
@@ -1358,7 +1377,7 @@ P(Cross) if HR=0.74
 <h3 id="nominal-p-values-for-each-analysis">Nominal p-values for each analysis<a class="anchor" aria-label="anchor" href="#nominal-p-values-for-each-analysis"></a>
 </h3>
 <p>For analyses not yet performed enter dummy values, including a p-value near 1 (e.g., .99). No other entry is required by the user in any other section of the document. Calendar timing is also associated with PFS hypotheses for use in spending functions. Spending time for OS spending will be input as NULL so that spending will be based on event counts for OS hypotheses.</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">### THIS NEEDS TO BE MODIFIED TO MATCH YOUR STUDY</span>
 <span class="va">inputResults</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>H<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">3</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">2</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">2</span><span class="op">)</span>,<span class="fl">5</span>,<span class="fl">6</span><span class="op">)</span>,
                  Pop<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"Subgroup"</span>,<span class="fl">3</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"All"</span>,<span class="fl">3</span><span class="op">)</span>,
@@ -1704,7 +1723,7 @@ NA
 <h3 id="compute-sequential-p-values-for-each-hypothesis">Compute sequential p-values for each hypothesis<a class="anchor" aria-label="anchor" href="#compute-sequential-p-values-for-each-hypothesis"></a>
 </h3>
 <p>Sequential p-value computation is done in one loop in an attempt to minimize chances for coding errors. We delay showing these until after display of the sequence of multiplicity graphs generated by hypothesis rejection is shown.</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">### USER SHOULD NOT NEED TO MODIFY THIS CODE</span>
 <span class="va">EOCtab</span> <span class="op">&lt;-</span> <span class="cn">NULL</span>
 <span class="va">EOCtab</span> <span class="op">&lt;-</span> <span class="va">inputResults</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
@@ -1730,7 +1749,7 @@ NA
 <h3 id="evaluate-hypothesis-rejection-using-gmcp">Evaluate hypothesis rejection using gMCP<a class="anchor" aria-label="anchor" href="#evaluate-hypothesis-rejection-using-gmcp"></a>
 </h3>
 <p>We need to set up a <code>graph</code> object as implemented in the gMCP package.</p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># make a graph object</span>
 <span class="fu"><a href="https://tibble.tidyverse.org/reference/rownames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">nameHypotheses</span>
 <span class="va">graph</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/matrix2graph.html">matrix2graph</a></span><span class="op">(</span><span class="va">m</span><span class="op">)</span>
@@ -1742,14 +1761,14 @@ NA
 <span class="co"># graph@nodeAttr$X &lt;- rescale * d$x * 1.75</span>
 <span class="co"># graph@nodeAttr$Y &lt;- -rescale * d$y * 2</span></code></pre></div>
 <p>Now we add the sequential p-values and evaluate which hypotheses have been rejected.</p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/gMCP.html">gMCP</a></span><span class="op">(</span>graph<span class="op">=</span><span class="va">graph</span>, pvalues<span class="op">=</span><span class="va">EOCtab</span><span class="op">$</span><span class="va">seqp</span>, alpha<span class="op">=</span><span class="va">fwer</span><span class="op">)</span>
 <span class="va">result</span><span class="op">@</span><span class="va">rejected</span></code></pre></div>
 <pre><code><span class="co">##      H1: OS\n Subgroup  H2: OS\n All subjects     H3: PFS\n Subgroup </span>
 <span class="co">##                   TRUE                  FALSE                   TRUE </span>
 <span class="co">## H4: PFS\n All subjects     H5: ORR\n Subgroup H6: ORR\n All subjects </span>
 <span class="co">##                  FALSE                   TRUE                  FALSE</span></code></pre>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># now map back into EOCtable (CHECK AGAIN!!!)</span>
 <span class="va">EOCtab</span><span class="op">$</span><span class="va">Rejected</span> <span class="op">&lt;-</span> <span class="va">result</span><span class="op">@</span><span class="va">rejected</span>
 <span class="va">EOCtab</span><span class="op">$</span><span class="va">adjPValues</span> <span class="op">&lt;-</span> <span class="va">result</span><span class="op">@</span><span class="va">adjPValues</span></code></pre></div>
@@ -1758,7 +1777,7 @@ NA
 <div class="section level2">
 <h2 id="verification-of-hypotheses-rejected">Verification of hypotheses rejected<a class="anchor" aria-label="anchor" href="#verification-of-hypotheses-rejected"></a>
 </h2>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># number of graphs is used repeatedly</span>
 <span class="va">ngraphs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">result</span><span class="op">@</span><span class="va">graphs</span><span class="op">)</span>
 <span class="co"># Set up tibble with hypotheses rejected at each stage</span>
@@ -1794,7 +1813,7 @@ NA
 <div class="section level3">
 <h3 id="multiplicity-graph-sequence-from-gmcp">Multiplicity graph sequence from gMCP<a class="anchor" aria-label="anchor" href="#multiplicity-graph-sequence-from-gmcp"></a>
 </h3>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">### THERE SHOULD BE NO NEED TO MODIFY THIS CODE SECTION</span>
 <span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">ngraphs</span><span class="op">)</span><span class="op">{</span>
   <span class="va">mx</span> <span class="op">&lt;-</span> <span class="va">result</span><span class="op">@</span><span class="va">graphs</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span><span class="op">@</span><span class="va">m</span>
@@ -1842,7 +1861,7 @@ NA
 <li>For rejected hypotheses, the maximum <span class="math inline">\(\alpha\)</span> allocated to the hypothesis. For example, hypothesis one was allocated <span class="math inline">\(\alpha=0.01\)</span> in the first graph above (select using first tab). We see that the sequential p-value of 0.0001 is smaller than <span class="math inline">\(\alpha=0.01\)</span> and thus the hypothesis is rejected. We can then proceed to the second graph and see that hypothesis 5 was rejected. The last hypothesis rejected is hypothesis 3 in the third graph.</li>
 <li>For the remaining hypotheses (H2, H4, H6) the maximum <span class="math inline">\(\alpha\)</span> allocated is in the fourth graph; since each sequential p-value is greather than the allocated <span class="math inline">\(\alpha\)</span> for the corresponding hypothesis, none of these hypotheses were rejected.</li>
 </ol>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">EOCtabx</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span>,<span class="fl">7</span>,<span class="fl">5</span><span class="op">:</span><span class="fl">6</span>,<span class="fl">8</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kable_styling.html" class="external-link">kable_styling</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <table class="table table" style="margin-left: auto; margin-right: auto;">
 <thead><tr>
@@ -2035,7 +2054,7 @@ FALSE
 <h3 id="bounds-at-final-alpha-allocated-for-group-sequential-tests">Bounds at final <span class="math inline">\(\alpha\)</span> allocated for group sequential tests<a class="anchor" aria-label="anchor" href="#bounds-at-final-alpha-allocated-for-group-sequential-tests"></a>
 </h3>
 <p>As a separate validation, we examine group sequential bounds for each hypothesis updated with 1) the maximum <span class="math inline">\(\alpha\)</span> allocated above, 2) the number of events at each analysis, and 3) the cumulative spending at each analysis above. The nominal p-value for at least one of the analyses performed for each rejected hypotheses should be less than or equal to the nominal p-value in the group sequential design. For each hypothesis not rejected, all nominal p-values are greater than the its corresponding bound. For hypotheses tested without a group sequential design, the nominal p-value for the test of that hypothesis can be compared to the maximum alpha allocated in the above table.</p>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">nHypotheses</span><span class="op">)</span><span class="op">{</span>
   <span class="co"># Set up tab for hypothesis in output</span>
   <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"###"</span>,<span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">" Hypothesis"</span>,<span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">i</span><span class="op">)</span>, <span class="st">" \n"</span><span class="op">)</span><span class="op">)</span>
@@ -2431,9 +2450,9 @@ p (1-sided)
 <h2 id="session-information">Session information<a class="anchor" aria-label="anchor" href="#session-information"></a>
 </h2>
 <p>The following documents the versions of R and packages used to develop this document. Note, in particular, that version 3.1 or later of the <strong>gsDesign</strong> package is needed.</p>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html" class="external-link">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## R version 4.1.3 (2022-03-10)</span>
+<pre><code><span class="co">## R version 4.2.0 (2022-04-22)</span>
 <span class="co">## Platform: x86_64-pc-linux-gnu (64-bit)</span>
 <span class="co">## Running under: Ubuntu 20.04.4 LTS</span>
 <span class="co">## </span>
@@ -2451,31 +2470,31 @@ p (1-sided)
 <span class="co">## [1] stats     graphics  grDevices utils     datasets  methods   base     </span>
 <span class="co">## </span>
 <span class="co">## other attached packages:</span>
-<span class="co">## [1] gMCPmini_0.8-15  testthat_3.1.3   gsDesign_3.2.2   ggplot2_3.3.5   </span>
-<span class="co">## [5] gt_0.4.0         kableExtra_1.3.4 knitr_1.38       tibble_3.1.6    </span>
-<span class="co">## [9] dplyr_1.0.8     </span>
+<span class="co">## [1] gMCPmini_0.8-15  testthat_3.1.4   gsDesign_3.2.2   ggplot2_3.3.5   </span>
+<span class="co">## [5] gt_0.5.0         kableExtra_1.3.4 knitr_1.39       tibble_3.1.6    </span>
+<span class="co">## [9] dplyr_1.0.9     </span>
 <span class="co">## </span>
 <span class="co">## loaded via a namespace (and not attached):</span>
 <span class="co">##  [1] httr_1.4.2        sass_0.4.1        pkgload_1.2.4     tidyr_1.2.0      </span>
-<span class="co">##  [5] jsonlite_1.8.0    viridisLite_0.4.0 splines_4.1.3     bslib_0.3.1      </span>
+<span class="co">##  [5] jsonlite_1.8.0    viridisLite_0.4.0 splines_4.2.0     bslib_0.3.1      </span>
 <span class="co">##  [9] brio_1.1.3        highr_0.9         yaml_2.3.5        remotes_2.4.2    </span>
 <span class="co">## [13] sessioninfo_1.2.2 backports_1.4.1   pillar_1.7.0      lattice_0.20-45  </span>
-<span class="co">## [17] glue_1.6.2        digest_0.6.29     checkmate_2.0.0   rvest_1.0.2      </span>
+<span class="co">## [17] glue_1.6.2        digest_0.6.29     checkmate_2.1.0   rvest_1.0.2      </span>
 <span class="co">## [21] colorspace_2.0-3  sandwich_3.0-1    htmltools_0.5.2   Matrix_1.4-1     </span>
 <span class="co">## [25] pkgconfig_2.0.3   devtools_2.4.3    purrr_0.3.4       xtable_1.8-4     </span>
-<span class="co">## [29] mvtnorm_1.1-3     scales_1.1.1      webshot_0.5.2     processx_3.5.3   </span>
+<span class="co">## [29] mvtnorm_1.1-3     scales_1.2.0      webshot_0.5.3     processx_3.5.3   </span>
 <span class="co">## [33] svglite_2.1.0     farver_2.1.0      generics_0.1.2    usethis_2.1.5    </span>
-<span class="co">## [37] ellipsis_0.3.2    TH.data_1.1-0     cachem_1.0.6      withr_2.5.0      </span>
-<span class="co">## [41] cli_3.2.0         survival_3.3-1    magrittr_2.0.3    crayon_1.5.1     </span>
-<span class="co">## [45] memoise_2.0.1     evaluate_0.15     ps_1.6.0          fs_1.5.2         </span>
-<span class="co">## [49] fansi_1.0.3       MASS_7.3-56       xml2_1.3.3        pkgbuild_1.3.1   </span>
-<span class="co">## [53] textshaping_0.3.6 tools_4.1.3       prettyunits_1.1.1 lifecycle_1.0.1  </span>
-<span class="co">## [57] multcomp_1.4-18   stringr_1.4.0     munsell_0.5.0     callr_3.7.0      </span>
-<span class="co">## [61] compiler_4.1.3    pkgdown_2.0.2     jquerylib_0.1.4   systemfonts_1.0.4</span>
-<span class="co">## [65] rlang_1.0.2       grid_4.1.3        rstudioapi_0.13   labeling_0.4.2   </span>
-<span class="co">## [69] rmarkdown_2.13    codetools_0.2-18  gtable_0.3.0      R6_2.5.1         </span>
-<span class="co">## [73] zoo_1.8-9         fastmap_1.1.0     utf8_1.2.2        rprojroot_2.0.2  </span>
-<span class="co">## [77] ragg_1.2.2        desc_1.4.1        stringi_1.7.6     vctrs_0.4.0      </span>
+<span class="co">## [37] ellipsis_0.3.2    TH.data_1.1-1     cachem_1.0.6      withr_2.5.0      </span>
+<span class="co">## [41] cli_3.3.0         survival_3.3-1    magrittr_2.0.3    crayon_1.5.1     </span>
+<span class="co">## [45] memoise_2.0.1     evaluate_0.15     ps_1.7.0          fs_1.5.2         </span>
+<span class="co">## [49] fansi_1.0.3       MASS_7.3-57       xml2_1.3.3        pkgbuild_1.3.1   </span>
+<span class="co">## [53] textshaping_0.3.6 tools_4.2.0       prettyunits_1.1.1 lifecycle_1.0.1  </span>
+<span class="co">## [57] multcomp_1.4-19   stringr_1.4.0     munsell_0.5.0     callr_3.7.0      </span>
+<span class="co">## [61] compiler_4.2.0    pkgdown_2.0.3     jquerylib_0.1.4   systemfonts_1.0.4</span>
+<span class="co">## [65] rlang_1.0.2       grid_4.2.0        rstudioapi_0.13   labeling_0.4.2   </span>
+<span class="co">## [69] rmarkdown_2.14    codetools_0.2-18  gtable_0.3.0      R6_2.5.1         </span>
+<span class="co">## [73] zoo_1.8-10        fastmap_1.1.0     utf8_1.2.2        rprojroot_2.0.3  </span>
+<span class="co">## [77] ragg_1.2.2        desc_1.4.1        stringi_1.7.6     vctrs_0.4.1      </span>
 <span class="co">## [81] tidyselect_1.1.2  xfun_0.30</span></code></pre>
 </div>
 <div class="section level2">
@@ -2527,7 +2546,7 @@ p (1-sided)
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
       </footer>
