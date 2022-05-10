@@ -58,7 +58,7 @@ possibly reduced level alpha of sum(w)*alpha,
 where sum(w) is the sum of all node weights in this subset.
 If \code{upscale=TRUE} all weights are upscaled, so that sum(w)=1.
 
-For backward comptibility the default value is TRUE if a the parameter \code{test}
+For backward compatibility the default value is TRUE if a the parameter \code{test}
 is missing, but parameter \code{correlation} is specified or if \code{test=="Bretz2011"}.}
 
 \item{useC}{Logical scalar. If \code{TRUE} neither adjusted p-values nor

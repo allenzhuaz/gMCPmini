@@ -1,9 +1,10 @@
 # gMCPmini
   <!-- badges: start -->
   [![R-CMD-check](https://github.com/allenzhuaz/gMCPmini/workflows/R-CMD-check/badge.svg)](https://github.com/allenzhuaz/gMCPmini/actions)
-  <!-- badges: end -->
-  <!-- badges: start -->
+
   [![test-coverage](https://github.com/allenzhuaz/gMCPmini/workflows/test-coverage/badge.svg)](https://github.com/allenzhuaz/gMCPmini/actions)
+  
+  [![Codecov test coverage](https://codecov.io/gh/allenzhuaz/gMCPmini/branch/main/graph/badge.svg)](https://codecov.io/gh/allenzhuaz/gMCPmini?branch=main)
   <!-- badges: end -->
   
 `gMCPmini` contains a subset of functions from `gMCP`. The purpose is to remove package dependency of gMCP package including `rJAVA`. The selected functions ensure `gsDesign` can produce multiple comparision graph using `hGraph` function. 
