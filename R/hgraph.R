@@ -20,6 +20,7 @@
 #' @param trdigits digits displayed for transition weights
 #' @param size text size in ellipses
 #' @param boxtextsize transition text size
+#' @param legend.textsize legend text size
 #' @param arrowsize size of arrowhead for transition arrows
 #' @param radianStart radians from origin for first ellipse; nodes spaced equally in clockwise order with centers on an ellipse by default
 #' @param offset rotational offset in radians for transition weight arrows
@@ -58,7 +59,7 @@
 #' @details
 #' See vignette **Multiplicity graphs formatting using ggplot2** for explanation of formatting.
 #' @importFrom grDevices gray.colors
-#' @importFrom ggplot2 aes ggplot guide_legend stat_ellipse theme theme_void geom_text geom_segment geom_rect scale_fill_manual
+#' @importFrom ggplot2 aes ggplot guide_legend stat_ellipse theme theme_void geom_text geom_segment geom_rect scale_fill_manual element_text
 #' @importFrom grid unit
 #' @importFrom magrittr "%>%"
 #' @importFrom dplyr mutate n filter left_join select
@@ -90,6 +91,7 @@ hGraph <- function(
   trdigits = 2,
   size = 6,
   boxtextsize = 4,
+  legend.textsize = size*2.5,
   arrowsize = 0.02,
   radianStart = if((nHypotheses)%%2 != 0) {
     pi * (1/2 + 1/nHypotheses) } else {
@@ -100,7 +102,7 @@ hGraph <- function(
   x = NULL,
   y = NULL,
   # following is temporary fix from intended {'\u03b1'} for Windows
-  wchar = if(as.character(Sys.info()[1])=="Windows"){'w'}else{'w'}
+  wchar = if(as.character(Sys.info()[1])=="Windows"){"\u03b1"}else{"\u03b1"}
 ){
   #####################################################################
   # Begin: Internal functions
@@ -183,7 +185,7 @@ hGraph <- function(
 
 
   checkHGArgs <- function(nHypotheses =NULL, nameHypotheses =NULL, alphaHypotheses = NULL, m = NULL, fill = NULL,
-                          palette = NULL, labels = NULL, legend = NULL, legend.name = NULL, legend.Position = NULL,
+                          palette = NULL, labels = NULL, legend = NULL, legend.name = NULL, legend.Position = NULL, legend.textsize = NULL,
                           halfwid = NULL, halfhgt = NULL, trhw = NULL, trhh = NULL, trprop = NULL, digits = NULL,
                           trdigits = NULL, size = NULL, boxtextsize = NULL, arrowsize = NULL, radianStart = NULL,
                           offset = NULL, xradius = NULL, yradius = NULL, x = NULL, y = NULL, wchar='w')
@@ -203,7 +205,7 @@ hGraph <- function(
 
   # Check inputs
   checkHGArgs(nHypotheses, nameHypotheses, alphaHypotheses, m, fill,
-              palette, labels, legend, legend.name, legend.position, halfwid, halfhgt,
+              palette, labels, legend, legend.name, legend.position, legend.textsize, halfwid, halfhgt,
               trhw, trhh, trprop, digits, trdigits, size, boxtextsize,
               arrowsize, radianStart, offset, xradius, yradius, x, y, wchar)
   # Set up hypothesis data
@@ -235,7 +237,9 @@ hGraph <- function(
     scale_fill_manual(values=palette,
                       labels=labels,
                       guide_legend(legend.name)) +
-    theme(legend.position = legend.position) +
+    theme(legend.position = legend.position,
+          legend.title = ggplot2::element_text(size = legend.textsize),
+          legend.text = ggplot2::element_text(size = legend.textsize)) +
     # Add text
     geom_text(data=hData,aes(x=x,y=y,label=txt),size=size) +
     # Add transition arrows
