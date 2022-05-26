@@ -40,4 +40,4 @@ Suggests:
     testthat (>= 3.0.0),
     tibble
 Config/testthat/edition: 3
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.0
