@@ -1,5 +1,4 @@
 Package: gMCPmini
-Type: Package
 Title: Graph Based Multiple Comparison Procedures (Mini Version)
 Version: 0.8-15
 Authors@R: c(
@@ -15,29 +14,30 @@ Description: Selected functions from the 'gMCP' package to support 'gsDesign'
 Depends: R (>= 3.6.0)
 License: GPL (>= 2)
 URL: https://allenzhuaz.github.io/gMCPmini, https://github.com/allenzhuaz/gMCPmini
+BugReports: https://github.com/allenzhuaz/gMCPmini/issues
 Encoding: UTF-8
-RoxygenNote: 7.1.2
-Imports: 
+VignetteBuilder: knitr
+Imports:
+    dplyr,
     ggplot2,
     grDevices,
     grid,
+    graphics,
     magrittr,
-    dplyr,
-    tidyr,
+    methods,
+    multcomp (>= 1.1),
     mvtnorm,
     scales,
-    methods,
     stats,
-    graphics, 
-    utils,
-    multcomp (>= 1.1)
-Suggests: 
-    testthat (>= 3.0.0),
+    tidyr,
+    utils
+Suggests:
+    gsDesign,
+    gt,
+    kableExtra,
     knitr,
     rmarkdown,
-    gsDesign,
-    kableExtra,
-    gt,
+    testthat (>= 3.0.0),
     tibble
 Config/testthat/edition: 3
-VignetteBuilder: knitr
+RoxygenNote: 7.1.2

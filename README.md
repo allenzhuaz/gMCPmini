@@ -6,7 +6,10 @@
 [![Codecov test coverage](https://codecov.io/gh/allenzhuaz/gMCPmini/branch/main/graph/badge.svg)](https://codecov.io/gh/allenzhuaz/gMCPmini?branch=main)
 <!-- badges: end -->
 
-`gMCPmini` contains a subset of functions from `gMCP`. The purpose is to remove package dependency of gMCP package including `rJAVA`. The selected functions ensure `gsDesign` can produce multiple comparision graph using `hGraph` function.
+`gMCPmini` contains a subset of functions from `gMCP`.
+The purpose is to remove package dependency of gMCP package including `rJava`.
+The selected functions ensure `gsDesign` can produce multiple comparison graph
+using the `hGraph()` function.
 
 ## Installation
 
