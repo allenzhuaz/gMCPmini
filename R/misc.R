@@ -256,31 +256,57 @@ bdiagNA <- function(...) {
   return(M)
 }
 
-
-# Checks the following properties:
-# Values must be between -1 and 1.
-# Diagonal must be equal to 1.
-# Matrix must be symmetric.
-#' @export
-checkCorrelation <- function(m, returnMessage=FALSE, na.allowed=TRUE) {
+#' Check correlation matrix
+#'
+#' Sanity checks for the correlation matrix.
+#'
+#' @param m TBA
+#' @param returnMessage TBA
+#' @param na.allowed TBA
+#'
+#' @details
+#' Checks the following properties:
+#' \itemize{
+#'   \item Values must be between -1 and 1.
+#'   \item Diagonal must be equal to 1.
+#'   \item Matrix must be symmetric.
+#' }
+#'
+#' @return Logical
+#'
+#' @export checkCorrelation
+#'
+#' @examples
+#' NULL
+checkCorrelation <- function(m, returnMessage = FALSE, na.allowed = TRUE) {
   if (!na.allowed && any(is.na(m))) {
-    if (returnMessage) return("Matrix can not contain NAs.")
+    if (returnMessage) {
+      return("Matrix can not contain NAs.")
+    }
     return(FALSE)
   }
   if (!is.numeric(m) || !is.matrix(m)) {
-    if (returnMessage) return("Matrix must be a numeric matirx.")
+    if (returnMessage) {
+      return("Matrix must be a numeric matirx.")
+    }
     return(FALSE)
   }
   if (!isTRUE(all.equal(1, max(1, max(abs(m)[!is.na(m)]))))) {
-    if (returnMessage) return("Values must be between -1 and 1.")
+    if (returnMessage) {
+      return("Values must be between -1 and 1.")
+    }
     return(FALSE)
   }
-  if (!isTRUE(all.equal(diag(m), rep(1, dim(m)[1]),check.attributes=FALSE))) {
-    if (returnMessage) return("Diagonal must be equal to 1.")
+  if (!isTRUE(all.equal(diag(m), rep(1, dim(m)[1]), check.attributes = FALSE))) {
+    if (returnMessage) {
+      return("Diagonal must be equal to 1.")
+    }
     return(FALSE)
   }
   if (!isSymmetric(unname(m))) {
-    if (returnMessage) return("Matrix must be symmetric.")
+    if (returnMessage) {
+      return("Matrix must be symmetric.")
+    }
     return(FALSE)
   }
   return(TRUE)
@@ -289,10 +315,25 @@ checkCorrelation <- function(m, returnMessage=FALSE, na.allowed=TRUE) {
 # Calculation time note: n=22 needs 12 seconds on my computer.
 # With each further step calculation time nearly doubles.
 
+#' Title Placeholder
 #'
-#' @export
+#' Description placeholder.
+#'
+#' @param n TBA
+#'
+#' @return TBA
+#'
+#' @export permutations
+#'
+#' @examples
+#' NULL
 permutations <- function(n) {
-  outer((1:(2^n))-1, (n:1)-1, FUN=function(x,y) {(x%/%2^y)%%2})
+  outer(
+    (1:(2^n)) - 1, (n:1) - 1,
+    FUN = function(x, y) {
+      (x %/% 2^y) %% 2
+    }
+  )
 }
 
 #' Placement of graph nodes
