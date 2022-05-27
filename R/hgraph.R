@@ -1,7 +1,9 @@
-#' @title Create multiplicity graphs using ggplot2
+#' Create multiplicity graphs using ggplot2
 #'
-#' @description \code{hGraph()} plots a multiplicity graph defined by user inputs.
-#' The graph can also be used with the ***gMCP*** package to evaluate a set of nominal p-values for the tests of the hypotheses in the graph
+#' Plots a multiplicity graph defined by user inputs.
+#' The graph can also be used with the ***gMCP*** package to evaluate a set of
+#' nominal p-values for the tests of the hypotheses in the graph.
+#'
 #' @param nHypotheses number of hypotheses in graph
 #' @param nameHypotheses hypothesis names
 #' @param alphaHypotheses alpha-levels or weights for ellipses
@@ -30,6 +32,7 @@
 #' @param y y coordinates for hypothesis ellipses if elliptical arrangement is not wanted
 #' @param wchar character for alphaHypotheses in ellipses
 #' @return A `ggplot` object with a multi-layer multiplicity graph
+#'
 #' @examples
 #' library(tidyr)
 #' # Defaults: note clockwise ordering
@@ -56,21 +59,63 @@
 #'        palette=cbPalette[2:4], fill = c(1, 2, 2),
 #'        legend.position = c(.6,.5), legend.name = "Legend:", labels = c("Group 1", "Group 2"),
 #'        nameHypotheses=c("H1:\n Long name","H2:\n Longer name","H3:\n Longest name"))
+#'
 #' @details
-#' See vignette **Multiplicity graphs formatting using ggplot2** for explanation of formatting.
+#' See vignette **Multiplicity graphs formatting using ggplot2**
+#' for explanation of formatting.
+#'
 #' @importFrom grDevices gray.colors
-#' @importFrom ggplot2 aes ggplot guide_legend stat_ellipse theme theme_void geom_text geom_segment geom_rect scale_fill_manual element_text
+#' @importFrom ggplot2 aes ggplot guide_legend stat_ellipse theme theme_void
+#' geom_text geom_segment geom_rect scale_fill_manual element_text
 #' @importFrom grid unit
 #' @importFrom magrittr "%>%"
 #' @importFrom dplyr mutate n filter left_join select
 #' @importFrom tidyr pivot_longer
-#' @importFrom "grDevices" "palette"
+#' @importFrom grDevices palette
 #' @importFrom methods new show callNextMethod validObject
 #' @importFrom stats qt qnorm uniroot
 #' @importFrom graphics legend
 #' @importFrom utils capture.output
 #' @rdname hGraph
-#' @export
+#' @export hGraph
+#'
+# Workaround for roxygen2 bug <https://github.com/r-lib/roxygen2/issues/1186>
+#' @usage
+#' hGraph(
+#'   nHypotheses = 4,
+#'   nameHypotheses = paste("H", (1:nHypotheses), sep = ""),
+#'   alphaHypotheses = 0.025/nHypotheses,
+#'   m = matrix(array(1/(nHypotheses - 1), nHypotheses^2), nrow = nHypotheses) -
+#'     diag(1/(nHypotheses - 1), nHypotheses),
+#'   fill = 1,
+#'   palette = grDevices::gray.colors(length(unique(fill)), start = 0.5, end = 0.8),
+#'   labels = LETTERS[1:length(unique(fill))],
+#'   legend.name = " ",
+#'   legend.position = "none",
+#'   halfWid = 0.5,
+#'   halfHgt = 0.5,
+#'   trhw = 0.1,
+#'   trhh = 0.075,
+#'   trprop = 1/3,
+#'   digits = 5,
+#'   trdigits = 2,
+#'   size = 6,
+#'   boxtextsize = 4,
+#'   legend.textsize = size * 2.5,
+#'   arrowsize = 0.02,
+#'   radianStart = if ((nHypotheses)\%\%2 != 0) {
+#'      pi * (1/2 + 1/nHypotheses)
+#'  } else
+#'     {
+#'      pi * (1 + 2/nHypotheses)/2
+#'  },
+#'   offset = pi/4/nHypotheses,
+#'   xradius = 2,
+#'   yradius = xradius,
+#'   x = NULL,
+#'   y = NULL,
+#'   wchar = if ((.Platform$OS.type == "windows")) "w" else "\u03b1"
+#' )
 hGraph <- function(
   nHypotheses = 4,
   nameHypotheses = paste("H", (1:nHypotheses), sep = ""),
@@ -101,8 +146,8 @@ hGraph <- function(
   yradius = xradius,
   x = NULL,
   y = NULL,
-  # following is temporary fix from intended {'\u03b1'} for Windows
-  wchar = if(as.character(Sys.info()[1])=="Windows"){"\u03b1"}else{"\u03b1"}
+  # following is temporary fix from intended "\u03b1" for Windows
+  wchar = if ((.Platform$OS.type == "windows")) "w" else "\u03b1"
 ){
   #####################################################################
   # Begin: Internal functions
@@ -185,7 +230,7 @@ hGraph <- function(
 
 
   checkHGArgs <- function(nHypotheses =NULL, nameHypotheses =NULL, alphaHypotheses = NULL, m = NULL, fill = NULL,
-                          palette = NULL, labels = NULL, legend = NULL, legend.name = NULL, legend.Position = NULL, legend.textsize = NULL,
+                          palette = NULL, labels = NULL, legend = NULL, legend.name = NULL, legend.position = NULL, legend.textsize = NULL,
                           halfwid = NULL, halfhgt = NULL, trhw = NULL, trhh = NULL, trprop = NULL, digits = NULL,
                           trdigits = NULL, size = NULL, boxtextsize = NULL, arrowsize = NULL, radianStart = NULL,
                           offset = NULL, xradius = NULL, yradius = NULL, x = NULL, y = NULL, wchar='w')
