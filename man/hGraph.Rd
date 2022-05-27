@@ -37,12 +37,7 @@ hGraph(
   yradius = xradius,
   x = NULL,
   y = NULL,
-  wchar = if (as.character(Sys.info()[1]) == "Windows") {
-     "α"
- } else {
-    
-    "α"
- }
+  wchar = if ((.Platform$OS.type == "windows")) "w" else "\u03b1"
 )
 }
 \arguments{
@@ -104,11 +99,13 @@ hGraph(
 A `ggplot` object with a multi-layer multiplicity graph
 }
 \description{
-\code{hGraph()} plots a multiplicity graph defined by user inputs.
-The graph can also be used with the ***gMCP*** package to evaluate a set of nominal p-values for the tests of the hypotheses in the graph
+Plots a multiplicity graph defined by user inputs.
+The graph can also be used with the ***gMCP*** package to evaluate a set of
+nominal p-values for the tests of the hypotheses in the graph.
 }
 \details{
-See vignette **Multiplicity graphs formatting using ggplot2** for explanation of formatting.
+See vignette **Multiplicity graphs formatting using ggplot2**
+for explanation of formatting.
 }
 \examples{
 library(tidyr)
@@ -136,4 +133,5 @@ hGraph(3,x=sqrt(0:2),y=c(1,3,1.5),size=6,halfWid=.3,halfHgt=.3, trhw=0.6,
        palette=cbPalette[2:4], fill = c(1, 2, 2),
        legend.position = c(.6,.5), legend.name = "Legend:", labels = c("Group 1", "Group 2"),
        nameHypotheses=c("H1:\n Long name","H2:\n Longer name","H3:\n Longest name"))
+
 }
