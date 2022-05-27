@@ -185,7 +185,7 @@ hGraph <- function(
 
 
   checkHGArgs <- function(nHypotheses =NULL, nameHypotheses =NULL, alphaHypotheses = NULL, m = NULL, fill = NULL,
-                          palette = NULL, labels = NULL, legend = NULL, legend.name = NULL, legend.Position = NULL, legend.textsize = NULL,
+                          palette = NULL, labels = NULL, legend = NULL, legend.name = NULL, legend.position = NULL, legend.textsize = NULL,
                           halfwid = NULL, halfhgt = NULL, trhw = NULL, trhh = NULL, trprop = NULL, digits = NULL,
                           trdigits = NULL, size = NULL, boxtextsize = NULL, arrowsize = NULL, radianStart = NULL,
                           offset = NULL, xradius = NULL, yradius = NULL, x = NULL, y = NULL, wchar='w')
