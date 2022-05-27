@@ -64,7 +64,7 @@
 #' @importFrom magrittr "%>%"
 #' @importFrom dplyr mutate n filter left_join select
 #' @importFrom tidyr pivot_longer
-#' @importFrom "grDevices" "palette"
+#' @importFrom grDevices palette
 #' @importFrom methods new show callNextMethod validObject
 #' @importFrom stats qt qnorm uniroot
 #' @importFrom graphics legend

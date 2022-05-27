@@ -1,4 +1,98 @@
 ## Graph representation in gMCP
+
+#' Class graphMCP
+#'
+#' A graphMCP object describes a sequentially rejective multiple test
+#' procedure.
+#'
+#' @exportClass graphMCP
+#'
+#' @name graphMCP-class
+#'
+#' @aliases graphMCP-class graphMCP print,graphMCP-method
+#' plot,graphMCP,ANY-method plot,graphMCP-method getWeights
+#' getWeights,graphMCP-method getMatrix getMatrix,graphMCP-method setWeights
+#' setWeights,graphMCP-method setRejected<- setRejected<-,graphMCP-method
+#' getRejected getRejected,graphMCP-method getXCoordinates
+#' getXCoordinates,graphMCP-method getYCoordinates
+#' getYCoordinates,graphMCP-method setEdge
+#' setEdge,character,character,graphMCP,character-method
+#' setEdge,character,character,graphMCP,numeric-method getNodes
+#' getNodes,graphMCP-method edgeAttr edgeAttr<-
+#' edgeAttr,graphMCP,character,character,character-method
+#' edgeAttr<-,graphMCP,character,character,character-method nodeAttr nodeAttr<-
+#' nodeAttr,graphMCP,character,character-method
+#' nodeAttr<-,graphMCP,character,character-method
+#'
+#' @docType class
+#'
+#' @section Slots:
+#' \describe{
+#'   \item{\code{m}}{A transition matrix. Can be either \code{numerical} or
+#'   \code{character} depending whether the matrix contains variables or not.
+#'   Row and column names will be the names of the nodes.}
+#'   \item{\code{weights}}{A numeric.}
+#'   \item{\code{edgeAttr}}{A list for edge attributes.}
+#'   \item{\code{nodeAttr}}{A list for node attributes.}
+#' }
+#'
+#' @section Methods:
+#' \describe{
+#'   \item{getMatrix}{\code{signature(object = "graphMCP")}: A method for getting the transition matrix of the graph.}
+#'   \item{getWeights}{\code{signature(object = "graphMCP")}: A method for getting the weights.
+#'     If a third optional argument \code{node} is specified, only for these nodes the weight will be returned.}
+#'   \item{setWeights}{\code{signature(object = "graphMCP")}: A method for setting the weights.
+#'     If a third optional argument \code{node} is specified, only for these nodes the weight will be set.}
+#'   \item{getRejected}{\code{signature(object = "graphMCP")}:
+#'       A method for getting the information whether the hypotheses are marked in the graph as already rejected.
+#'     If a second optional argument \code{node} is specified, only for these nodes the boolean vector will be returned.}
+#'   \item{getXCoordinates}{\code{signature(object = "graphMCP")}:
+#'       A method for getting the x coordinates of the graph.
+#'     If a second optional argument \code{node} is specified, only for these nodes the x coordinates will be returned.
+#'     If x coordinates are not set yet \code{NULL} is returned.}
+#'   \item{getYCoordinates}{\code{signature(object = "graphMCP")}:
+#'       A method for getting the y coordinates of the graph
+#'     If a second optional argument \code{node} is specified, only for these nodes the x coordinates will be returned.
+#'     If y coordinates are not set yet \code{NULL} is returned.}
+#'   \item{setEdge}{\code{signature(from="character", to="character", graph="graphNEL", weights="numeric")}:
+#'       A method for adding new edges with the given weights.}
+#'   \item{setEdge}{\code{signature(from="character", to="character", graph="graphMCP", weights="character")}:
+#'       A method for adding new edges with the given weights.}
+#' }
+#'
+#' @author Kornelius Rohmeyer \email{rohmeyer@@small-projects.de}
+#'
+#' @keywords graphs
+#'
+#' @examples
+#' m <- rbind(H11=c(0,   0.5, 0,   0.5, 0,   0  ),
+#' 			H21=c(1/3, 0,   1/3, 0,   1/3, 0  ),
+#' 			H31=c(0,   0.5, 0,   0,   0,   0.5),
+#' 			H12=c(0,   1,   0,   0,   0,   0  ),
+#' 			H22=c(0.5, 0,   0.5, 0,   0,   0  ),
+#' 			H32=c(0,   1,   0,   0,   0,   0  ))
+#'
+#' weights <- c(1/3, 1/3, 1/3, 0, 0, 0)
+#'
+#' # Graph creation
+#' graph <- new("graphMCP", m=m, weights=weights)
+#'
+#' # Visualization settings
+#' nodeX <- rep(c(100, 300, 500), 2)
+#' nodeY <- rep(c(100, 300), each=3)
+#' graph@@nodeAttr$X <- nodeX
+#' graph@@nodeAttr$Y <- nodeY
+#'
+#' getWeights(graph)
+#'
+#' getRejected(graph)
+#'
+#' pvalues <- c(0.1, 0.008, 0.005, 0.15, 0.04, 0.006)
+#' result <- gMCP(graph, pvalues)
+#'
+#' getWeights(result@@graphs[[4]])
+#' getRejected(result@@graphs[[4]])
+
 setClass("graphMCP",
 		representation(m="matrix",
 				weights="numeric",
@@ -33,6 +127,36 @@ validWeightedGraph <- function(object) {
 	return(TRUE)
 }
 
+#' Class gMCPResult
+#'
+#' A gMCPResult object describes an evaluated sequentially rejective multiple
+#' test procedure.
+#'
+#' @exportClass gMCPResult
+#'
+#' @name gMCPResult-class
+#'
+#' @aliases gMCPResult-class gMCPResult print,gMCPResult-method
+#' plot,gMCPResult,ANY-method plot,gMCPResult-method
+#' getWeights,gMCPResult-method getRejected,gMCPResult-method
+#'
+#' @docType class
+#'
+#' @section Slots:
+#' \describe{
+#'   \item{\code{graphs}}{Object of class \code{list}.}
+#'   \item{\code{alpha}}{A \code{numeric} specifying the maximal type I error rate.}
+#'   \item{\code{pvalues}}{The \code{numeric} vector of p-values.}
+#'   \item{\code{rejected}}{The \code{logical} vector of rejected null hypotheses.}
+#'   \item{\code{adjPValues}}{The \code{numeric} vector of adjusted p-values.}
+#' }
+#'
+#' @author Kornelius Rohmeyer \email{rohmeyer@@small-projects.de}
+#'
+#' @seealso \code{\link{gMCP}}
+#'
+#' @keywords graphs
+
 setClass("gMCPResult",
 		representation(graphs="list",
 				pvalues="numeric",
@@ -41,6 +165,7 @@ setClass("gMCPResult",
 				adjPValues="numeric")
 )
 
+#' @exportMethod print
 setMethod("print", "gMCPResult",
 		function(x, ...) {
 			callNextMethod(x, ...)
@@ -75,6 +200,7 @@ setMethod("show", "gMCPResult",
 			}
 		})
 
+#' @exportMethod plot
 setMethod("plot", "gMCPResult",
 		function(x, y, ...) {
 			# TODO Show visualization of graph
@@ -82,6 +208,7 @@ setMethod("plot", "gMCPResult",
 
 setGeneric("getNodes", function(object, ...) standardGeneric("getNodes"))
 
+#' @exportMethod getNodes
 setMethod("getNodes", c("graphMCP"),
 		function(object, ...) {
 			return(rownames(object@m))
@@ -89,16 +216,16 @@ setMethod("getNodes", c("graphMCP"),
 
 setGeneric("getMatrix", function(object, ...) standardGeneric("getMatrix"))
 
+#' @exportMethod getMatrix
 setMethod("getMatrix", c("graphMCP"),
 		function(object, ...) {
 			m <- object@m
 			return(m)
 		})
 
-#' @export
 setGeneric("getWeights", function(object, node, ...) standardGeneric("getWeights"))
 
-#' @export
+#' @exportMethod getWeights
 setMethod("getWeights", c("graphMCP"),
 		function(object, node, ...) {
 			weights <- object@weights
@@ -109,10 +236,9 @@ setMethod("getWeights", c("graphMCP"),
 			return(weights)
 		})
 
-#' @export
 setGeneric("setWeights", function(object, weights, node, ...) standardGeneric("setWeights"))
 
-#' @export
+#' @exportMethod setWeights
 setMethod("setWeights", c("graphMCP"),
 		function(object, weights, node, ...) {
 			if (missing(node)) {
@@ -122,7 +248,7 @@ setMethod("setWeights", c("graphMCP"),
 			return(object)
 		})
 
-#' @export
+#' @exportMethod getWeights
 setMethod("getWeights", c("gMCPResult"),
 		function(object, node, ...) {
 			graph <- object@graphs[[length(object@graphs)]]
@@ -131,6 +257,7 @@ setMethod("getWeights", c("gMCPResult"),
 
 setGeneric("setEdge", function(from, to, graph, weights) standardGeneric("setEdge"))
 
+#' @exportMethod setEdge
 setMethod("setEdge", signature=signature(from="character", to="character",
 				graph="graphMCP", weights="character"),
 		function(from, to, graph, weights) {
@@ -138,6 +265,7 @@ setMethod("setEdge", signature=signature(from="character", to="character",
 			graph
 		})
 
+#' @exportMethod setEdge
 setMethod("setEdge", signature=signature(from="character", to="character",
 				graph="graphMCP", weights="numeric"),
 		function(from, to, graph, weights) {
@@ -148,12 +276,14 @@ setMethod("setEdge", signature=signature(from="character", to="character",
 setGeneric("edgeAttr", function(self, from, to, attr) standardGeneric("edgeAttr"))
 setGeneric("edgeAttr<-", function(self, from, to, attr, value) standardGeneric("edgeAttr<-"))
 
+#' @exportMethod edgeAttr
 setMethod("edgeAttr", signature(self="graphMCP", from="character", to="character",
 				attr="character"),
 		function(self, from, to, attr) {
 			self@edgeAttr[[attr]][from, to]
 		})
 
+#' @exportMethod "edgeAttr<-"
 setReplaceMethod("edgeAttr",
 		signature(self="graphMCP", from="character", to="character", attr="character", value="ANY"),
 		function(self, from, to, attr, value) {
@@ -166,11 +296,13 @@ setReplaceMethod("edgeAttr",
 setGeneric("nodeAttr", function(self, n, attr) standardGeneric("nodeAttr"))
 setGeneric("nodeAttr<-", function(self, n, attr, value) standardGeneric("nodeAttr<-"))
 
+#' @exportMethod nodeAttr
 setMethod("nodeAttr", signature(self="graphMCP", n="character", attr="character"),
 		function(self, n, attr) {
 			self@nodeAttr[[attr]][n]
 		})
 
+#' @exportMethod "nodeAttr<-"
 setReplaceMethod("nodeAttr",
 		signature(self="graphMCP", n="character", attr="character", value="ANY"),
 		function(self, n, attr, value) {
@@ -181,6 +313,7 @@ setReplaceMethod("nodeAttr",
 
 setGeneric("getRejected", function(object, node, ...) standardGeneric("getRejected"))
 
+#' @exportMethod getRejected
 setMethod("getRejected", c("graphMCP"), function(object, node, ...) {
 			rejected <- object@nodeAttr$rejected
 			if (!missing(node)) {
@@ -189,6 +322,7 @@ setMethod("getRejected", c("graphMCP"), function(object, node, ...) {
 			return(rejected)
 		})
 
+#' @exportMethod getRejected
 setMethod("getRejected", c("gMCPResult"), function(object, node, ...) {
 			rejected <- object@rejected
 			if (!missing(node)) {
@@ -209,6 +343,7 @@ setMethod("setRejected", c("graphMCP"),
 			return(object)
 		})
 
+#' @exportMethod "setRejected<-"
 setReplaceMethod("setRejected", c("graphMCP"),
 		function(object, node, value) {
 			if (missing(node)) {
@@ -220,6 +355,7 @@ setReplaceMethod("setRejected", c("graphMCP"),
 
 setGeneric("getXCoordinates", function(graph, node) standardGeneric("getXCoordinates"))
 
+#' @exportMethod getXCoordinates
 setMethod("getXCoordinates", c("graphMCP"), function(graph, node) {
 			x <- graph@nodeAttr$X
 			if (is.null(x)) return(x)
@@ -232,6 +368,7 @@ setMethod("getXCoordinates", c("graphMCP"), function(graph, node) {
 
 setGeneric("getYCoordinates", function(graph, node) standardGeneric("getYCoordinates"))
 
+#' @exportMethod getYCoordinates
 setMethod("getYCoordinates", c("graphMCP"), function(graph, node) {
 			y <- graph@nodeAttr$Y
 			if (is.null(y)) return(y)
@@ -246,6 +383,7 @@ canBeRejected <- function(graph, node, alpha, pvalues) {
 	return(getWeights(graph)[[node]]*alpha>pvalues[[node]] | (all.equal(getWeights(graph)[[node]]*alpha,pvalues[[node]])[1]==TRUE));
 }
 
+#' @exportMethod print
 setMethod("print", "graphMCP",
 		function(x, ...) {
 			callNextMethod(x, ...)
@@ -313,13 +451,78 @@ getFractionString <- function(x, eps=1e-07) {
 	return(xStr)
 }
 
+#' @exportMethod plot
 setMethod("plot", "graphMCP",
 		function(x, y, ...) {
 			# TODO Show visualization of graph
 		})
 
+#' Simultaneous confidence intervals for sequentially rejective multiple test
+#' procedures
+#'
+#' Calculates simultaneous confidence intervals for sequentially rejective
+#' multiple test procedures.
+#'
+#' @details
+#' For details see the given references.
+#'
+#' @aliases simConfint simConfint,graphMCP-method
+#'
+#' @param object A graph of class \code{\link{graphMCP}}.
+#' @param pvalues A numeric vector specifying the p-values for the sequentially
+#' rejective MTP.
+#' @param confint One of the following: A character string \code{"normal"},
+#' \code{"t"} or a function that calculates the confidence intervals.  If
+#' \code{confint=="t"} the parameter \code{df} must be specified.  If
+#' \code{confint} is a function it must be of signature \code{("character",
+#' "numeric")}, where the first parameter is the hypothesis name and the second
+#' the marginal confidence level (see examples).
+#' @param alternative A character string specifying the alternative hypothesis,
+#' must be "greater" or "less".
+#' @param estimates Point estimates for the parameters of interest.
+#' @param df Degree of freedom as numeric.
+#' @param alpha The overall alpha level as numeric scalar.
+#' @param mu The numerical parameter vector under null hypothesis.
+#'
+#' @return A matrix with columns giving lower confidence limits, point
+#' estimates and upper confidence limits for each parameter. These will be
+#' labeled as "lower bound", "estimate" and "upper bound". %(1-level)/2 and 1 -
+#' (1-level)/2 in \% (by default 2.5\% and 97.5\%).
+#'
+#' @author Kornelius Rohmeyer \email{rohmeyer@@small-projects.de}
+#'
+#' @seealso \code{\link{graphMCP}}
+#'
+#' @references Frank Bretz, Willi Maurer, Werner Brannath, Martin Posch: A
+#' graphical approach to sequentially rejective multiple test procedures.
+#' Statistics in Medicine 2009 vol. 28 issue 4 page 586-604.
+#' \url{http://www.meduniwien.ac.at/fwf_adaptive/papers/bretz_2009_22.pdf}
+#'
+#' @keywords htest graphs
+#'
+#' @examples
+#' est <- c("H1"=0.860382, "H2"=0.9161474, "H3"=0.9732953)
+#' # Sample standard deviations:
+#' ssd <- c("H1"=0.8759528, "H2"=1.291310, "H3"=0.8570892)
+#'
+#' pval <- c(0.01260, 0.05154, 0.02124)/2
+#'
+#' simConfint(BonferroniHolm(3), pvalues=pval,
+#' 		confint=function(node, alpha) {
+#' 			c(est[node]-qt(1-alpha,df=9)*ssd[node]/sqrt(10), Inf)
+#' 		}, estimates=est, alpha=0.025, mu=0, alternative="greater")
+#'
+#' # Note that the sample standard deviations in the following call
+#' # will be calculated from the pvalues and estimates.
+#' ci <- simConfint(BonferroniHolm(3), pvalues=pval,
+#' 		confint="t", df=9, estimates=est, alpha=0.025, alternative="greater")
+#' ci
+#'
+#' # plotSimCI(ci)
+
 setGeneric("simConfint", function(object, pvalues, confint, alternative=c("less", "greater"), estimates, df, alpha=0.05, mu=0) standardGeneric("simConfint"))
 
+#' @exportMethod simConfint
 setMethod("simConfint", c("graphMCP"), function(object, pvalues, confint, alternative=c("less", "greater"), estimates, df, alpha=0.05, mu=0) {
 			result <- gMCP(object, pvalues, alpha=alpha)
 			if (all(getRejected(result))) {
@@ -362,6 +565,44 @@ setMethod("simConfint", c("graphMCP"), function(object, pvalues, confint, altern
 			return(m)
 		})
 
+#' Class gPADInterim
+#'
+#' A gPADInterim object describes an object holding interim information for an
+#' adaptive procedure that is based on a preplanned graphical procedure.
+#'
+#' @exportClass gPADInterim
+#'
+#' @name gPADInterim-class
+#'
+#' @aliases gPADInterim-class gPADInterim print,gPADInterim-method
+#' plot,gPADInterim-method getWeights,gPADInterim-method
+#' getRejected,gPADInterim-method
+#'
+#' @docType class
+#'
+#' @section Slots:
+#' \describe{
+#'   \item{\code{Aj}}{Object of class \code{numeric}. Giving partial
+#'     conditional errors (PCEs) for all elementary hypotheses in each
+#'     intersection hypothesis }
+#'   \item{\code{BJ}}{A \code{numeric} specifying the sum of PCEs per
+#'     intersection hypothesis.}
+#'   \item{\code{z1}}{The \code{numeric} vector of first stage
+#'     z-scores.}
+#'   \item{\code{v}}{A \code{numeric} specifying the proportion of
+#'     measurements collected up to interim}
+#'   \item{\code{preplanned}}{Object of class \code{\link{graphMCP}}
+#'     specifying the preplanned graphical procedure.}
+#'   \item{\code{alpha}}{A \code{numeric} giving the alpha level of the
+#'     pre-planned test}
+#' }
+#'
+#' @author Florian Klinglmueller \email{float@@lefant.net}
+#'
+#' @keywords graphs
+#'
+#' @seealso \code{\link{gMCP}}
+#  , \code{\link{doInterim}}, \code{\link{secondStageTest}}
 
 setClass("gPADInterim",
 		representation(Aj="matrix",
@@ -372,6 +613,7 @@ setClass("gPADInterim",
 				alpha="numeric"),
 		validity=function(object) validPartialCEs(object))
 
+#' @exportMethod print
 setMethod("print", "gPADInterim",
 		function(x, ...) {
 			callNextMethod(x, ...)
@@ -404,6 +646,62 @@ setMethod("show","gPADInterim",
 ############################## Entangled graphs #################################
 
 ## Entangled graph representation in gMCP
+
+#' Class entangledMCP
+#'
+#' A entangledMCP object describes ... TODO
+#'
+#' @exportClass entangledMCP
+#'
+#' @name entangledMCP-class
+#'
+#' @aliases entangledMCP-class entangledMCP print,entangledMCP-method
+#' getWeights,entangledMCP-method getMatrices getMatrices,entangledMCP-method
+#' getRejected,entangledMCP-method getXCoordinates,entangledMCP-method
+#' getYCoordinates,entangledMCP-method getNodes,entangledMCP-method
+#'
+#' @docType class
+#'
+#' @section Slots:
+#' \describe{
+#'   \item{\code{subgraphs}}{A list of graphs of class graphMCP.}
+#'   \item{\code{weights}}{A numeric.}
+#'   \item{\code{graphAttr}}{A list for graph attributes like color, etc.}
+#' }
+#'
+#' @section Methods:
+#' \describe{
+#'   \item{print}{\code{signature(object = "entangledMCP")}: A method for printing the data of the entangled graph to the R console.}
+#'   \item{getMatrices}{\code{signature(object = "entangledMCP")}: A method for getting the list of transition matrices of the entangled graph.}
+#'   \item{getWeights}{\code{signature(object = "entangledMCP")}: A method for getting the matrix of weights of the entangled graph.}
+#'   \item{getRejected}{\code{signature(object = "entangledMCP")}:
+#'       A method for getting the information whether the hypotheses are marked in the graph as already rejected.
+#'     If a second optional argument \code{node} is specified, only for these nodes the boolean vector will be returned.}
+#'   \item{getXCoordinates}{\code{signature(object = "entangledMCP")}:
+#'       A method for getting the x coordinates of the graph.
+#'     If a second optional argument \code{node} is specified, only for these nodes the x coordinates will be returned.
+#'     If x coordinates are not yet set, \code{NULL} is returned.}
+#'   \item{getYCoordinates}{\code{signature(object = "entangledMCP")}:
+#'       A method for getting the y coordinates of the graph
+#'     If a second optional argument \code{node} is specified, only for these nodes the x coordinates will be returned.
+#'     If y coordinates are not yet set, \code{NULL} is returned.}
+#' }
+#'
+#' @author Kornelius Rohmeyer \email{rohmeyer@@small-projects.de}
+#'
+#' @seealso \code{\link[gMCPmini:graphMCP-class]{graphMCP}}
+#'
+#' @keywords graphs
+#'
+#' @examples
+#' g1 <- BonferroniHolm(2)
+#' g2 <- BonferroniHolm(2)
+#'
+#' graph <- new("entangledMCP", subgraphs=list(g1,g2), weights=c(0.5,0.5))
+#'
+#' getMatrices(graph)
+#' getWeights(graph)
+
 setClass("entangledMCP",
 		representation(subgraphs="list",
 				weights="numeric",
@@ -418,6 +716,7 @@ validEntangledGraph <- function(graph) {
 
 setGeneric("getMatrices", function(object, ...) standardGeneric("getMatrices"))
 
+#' @exportMethod getMatrices
 setMethod("getMatrices", c("entangledMCP"),
 		function(object, ...) {
 			result <- list()
@@ -427,7 +726,7 @@ setMethod("getMatrices", c("entangledMCP"),
 			return(result)
 		})
 
-#' @export
+#' @exportMethod getWeights
 setMethod("getWeights", c("entangledMCP"),
 		function(object, node, ...) {
 			result <- c()
@@ -437,19 +736,23 @@ setMethod("getWeights", c("entangledMCP"),
 			return(result)
 		})
 
+#' @exportMethod getNodes
 setMethod("getNodes", c("entangledMCP"),
 		function(object, ...) {
 			return(getNodes(object@subgraphs[[1]]))
 		})
 
+#' @exportMethod getXCoordinates
 setMethod("getXCoordinates", c("entangledMCP"), function(graph, node) {
 			return(getXCoordinates(graph@subgraphs[[1]], node))
 		})
 
+#' @exportMethod getYCoordinates
 setMethod("getYCoordinates", c("entangledMCP"), function(graph, node) {
 			return(getYCoordinates(graph@subgraphs[[1]], node))
 		})
 
+#' @exportMethod getRejected
 setMethod("getRejected", c("entangledMCP"), function(object, node, ...) {
 			return(getRejected(object@subgraphs[[1]], node))
 		})
