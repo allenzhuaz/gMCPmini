@@ -114,7 +114,7 @@
 #'   yradius = xradius,
 #'   x = NULL,
 #'   y = NULL,
-#'   wchar = if ((.Platform$OS.type == "windows")) "w" else "\u03b1"
+#'   wchar = "\u03b1"
 #' )
 hGraph <- function(
   nHypotheses = 4,
@@ -146,8 +146,7 @@ hGraph <- function(
   yradius = xradius,
   x = NULL,
   y = NULL,
-  # following is temporary fix from intended "\u03b1" for Windows
-  wchar = if ((.Platform$OS.type == "windows")) "w" else "\u03b1"
+  wchar = "\u03b1"
 ){
   #####################################################################
   # Begin: Internal functions
