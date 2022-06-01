@@ -87,7 +87,7 @@
 #' \item{\code{adjPValues}}{adjusted p-values}
 #' }
 #' @author Kornelius Rohmeyer \email{rohmeyer@@small-projects.de}
-#' @seealso \code{graphMCP} \code{\link[multcomp:contrMat]{graphNEL}}
+#' @seealso \code{graphMCP} \code{\link[multcomp:contrMat]{multcomp::contrMat()}}
 #' @references Frank Bretz, Willi Maurer, Werner Brannath, Martin Posch: A
 #' graphical approach to sequentially rejective multiple test procedures.
 #' Statistics in Medicine 2009 vol. 28 issue 4 page 586-604.

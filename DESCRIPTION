@@ -25,9 +25,7 @@ Imports:
     MASS,
     magrittr,
     methods,
-    multcomp (>= 1.1),
     mvtnorm,
-    scales,
     stats,
     tidyr,
     utils
@@ -37,6 +35,7 @@ Suggests:
     kableExtra,
     knitr,
     rmarkdown,
+    scales,
     testthat (>= 3.0.0),
     tibble
 Config/testthat/edition: 3

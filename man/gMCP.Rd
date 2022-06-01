@@ -159,7 +159,7 @@ stepdown procedure and other closed-testing procedures. Biometrical Journal
 2008; 50:678-692.
 }
 \seealso{
-\code{graphMCP} \code{\link[multcomp:contrMat]{graphNEL}}
+\code{graphMCP} \code{\link[multcomp:contrMat]{multcomp::contrMat()}}
 }
 \author{
 Kornelius Rohmeyer \email{rohmeyer@small-projects.de}
