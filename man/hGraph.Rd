@@ -24,15 +24,20 @@ hGraph(
   trdigits = 2,
   size = 6,
   boxtextsize = 4,
+  legend.textsize = size * 2.5,
   arrowsize = 0.02,
-  radianStart = if ((nHypotheses)\%\%2 != 0) {     pi * (1/2 + 1/nHypotheses) } else { 
-       pi * (1 + 2/nHypotheses)/2 },
+  radianStart = if ((nHypotheses)\%\%2 != 0) {
+     pi * (1/2 + 1/nHypotheses)
+ } else
+    {
+     pi * (1 + 2/nHypotheses)/2
+ },
   offset = pi/4/nHypotheses,
   xradius = 2,
   yradius = xradius,
   x = NULL,
   y = NULL,
-  wchar = if (as.character(Sys.info()[1]) == "Windows") {     "w" } else {     "w" }
+  wchar = "\u03b1"
 )
 }
 \arguments{
@@ -72,6 +77,8 @@ hGraph(
 
 \item{boxtextsize}{transition text size}
 
+\item{legend.textsize}{legend text size}
+
 \item{arrowsize}{size of arrowhead for transition arrows}
 
 \item{radianStart}{radians from origin for first ellipse; nodes spaced equally in clockwise order with centers on an ellipse by default}
@@ -92,11 +99,13 @@ hGraph(
 A `ggplot` object with a multi-layer multiplicity graph
 }
 \description{
-\code{hGraph()} plots a multiplicity graph defined by user inputs.
-The graph can also be used with the ***gMCP*** package to evaluate a set of nominal p-values for the tests of the hypotheses in the graph
+Plots a multiplicity graph defined by user inputs.
+The graph can also be used with the ***gMCP*** package to evaluate a set of
+nominal p-values for the tests of the hypotheses in the graph.
 }
 \details{
-See vignette **Multiplicity graphs formatting using ggplot2** for explanation of formatting.
+See vignette **Multiplicity graphs formatting using ggplot2**
+for explanation of formatting.
 }
 \examples{
 library(tidyr)
@@ -124,4 +133,5 @@ hGraph(3,x=sqrt(0:2),y=c(1,3,1.5),size=6,halfWid=.3,halfHgt=.3, trhw=0.6,
        palette=cbPalette[2:4], fill = c(1, 2, 2),
        legend.position = c(.6,.5), legend.name = "Legend:", labels = c("Group 1", "Group 2"),
        nameHypotheses=c("H1:\n Long name","H2:\n Longer name","H3:\n Longest name"))
+
 }

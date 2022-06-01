@@ -6,22 +6,23 @@
 \alias{gMCPmini-package}
 \title{gMCPmini: Graph Based Multiple Comparison Procedures (Mini Version)}
 \description{
-Selected Functions From gMCP package to support gsDesign and remove JAVA dependency. The package version is the same as the gMCP package version.
+Selected functions from the 'gMCP' package to support 'gsDesign' and remove the Java dependency. The package version is the same as the 'gMCP' package version.
 }
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://allenzhuaz.github.io/gMCPmini}
+  \item \url{https://allenzhuaz.github.io/gMCPmini/}
   \item \url{https://github.com/allenzhuaz/gMCPmini}
+  \item Report bugs at \url{https://github.com/allenzhuaz/gMCPmini/issues}
 }
 
 }
 \author{
-\strong{Maintainer}: Yilong Zhang \email{yilong.zhang@merck.com}
+\strong{Maintainer}: Yalin Zhu \email{yalin.zhu@merck.com}
 
 Authors:
 \itemize{
-  \item Yalin Zhu \email{yalin.zhu@merck.com}
+  \item Yilong Zhang
   \item Xuan Deng \email{xuan.deng@merck.com}
   \item Keaven Anderson \email{keaven_anderson@merck.com}
 }

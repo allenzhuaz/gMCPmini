@@ -1,42 +1,43 @@
 Package: gMCPmini
-Type: Package
 Title: Graph Based Multiple Comparison Procedures (Mini Version)
 Version: 0.8-15
-Authors@R: c(person("Yilong", "Zhang", role = c("aut", "cre"),  email = "yilong.zhang@merck.com"),
-             person("Yalin", "Zhu", role = c("aut"),  email = "yalin.zhu@merck.com"),
-             person("Xuan", "Deng", role = c("aut"),  email = "xuan.deng@merck.com"),
-             person("Keaven", "Anderson", role = c("aut"),  email = "keaven_anderson@merck.com"))
-Maintainer: Yalin Zhu <yalin.zhu@merck.com>
-Description: Selected Functions From gMCP package to support gsDesign and remove JAVA dependency. The 
-  package version is the same as the gMCP package version.
-Depends:
-    R (>= 3.6.0)
+Authors@R: c(
+    person("Yilong", "Zhang", role = c("aut")),
+    person("Yalin", "Zhu", role = c("aut", "cre"), email = "yalin.zhu@merck.com"),
+    person("Xuan", "Deng", role = c("aut"), email = "xuan.deng@merck.com"),
+    person("Keaven", "Anderson", role = c("aut"),  email = "keaven_anderson@merck.com")
+    )
+Description: Selected functions from the 'gMCP' package to support 'gsDesign'
+    and remove the Java dependency. The package version is the same as the
+    'gMCP' package version.
+Depends: R (>= 3.6.0)
 License: GPL (>= 2)
-URL: https://allenzhuaz.github.io/gMCPmini, https://github.com/allenzhuaz/gMCPmini
+URL: https://allenzhuaz.github.io/gMCPmini/, https://github.com/allenzhuaz/gMCPmini
+BugReports: https://github.com/allenzhuaz/gMCPmini/issues
 Encoding: UTF-8
-RoxygenNote: 7.1.2
-Imports: 
+VignetteBuilder: knitr
+Imports:
+    dplyr,
     ggplot2,
     grDevices,
     grid,
+    graphics,
+    MASS,
     magrittr,
-    dplyr,
-    tidyr,
-    mvtnorm,
-    scales,
     methods,
+    mvtnorm,
     stats,
-    graphics, 
-    utils,
-    multcomp (>= 1.1)
-Suggests: 
-    testthat (>= 3.0.0),
-    knitr,
-    rmarkdown,
+    tidyr,
+    utils
+Suggests:
     gsDesign,
-    kableExtra,
     gt,
-    tibble,
-    devtools
+    kableExtra,
+    knitr,
+    multcomp,
+    rmarkdown,
+    scales,
+    testthat (>= 3.0.0),
+    tibble
 Config/testthat/edition: 3
-VignetteBuilder: knitr
+RoxygenNote: 7.2.0
