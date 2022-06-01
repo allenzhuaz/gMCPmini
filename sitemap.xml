@@ -25,6 +25,12 @@
     <loc>/reference/bonferroni.trimmed.simes.test.html</loc>
   </url>
   <url>
+    <loc>/reference/checkCorrelation.html</loc>
+  </url>
+  <url>
+    <loc>/reference/entangledMCP-class.html</loc>
+  </url>
+  <url>
     <loc>/reference/exampleGraphs.html</loc>
   </url>
   <url>
@@ -34,13 +40,22 @@
     <loc>/reference/gMCP.html</loc>
   </url>
   <url>
+    <loc>/reference/gMCPResult-class.html</loc>
+  </url>
+  <url>
     <loc>/reference/gMCPmini-package.html</loc>
+  </url>
+  <url>
+    <loc>/reference/gPADInterim-class.html</loc>
   </url>
   <url>
     <loc>/reference/generatePvals.html</loc>
   </url>
   <url>
     <loc>/reference/generateWeights.html</loc>
+  </url>
+  <url>
+    <loc>/reference/graphMCP-class.html</loc>
   </url>
   <url>
     <loc>/reference/graphTest.html</loc>
@@ -61,6 +76,9 @@
     <loc>/reference/parametric.test.html</loc>
   </url>
   <url>
+    <loc>/reference/permutations.html</loc>
+  </url>
+  <url>
     <loc>/reference/placeNodes.html</loc>
   </url>
   <url>
@@ -68,6 +86,9 @@
   </url>
   <url>
     <loc>/reference/replaceVariables.html</loc>
+  </url>
+  <url>
+    <loc>/reference/simConfint.html</loc>
   </url>
   <url>
     <loc>/reference/simes.on.subsets.test.html</loc>

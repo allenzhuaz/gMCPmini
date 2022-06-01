@@ -194,8 +194,8 @@ Statistics in Medicine 2009 vol. 28 issue 4 page 586-604.
 <a href="http://www.meduniwien.ac.at/fwf_adaptive/papers/bretz_2009_22.pdf" class="external-link">http://www.meduniwien.ac.at/fwf_adaptive/papers/bretz_2009_22.pdf</a></p>
 <p>Bretz F., Posch M., Glimm E., Klinglmueller F., Maurer W., Rohmeyer K.
 (2011): Graphical approaches for multiple endpoint problems using weighted
-Bonferroni, Simes or parametric tests. Biometrical Journal 53 (6), pages 894-913, Wiley.
-<a href="http://onlinelibrary.wiley.com/doi/10.1002/bimj.201000239/full" class="external-link">http://onlinelibrary.wiley.com/doi/10.1002/bimj.201000239/full</a></p>
+Bonferroni, Simes or parametric tests. Biometrical Journal 53 (6),
+pages 894-913, Wiley.</p>
 <p>Strassburger K., Bretz F.: Compatible simultaneous lower confidence bounds
 for the Holm procedure and other Bonferroni based closed tests. Statistics
 in Medicine 2008; 27:4914-4927.</p>
@@ -208,7 +208,7 @@ stepdown procedure and other closed-testing procedures. Biometrical Journal
     </div>
     <div id="see-also">
     <h2>See also</h2>
-    <div class="dont-index"><p><code>graphMCP</code> <code><a href="https://rdrr.io/pkg/multcomp/man/contrMat.html" class="external-link">graphNEL</a></code></p></div>
+    <div class="dont-index"><p><code>graphMCP</code> <code><a href="https://rdrr.io/pkg/multcomp/man/contrMat.html" class="external-link">multcomp::contrMat()</a></code></p></div>
     </div>
     <div id="author">
     <h2>Author</h2>
@@ -217,9 +217,7 @@ stepdown procedure and other closed-testing procedures. Biometrical Journal
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="exampleGraphs.html">BonferroniHolm</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="exampleGraphs.html">BonferroniHolm</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span></span>
 <span class="r-in"><span class="fu">gMCP</span><span class="op">(</span><span class="va">g</span>, pvalues<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.01</span>, <span class="fl">0.02</span>, <span class="fl">0.04</span>, <span class="fl">0.04</span>, <span class="fl">0.7</span><span class="op">)</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> gMCP-Result</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
