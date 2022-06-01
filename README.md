@@ -1,7 +1,7 @@
 # gMCPmini
 
 <!-- badges: start -->
-[![R-CMD-check](https://github.com/allenzhuaz/gMCPmini/workflows/R-CMD-check/badge.svg)](https://github.com/allenzhuaz/gMCPmini/actions)
+[![R-CMD-check](https://github.com/allenzhuaz/gMCPmini/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/allenzhuaz/gMCPmini/actions/workflows/R-CMD-check.yaml)
 [![test-coverage](https://github.com/allenzhuaz/gMCPmini/workflows/test-coverage/badge.svg)](https://github.com/allenzhuaz/gMCPmini/actions)
 [![Codecov test coverage](https://codecov.io/gh/allenzhuaz/gMCPmini/branch/main/graph/badge.svg)](https://app.codecov.io/gh/allenzhuaz/gMCPmini?branch=main)
 <!-- badges: end -->
