@@ -3,7 +3,6 @@
 #' Implements the graphical test procedure described in Bretz et al. (2009).
 #' Note that the gMCP function in the gMCP package performs the same task.
 #'
-#'
 #' @param pvalues Either a vector or a matrix containing the local p-values for
 #' the hypotheses in the rows.
 #' @param weights Initial weight levels for the test procedure, in case of
@@ -36,11 +35,12 @@
 #' possibly reduced level alpha of sum(w)*alpha,
 #' where sum(w) is the sum of all node weights in this subset.
 #' If \code{upscale=TRUE} all weights are upscaled, so that sum(w)=1.
+#'
 #' @return A vector or a matrix containing the test results for the hypotheses
 #' under consideration. Significant tests are denoted by a 1, non-significant
 #' results by a 0.
-#' @references
 #'
+#' @references
 #' Bretz, F., Maurer, W., Brannath, W. and Posch, M. (2009) A graphical
 #' approach to sequentially rejective multiple test procedures. Statistics in
 #' Medicine, 28, 586--604
@@ -48,7 +48,9 @@
 #' Bretz, F., Maurer, W. and Hommel, G. (2010) Test and power considerations
 #' for multiple endpoint analyses using sequentially rejective graphical
 #' procedures, to appear in Statistics in Medicine
+#'
 #' @keywords htest
+#'
 #' @export graphTest
 #
 # @examples
@@ -225,7 +227,7 @@ convert <- function(g){
 	## used in the gMCP library
 	## and returns vector of alphas
 	## and significance levels
-	if(class(g) != "graphMCP")
+	if(!inherits(g, "graphMCP"))
 		stop("g needs to an object of class graphMCP")
 	Hnams <- g@nodes
 	nH <- length(Hnams)
