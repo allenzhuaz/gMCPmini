@@ -22,6 +22,7 @@ Imports:
     grDevices,
     grid,
     graphics,
+    MASS,
     magrittr,
     methods,
     multcomp (>= 1.1),

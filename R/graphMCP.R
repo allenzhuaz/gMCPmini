@@ -445,6 +445,7 @@ getWeightStr <- function(graph, from, to, LaTeX=FALSE) {
 	return(as.character(weight))
 }
 
+#' @importFrom MASS fractions
 getFractionString <- function(x, eps=1e-07) {
 	xStr <- as.character(fractions(x))
 	xStr <- ifelse(abs(sapply(xStr, function(x) {eval(parse(text=x))})-x)>eps, as.character(x), xStr)
