@@ -37,7 +37,7 @@ hGraph(
   yradius = xradius,
   x = NULL,
   y = NULL,
-  wchar = if ((.Platform$OS.type == "windows")) "w" else "\u03b1"
+  wchar = "\u03b1"
 )
 }
 \arguments{

@@ -87,7 +87,7 @@
 #' \item{\code{adjPValues}}{adjusted p-values}
 #' }
 #' @author Kornelius Rohmeyer \email{rohmeyer@@small-projects.de}
-#' @seealso \code{graphMCP} \code{\link[multcomp:contrMat]{graphNEL}}
+#' @seealso \code{graphMCP} \code{\link[multcomp:contrMat]{multcomp::contrMat()}}
 #' @references Frank Bretz, Willi Maurer, Werner Brannath, Martin Posch: A
 #' graphical approach to sequentially rejective multiple test procedures.
 #' Statistics in Medicine 2009 vol. 28 issue 4 page 586-604.
@@ -95,8 +95,8 @@
 #'
 #' Bretz F., Posch M., Glimm E., Klinglmueller F., Maurer W., Rohmeyer K.
 #' (2011): Graphical approaches for multiple endpoint problems using weighted
-#' Bonferroni, Simes or parametric tests. Biometrical Journal 53 (6), pages 894-913, Wiley.
-#' \url{http://onlinelibrary.wiley.com/doi/10.1002/bimj.201000239/full}
+#' Bonferroni, Simes or parametric tests. Biometrical Journal 53 (6),
+#' pages 894-913, Wiley.
 #'
 #' Strassburger K., Bretz F.: Compatible simultaneous lower confidence bounds
 #' for the Holm procedure and other Bonferroni based closed tests. Statistics
@@ -109,10 +109,10 @@
 #' Guilbaud O.: Simultaneous confidence regions corresponding to Holm's
 #' stepdown procedure and other closed-testing procedures. Biometrical Journal
 #' 2008; 50:678-692.
+#'
 #' @keywords htest graphs
+#'
 #' @examples
-#'
-#'
 #' g <- BonferroniHolm(5)
 #' gMCP(g, pvalues=c(0.01, 0.02, 0.04, 0.04, 0.7))
 #' # Simple Bonferroni with empty graph:

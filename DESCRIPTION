@@ -7,13 +7,12 @@ Authors@R: c(
     person("Xuan", "Deng", role = c("aut"), email = "xuan.deng@merck.com"),
     person("Keaven", "Anderson", role = c("aut"),  email = "keaven_anderson@merck.com")
     )
-Maintainer: Yalin Zhu <yalin.zhu@merck.com>
 Description: Selected functions from the 'gMCP' package to support 'gsDesign'
     and remove the Java dependency. The package version is the same as the
     'gMCP' package version.
 Depends: R (>= 3.6.0)
 License: GPL (>= 2)
-URL: https://allenzhuaz.github.io/gMCPmini, https://github.com/allenzhuaz/gMCPmini
+URL: https://allenzhuaz.github.io/gMCPmini/, https://github.com/allenzhuaz/gMCPmini
 BugReports: https://github.com/allenzhuaz/gMCPmini/issues
 Encoding: UTF-8
 VignetteBuilder: knitr
@@ -23,11 +22,10 @@ Imports:
     grDevices,
     grid,
     graphics,
+    MASS,
     magrittr,
     methods,
-    multcomp (>= 1.1),
     mvtnorm,
-    scales,
     stats,
     tidyr,
     utils
@@ -37,6 +35,7 @@ Suggests:
     kableExtra,
     knitr,
     rmarkdown,
+    scales,
     testthat (>= 3.0.0),
     tibble
 Config/testthat/edition: 3

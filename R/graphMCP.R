@@ -445,6 +445,7 @@ getWeightStr <- function(graph, from, to, LaTeX=FALSE) {
 	return(as.character(weight))
 }
 
+#' @importFrom MASS fractions
 getFractionString <- function(x, eps=1e-07) {
 	xStr <- as.character(fractions(x))
 	xStr <- ifelse(abs(sapply(xStr, function(x) {eval(parse(text=x))})-x)>eps, as.character(x), xStr)
@@ -530,7 +531,7 @@ setMethod("simConfint", c("graphMCP"), function(object, pvalues, confint, altern
 			} else {
 				alpha <- getWeights(result)*alpha
 			}
-			if (class(confint)=="function") {
+			if (inherits(confint, "function")) {
 				f <- function(node, alpha, rejected) {
 					if (rejected && alternative=="less") return(c(-Inf, mu))
 					if (rejected && alternative=="greater") return(c(mu, Inf))

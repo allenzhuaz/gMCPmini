@@ -3,7 +3,7 @@
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/allenzhuaz/gMCPmini/workflows/R-CMD-check/badge.svg)](https://github.com/allenzhuaz/gMCPmini/actions)
 [![test-coverage](https://github.com/allenzhuaz/gMCPmini/workflows/test-coverage/badge.svg)](https://github.com/allenzhuaz/gMCPmini/actions)
-[![Codecov test coverage](https://codecov.io/gh/allenzhuaz/gMCPmini/branch/main/graph/badge.svg)](https://codecov.io/gh/allenzhuaz/gMCPmini?branch=main)
+[![Codecov test coverage](https://codecov.io/gh/allenzhuaz/gMCPmini/branch/main/graph/badge.svg)](https://app.codecov.io/gh/allenzhuaz/gMCPmini?branch=main)
 <!-- badges: end -->
 
 `gMCPmini` contains a subset of functions from `gMCP`.
