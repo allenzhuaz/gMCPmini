@@ -11,7 +11,7 @@ Selected functions from the 'gMCP' package to support 'gsDesign' and remove the 
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://allenzhuaz.github.io/gMCPmini}
+  \item \url{https://allenzhuaz.github.io/gMCPmini/}
   \item \url{https://github.com/allenzhuaz/gMCPmini}
   \item Report bugs at \url{https://github.com/allenzhuaz/gMCPmini/issues}
 }

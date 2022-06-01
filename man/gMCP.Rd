@@ -126,8 +126,6 @@ returned.
 For further details see the given references.
 }
 \examples{
-
-
 g <- BonferroniHolm(5)
 gMCP(g, pvalues=c(0.01, 0.02, 0.04, 0.04, 0.7))
 # Simple Bonferroni with empty graph:
@@ -145,8 +143,8 @@ Statistics in Medicine 2009 vol. 28 issue 4 page 586-604.
 
 Bretz F., Posch M., Glimm E., Klinglmueller F., Maurer W., Rohmeyer K.
 (2011): Graphical approaches for multiple endpoint problems using weighted
-Bonferroni, Simes or parametric tests. Biometrical Journal 53 (6), pages 894-913, Wiley.
-\url{http://onlinelibrary.wiley.com/doi/10.1002/bimj.201000239/full}
+Bonferroni, Simes or parametric tests. Biometrical Journal 53 (6),
+pages 894-913, Wiley.
 
 Strassburger K., Bretz F.: Compatible simultaneous lower confidence bounds
 for the Holm procedure and other Bonferroni based closed tests. Statistics

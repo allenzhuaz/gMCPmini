@@ -12,7 +12,7 @@ Description: Selected functions from the 'gMCP' package to support 'gsDesign'
     'gMCP' package version.
 Depends: R (>= 3.6.0)
 License: GPL (>= 2)
-URL: https://allenzhuaz.github.io/gMCPmini, https://github.com/allenzhuaz/gMCPmini
+URL: https://allenzhuaz.github.io/gMCPmini/, https://github.com/allenzhuaz/gMCPmini
 BugReports: https://github.com/allenzhuaz/gMCPmini/issues
 Encoding: UTF-8
 VignetteBuilder: knitr
