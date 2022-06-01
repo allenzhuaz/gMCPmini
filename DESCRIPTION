@@ -7,7 +7,6 @@ Authors@R: c(
     person("Xuan", "Deng", role = c("aut"), email = "xuan.deng@merck.com"),
     person("Keaven", "Anderson", role = c("aut"),  email = "keaven_anderson@merck.com")
     )
-Maintainer: Yalin Zhu <yalin.zhu@merck.com>
 Description: Selected functions from the 'gMCP' package to support 'gsDesign'
     and remove the Java dependency. The package version is the same as the
     'gMCP' package version.
