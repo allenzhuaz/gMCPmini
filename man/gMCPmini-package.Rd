@@ -6,6 +6,8 @@
 \alias{gMCPmini-package}
 \title{gMCPmini: Graph Based Multiple Comparison Procedures (Mini Version)}
 \description{
+\if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
+
 Selected functions from the 'gMCP' package to support 'gsDesign' and remove the Java dependency. The package version is the same as the 'gMCP' package version.
 }
 \seealso{

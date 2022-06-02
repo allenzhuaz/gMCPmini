@@ -1,4 +1,4 @@
-# gMCPmini
+# gMCPmini <img src="man/figures/logo.png" align="right" width="120" />
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/allenzhuaz/gMCPmini/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/allenzhuaz/gMCPmini/actions/workflows/R-CMD-check.yaml)
