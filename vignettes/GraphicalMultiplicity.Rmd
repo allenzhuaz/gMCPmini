@@ -82,7 +82,7 @@ The initial code block sets options and loads needed packages; no modification s
 options(scipen = 999)
 # Colorblind palette
 cbPalette <- c("#999999", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
-# 3 packages used for data storage and manipulation: dplyr, tibble
+# 2 packages used for data storage and manipulation: dplyr, tibble
 library(dplyr)
 library(tibble)
 # 2 packages used for R Markdown capabilities: knitr, kableExtra
@@ -133,10 +133,11 @@ fwer <- sum(alphaHypotheses)
 # Make a ggplot representation of the above specification and display it
 g <- gMCPmini::hGraph(6,
   alphaHypotheses = alphaHypotheses, m = m, nameHypotheses = nameHypotheses,
+  palette = cbPalette,
   halfWid = 1, halfHgt = .35, xradius = 2.5, yradius = 1, offset = 0, trhw = .15,
   x = c(-1.25, 1.25, -2.5, 2.5, -1.25, 1.25), y = c(2, 2, 1, 1, 0, 0),
   trprop = 0.4, fill = as.character(c(2, 2, 4, 4, 3, 3))
-) + scale_fill_manual(values = cbPalette)
+) 
 print(g)
 ```
 
@@ -540,11 +541,11 @@ for (i in 1:ngraphs) {
     alphaHypotheses = result@graphs[[i]]@weights * fwer,
     m = mx,
     nameHypotheses = nameHypotheses,
+    palette = cbPalette,
     halfWid = 1, halfHgt = .35, xradius = 2.5, yradius = 1, offset = 0, trhw = .15,
     x = c(-1.25, 1.25, -2.5, 2.5, -1.25, 1.25), y = c(2, 2, 1, 1, 0, 0),
     trprop = .4, fill = as.character(c(2, 2, 4, 4, 3, 3))
-  ) +
-    scale_fill_manual(values = cbPalette)
+  ) 
   cat(" \n")
   cat("####", paste(" Graph", as.character(i), " \n\n"))
   print(g)

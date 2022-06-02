@@ -24,20 +24,18 @@ BugReports: https://github.com/allenzhuaz/gMCPmini/issues
 Encoding: UTF-8
 VignetteBuilder: knitr
 Imports:
-    dplyr,
     ggplot2,
     grDevices,
     grid,
     graphics,
     MASS,
-    magrittr,
     methods,
     mvtnorm,
     stats,
-    tidyr,
     utils
 Suggests:
     gsDesign,
+    dplyr,
     gt,
     kableExtra,
     knitr,
