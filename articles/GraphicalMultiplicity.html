@@ -127,7 +127,7 @@
 <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>scipen <span class="op">=</span> <span class="fl">999</span><span class="op">)</span>
 <span class="co"># Colorblind palette</span>
 <span class="va">cbPalette</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#999999"</span>, <span class="st">"#E69F00"</span>, <span class="st">"#56B4E9"</span>, <span class="st">"#009E73"</span>, <span class="st">"#F0E442"</span>, <span class="st">"#0072B2"</span>, <span class="st">"#D55E00"</span>, <span class="st">"#CC79A7"</span><span class="op">)</span>
-<span class="co"># 3 packages used for data storage and manipulation: dplyr, tibble</span>
+<span class="co"># 2 packages used for data storage and manipulation: dplyr, tibble</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tibble.tidyverse.org/" class="external-link">tibble</a></span><span class="op">)</span>
 <span class="co"># 2 packages used for R Markdown capabilities: knitr, kableExtra</span>
@@ -170,10 +170,11 @@
 <span class="co"># Make a ggplot representation of the above specification and display it</span>
 <span class="va">g</span> <span class="op">&lt;-</span> <span class="fu">gMCPmini</span><span class="fu">::</span><span class="fu"><a href="../reference/hGraph.html">hGraph</a></span><span class="op">(</span><span class="fl">6</span>,
   alphaHypotheses <span class="op">=</span> <span class="va">alphaHypotheses</span>, m <span class="op">=</span> <span class="va">m</span>, nameHypotheses <span class="op">=</span> <span class="va">nameHypotheses</span>,
+  palette <span class="op">=</span> <span class="va">cbPalette</span>,
   halfWid <span class="op">=</span> <span class="fl">1</span>, halfHgt <span class="op">=</span> <span class="fl">.35</span>, xradius <span class="op">=</span> <span class="fl">2.5</span>, yradius <span class="op">=</span> <span class="fl">1</span>, offset <span class="op">=</span> <span class="fl">0</span>, trhw <span class="op">=</span> <span class="fl">.15</span>,
   x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1.25</span>, <span class="fl">1.25</span>, <span class="op">-</span><span class="fl">2.5</span>, <span class="fl">2.5</span>, <span class="op">-</span><span class="fl">1.25</span>, <span class="fl">1.25</span><span class="op">)</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span>,
   trprop <span class="op">=</span> <span class="fl">0.4</span>, fill <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">4</span>, <span class="fl">4</span>, <span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span>
-<span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_fill_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="va">cbPalette</span><span class="op">)</span>
+<span class="op">)</span> 
 <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></code></pre></div>
 <p><img src="GraphicalMultiplicity_files/figure-html/unnamed-chunk-3-1.png" width="80%" style="display: block; margin: auto;"></p>
 <p>This testing scheme can result in what might be referred to as time travel for passing of <span class="math inline">\(\alpha\)</span>. That is, if PFS hypotheses are not rejected at a given analysis (say final PFS analysis) and OS hypotheses are rejected at the final analysis, then the previously evaluated PFS tests at the interim and final PFS analysis can be compared to updated bounds based on reallocated Type I error. While this practice was not encouraged by <span class="citation">Maurer and Bretz (2013)</span>, it was acknowledged to control Type I error as previous discussed in <span class="citation">(Liu and Anderson 2008)</span>. Given the stringent Type I error control for multiple hypotheses, the ability to acknowledge clinically significant differences as statistically significant can be important in describing treatment benefits in regulatory labeling for a treatment.</p>
@@ -236,12 +237,12 @@
     footnote <span class="op">=</span> <span class="st">"Approximate hazard ratio at bound."</span>,
     locations <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/cells_body.html" class="external-link">cells_body</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="st">"Value"</span>, rows <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">8</span>, <span class="fl">13</span><span class="op">)</span><span class="op">)</span>
   <span class="op">)</span></code></pre></div>
-<div id="znxnerbeps" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="pjganxvuyy" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#znxnerbeps .gt_table {
+#pjganxvuyy .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -266,7 +267,7 @@
   border-left-color: #D3D3D3;
 }
 
-#znxnerbeps .gt_heading {
+#pjganxvuyy .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -278,7 +279,7 @@
   border-right-color: #D3D3D3;
 }
 
-#znxnerbeps .gt_title {
+#pjganxvuyy .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -290,7 +291,7 @@
   border-bottom-width: 0;
 }
 
-#znxnerbeps .gt_subtitle {
+#pjganxvuyy .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -302,13 +303,13 @@
   border-top-width: 0;
 }
 
-#znxnerbeps .gt_bottom_border {
+#pjganxvuyy .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#znxnerbeps .gt_col_headings {
+#pjganxvuyy .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -323,7 +324,7 @@
   border-right-color: #D3D3D3;
 }
 
-#znxnerbeps .gt_col_heading {
+#pjganxvuyy .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -343,7 +344,7 @@
   overflow-x: hidden;
 }
 
-#znxnerbeps .gt_column_spanner_outer {
+#pjganxvuyy .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -355,15 +356,15 @@
   padding-right: 4px;
 }
 
-#znxnerbeps .gt_column_spanner_outer:first-child {
+#pjganxvuyy .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#znxnerbeps .gt_column_spanner_outer:last-child {
+#pjganxvuyy .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#znxnerbeps .gt_column_spanner {
+#pjganxvuyy .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -375,7 +376,7 @@
   width: 100%;
 }
 
-#znxnerbeps .gt_group_heading {
+#pjganxvuyy .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -400,7 +401,7 @@
   vertical-align: middle;
 }
 
-#znxnerbeps .gt_empty_group_heading {
+#pjganxvuyy .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -415,15 +416,15 @@
   vertical-align: middle;
 }
 
-#znxnerbeps .gt_from_md > :first-child {
+#pjganxvuyy .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#znxnerbeps .gt_from_md > :last-child {
+#pjganxvuyy .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#znxnerbeps .gt_row {
+#pjganxvuyy .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -442,7 +443,7 @@
   overflow-x: hidden;
 }
 
-#znxnerbeps .gt_stub {
+#pjganxvuyy .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -455,7 +456,7 @@
   padding-right: 5px;
 }
 
-#znxnerbeps .gt_stub_row_group {
+#pjganxvuyy .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -469,11 +470,11 @@
   vertical-align: top;
 }
 
-#znxnerbeps .gt_row_group_first td {
+#pjganxvuyy .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#znxnerbeps .gt_summary_row {
+#pjganxvuyy .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -483,16 +484,16 @@
   padding-right: 5px;
 }
 
-#znxnerbeps .gt_first_summary_row {
+#pjganxvuyy .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#znxnerbeps .gt_first_summary_row.thick {
+#pjganxvuyy .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#znxnerbeps .gt_last_summary_row {
+#pjganxvuyy .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -502,7 +503,7 @@
   border-bottom-color: #D3D3D3;
 }
 
-#znxnerbeps .gt_grand_summary_row {
+#pjganxvuyy .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -512,7 +513,7 @@
   padding-right: 5px;
 }
 
-#znxnerbeps .gt_first_grand_summary_row {
+#pjganxvuyy .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -522,11 +523,11 @@
   border-top-color: #D3D3D3;
 }
 
-#znxnerbeps .gt_striped {
+#pjganxvuyy .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#znxnerbeps .gt_table_body {
+#pjganxvuyy .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -535,7 +536,7 @@
   border-bottom-color: #D3D3D3;
 }
 
-#znxnerbeps .gt_footnotes {
+#pjganxvuyy .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -549,7 +550,7 @@
   border-right-color: #D3D3D3;
 }
 
-#znxnerbeps .gt_footnote {
+#pjganxvuyy .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -558,7 +559,7 @@
   padding-right: 5px;
 }
 
-#znxnerbeps .gt_sourcenotes {
+#pjganxvuyy .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -572,7 +573,7 @@
   border-right-color: #D3D3D3;
 }
 
-#znxnerbeps .gt_sourcenote {
+#pjganxvuyy .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -580,36 +581,36 @@
   padding-right: 5px;
 }
 
-#znxnerbeps .gt_left {
+#pjganxvuyy .gt_left {
   text-align: left;
 }
 
-#znxnerbeps .gt_center {
+#pjganxvuyy .gt_center {
   text-align: center;
 }
 
-#znxnerbeps .gt_right {
+#pjganxvuyy .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#znxnerbeps .gt_font_normal {
+#pjganxvuyy .gt_font_normal {
   font-weight: normal;
 }
 
-#znxnerbeps .gt_font_bold {
+#pjganxvuyy .gt_font_bold {
   font-weight: bold;
 }
 
-#znxnerbeps .gt_font_italic {
+#pjganxvuyy .gt_font_italic {
   font-style: italic;
 }
 
-#znxnerbeps .gt_super {
+#pjganxvuyy .gt_super {
   font-size: 65%;
 }
 
-#znxnerbeps .gt_two_val_uncert {
+#pjganxvuyy .gt_two_val_uncert {
   display: inline-block;
   line-height: 1em;
   text-align: right;
@@ -618,31 +619,31 @@
   margin-left: 0.1em;
 }
 
-#znxnerbeps .gt_footnote_marks {
+#pjganxvuyy .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#znxnerbeps .gt_asterisk {
+#pjganxvuyy .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#znxnerbeps .gt_slash_mark {
+#pjganxvuyy .gt_slash_mark {
   font-size: 0.7em;
   line-height: 0.7em;
   vertical-align: 0.15em;
 }
 
-#znxnerbeps .gt_fraction_numerator {
+#pjganxvuyy .gt_fraction_numerator {
   font-size: 0.6em;
   line-height: 0.6em;
   vertical-align: 0.45em;
 }
 
-#znxnerbeps .gt_fraction_denominator {
+#pjganxvuyy .gt_fraction_denominator {
   font-size: 0.6em;
   line-height: 0.6em;
   vertical-align: -0.05em;
@@ -1872,11 +1873,11 @@ NA
     alphaHypotheses <span class="op">=</span> <span class="va">result</span><span class="op">@</span><span class="va">graphs</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span><span class="op">@</span><span class="va">weights</span> <span class="op">*</span> <span class="va">fwer</span>,
     m <span class="op">=</span> <span class="va">mx</span>,
     nameHypotheses <span class="op">=</span> <span class="va">nameHypotheses</span>,
+    palette <span class="op">=</span> <span class="va">cbPalette</span>,
     halfWid <span class="op">=</span> <span class="fl">1</span>, halfHgt <span class="op">=</span> <span class="fl">.35</span>, xradius <span class="op">=</span> <span class="fl">2.5</span>, yradius <span class="op">=</span> <span class="fl">1</span>, offset <span class="op">=</span> <span class="fl">0</span>, trhw <span class="op">=</span> <span class="fl">.15</span>,
     x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1.25</span>, <span class="fl">1.25</span>, <span class="op">-</span><span class="fl">2.5</span>, <span class="fl">2.5</span>, <span class="op">-</span><span class="fl">1.25</span>, <span class="fl">1.25</span><span class="op">)</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span>,
     trprop <span class="op">=</span> <span class="fl">.4</span>, fill <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">4</span>, <span class="fl">4</span>, <span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span>
-  <span class="op">)</span> <span class="op">+</span>
-    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html" class="external-link">scale_fill_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="va">cbPalette</span><span class="op">)</span>
+  <span class="op">)</span> 
   <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">" \n"</span><span class="op">)</span>
   <span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"####"</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">" Graph"</span>, <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">i</span><span class="op">)</span>, <span class="st">" \n\n"</span><span class="op">)</span><span class="op">)</span>
   <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span>
