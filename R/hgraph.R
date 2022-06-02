@@ -34,7 +34,6 @@
 #' @return A `ggplot` object with a multi-layer multiplicity graph
 #'
 #' @examples
-#' library(tidyr)
 #' # Defaults: note clockwise ordering
 #' hGraph(5)
 #' # Add colors (default is 3 gray shades)
@@ -68,9 +67,6 @@
 #' @importFrom ggplot2 aes ggplot guide_legend stat_ellipse theme theme_void
 #' geom_text geom_segment geom_rect scale_fill_manual element_text
 #' @importFrom grid unit
-#' @importFrom magrittr "%>%"
-#' @importFrom dplyr mutate n filter left_join select
-#' @importFrom tidyr pivot_longer
 #' @importFrom grDevices palette
 #' @importFrom methods new show callNextMethod validObject
 #' @importFrom stats qt qnorm uniroot
@@ -176,54 +172,55 @@ hGraph <- function(
   }
 
 
-  makeEllipseData <- function(x=NULL,xradius=.5,yradius=.5){
+  makeEllipseData <- function(df=NULL,xradius=.5,yradius=.5){
     # hack to get ellipses around x,y with radii xradius and yradius
     w <- xradius/3.1
     h <- yradius/3.1
-    x$n <- 1:nrow(x)
-    ellipses <- rbind(x %>% dplyr::mutate(y=y+h),
-                      x %>% dplyr::mutate(y=y-h),
-                      x %>% dplyr::mutate(x=x+w),
-                      x %>% dplyr::mutate(x=x-w)
-    )
+    df$n <- 1:nrow(df)
+    x1 <- x2 <- x3 <- x4 <- df
+    x1$y <- x1$y + h
+    x2$y <- x2$y - h
+    x3$x <- x3$x + w
+    x4$x <- x4$x - w
+    ellipses <- rbind(x1, x2, x3, x4)
     ellipses$txt=""
     return(ellipses)
   }
 
-  makeTransitionSegments <- function(x=NULL, m=NULL, xradius=NULL, yradius=NULL, offset=NULL,
+  makeTransitionSegments <- function(df=NULL, m=NULL, xradius=NULL, yradius=NULL, offset=NULL,
                                      trdigits=NULL, trprop=NULL, trhw=NULL, trhh=NULL){
     from <- to <- w <- y <- xend <- yend <- xb <- yb <- xbmin <- xbmax <- ybmin <- ybmax <- txt <- NULL
     # Create dataset records from transition matrix
     md <- data.frame(m)
     names(md) <- 1:nrow(m)
-    md <- md %>%
-      dplyr::mutate(from=1:dplyr::n()) %>%
-      # put transition weight in w
-      tidyr::pivot_longer(-from, names_to="to", values_to="w") %>%
-      dplyr::mutate(to=as.integer(to)) %>%
-      dplyr::filter(w > 0)
+    md$from <- 1:nrow(md)
+    md <- reshape(data = md, varying = 1:nrow(m), v.names = "w", idvar = "from", timevar = "to", direction = "long")
+    md <- md[md$w>0,]
 
     # Get ellipse center centers for transitions
-    y <- x %>% dplyr::select(x, y) %>% dplyr::mutate(from = 1:dplyr::n())
+    df1 <- df[, c("x", "y")]
+    df1$from <- 1:nrow(df1)
+
+    df2 <- merge(md, df1, by = "from", all.x = TRUE)
+
+    df1$to <- df1$from; df1$xend <- df1$x; df1$yend <- df1$y
+    df3 <- merge(df2, df1[, c("to", "xend", "yend")], by = "to", all.x = TRUE)
+    df3$theta <- atan2((df3$yend - df3$y) * xradius, (df3$xend - df3$x) * yradius)
+    df3$x1 <- df3$x; df3$x1end <- df3$xend; df3$y1 <- df3$y; df3$y1end <- df3$yend
+    df3$x <- df3$x1 + xradius * cos(df3$theta + offset)
+    df3$y <- df3$y1 + yradius * sin(df3$theta + offset)
+    df3$xend <- df3$x1end + xradius * cos(df3$theta + pi - offset)
+    df3$yend <- df3$y1end + yradius * sin(df3$theta + pi - offset)
+    df3$xb <- df3$x + (df3$xend - df3$x) * trprop
+    df3$yb <- df3$y + (df3$yend - df3$y) * trprop
+    df3$xbmin <- df3$xb - trhw
+    df3$xbmax <- df3$xb + trhw
+    df3$ybmin <- df3$yb - trhh
+    df3$ybmax <- df3$yb + trhh
+    df3$txt <- as.character(round(df3$w,trdigits))
+
     return(
-      md %>% dplyr::left_join(y, by = "from") %>%
-        dplyr::left_join(y %>% dplyr::transmute(to = from, xend = x, yend = y), by = "to") %>%
-        # Use ellipse centers, radii and offset to create points for line segments.
-        dplyr::mutate(theta=atan2((yend - y) * xradius, (xend - x) * yradius),
-                      x1 = x, x1end = xend, y1 = y, y1end = yend,
-                      x = x1 + xradius * cos(theta + offset),
-                      y = y1 + yradius * sin(theta + offset),
-                      xend = x1end + xradius * cos(theta + pi - offset),
-                      yend = y1end + yradius * sin(theta + pi - offset),
-                      xb = x + (xend - x) * trprop,
-                      yb = y + (yend - y) * trprop,
-                      xbmin = xb - trhw,
-                      xbmax = xb + trhw,
-                      ybmin = yb - trhh,
-                      ybmax = yb + trhh,
-                      txt = as.character(round(w,trdigits))
-        ) %>%
-        dplyr::select(c(from, to, w, x, y, xend, yend, xb, yb, xbmin, xbmax, ybmin, ybmax, txt))
+      df3[, c("from", "to", "w", "x", "y", "xend", "yend", "xb", "yb", "xbmin", "xbmax", "ybmin", "ybmax", "txt")]
     )
   }
 
@@ -264,10 +261,9 @@ hGraph <- function(
                           y = y,
                           wchar = wchar)
   # Set up ellipse data
-  ellipseData <- hData %>% makeEllipseData(xradius = halfWid, yradius = halfHgt)
+  ellipseData <- makeEllipseData(df = hData, xradius = halfWid, yradius = halfHgt)
   # Set up transition data
-  transitionSegments <- hData %>%
-    makeTransitionSegments(m, xradius = halfWid, yradius = halfHgt, offset = offset,
+  transitionSegments <- makeTransitionSegments(df = hData, m = m, xradius = halfWid, yradius = halfHgt, offset = offset,
                            trprop = trprop, trdigits = trdigits, trhw = trhw, trhh = trhh)
   # Layer the plot
   ggplot()+
