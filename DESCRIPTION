@@ -35,6 +35,7 @@ Suggests:
     kableExtra,
     knitr,
     multcomp,
+    ragg,
     rmarkdown,
     scales,
     testthat (>= 3.0.0),
