@@ -192,19 +192,19 @@ hGraph <- function(
     from <- to <- w <- y <- xend <- yend <- xb <- yb <- xbmin <- xbmax <- ybmin <- ybmax <- txt <- NULL
     # Create dataset records from transition matrix
     md <- data.frame(m)
-    names(md) <- 1:nrow(m)
-    md$from <- 1:nrow(md)
-    md <- reshape(data = md, varying = 1:nrow(m), v.names = "w", idvar = "from", timevar = "to", direction = "long")
-    md <- md[md$w>0,]
+    names(md) <- seq_len(nrow(m))
+    md$from <- seq_len(nrow(md))
+    md <- reshape(data = md, varying = seq_len(nrow(m)), v.names = "w", idvar = "from", timevar = "to", direction = "long")
+    md <- md[md$w > 0, , drop = FALSE]
 
     # Get ellipse center centers for transitions
-    df1 <- df[, c("x", "y")]
-    df1$from <- 1:nrow(df1)
+    df1 <- df[, c("x", "y"), drop = FALSE]
+    df1$from <- seq_len(nrow(df1))
 
     df2 <- merge(md, df1, by = "from", all.x = TRUE)
 
-    df1$to <- df1$from; df1$xend <- df1$x; df1$yend <- df1$y
-    df3 <- merge(df2, df1[, c("to", "xend", "yend")], by = "to", all.x = TRUE)
+    names(df1) <- c("xend", "yend", "to")
+    df3 <- merge(df2, df1[, c("to", "xend", "yend"), drop = FALSE], by = "to", all.x = TRUE)
     df3$theta <- atan2((df3$yend - df3$y) * xradius, (df3$xend - df3$x) * yradius)
     df3$x1 <- df3$x; df3$x1end <- df3$xend; df3$y1 <- df3$y; df3$y1end <- df3$yend
     df3$x <- df3$x1 + xradius * cos(df3$theta + offset)
@@ -220,7 +220,7 @@ hGraph <- function(
     df3$txt <- as.character(round(df3$w,trdigits))
 
     return(
-      df3[, c("from", "to", "w", "x", "y", "xend", "yend", "xb", "yb", "xbmin", "xbmax", "ybmin", "ybmax", "txt")]
+      df3[, c("from", "to", "w", "x", "y", "xend", "yend", "xb", "yb", "xbmin", "xbmax", "ybmin", "ybmax", "txt"), drop = FALSE]
     )
   }
 
