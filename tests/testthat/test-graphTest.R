@@ -13,5 +13,6 @@ test_that("Test graphTest using entangled graph", {
   graph <- new("entangledMCP", subgraphs=list(graph1, graph2), weights=c(0.5,0.5))
   out_from_objects <- graphTest(pvals, alpha=0.025, graph=graph, verbose = TRUE)
 
+  expect_error(convert(graph1))
 
 })

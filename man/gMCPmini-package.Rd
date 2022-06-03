@@ -4,9 +4,9 @@
 \name{gMCPmini-package}
 \alias{gMCPmini}
 \alias{gMCPmini-package}
-\title{gMCPmini: Graph Based Multiple Comparison Procedures (Mini Version)}
+\title{gMCPmini: Graph Based Multiple Comparison Procedures (Minimized Version without Java Dependency)}
 \description{
-\if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
+\if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
 
 Selected functions from the 'gMCP' package to support 'gsDesign' and remove the Java dependency. The package version is the same as the 'gMCP' package version.
 }
@@ -20,13 +20,20 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Yalin Zhu \email{yalin.zhu@merck.com}
+\strong{Maintainer}: Yalin Zhu \email{yalin.zhu@merck.com} (\href{https://orcid.org/0000-0003-3830-8660}{ORCID})
 
 Authors:
 \itemize{
   \item Yilong Zhang
   \item Xuan Deng \email{xuan.deng@merck.com}
   \item Keaven Anderson \email{keaven_anderson@merck.com}
+  \item Nan Xiao \email{nan.xiao1@merck.com} (\href{https://orcid.org/0000-0002-0250-5673}{ORCID})
+}
+
+Other contributors:
+\itemize{
+  \item Kornelius Rohmeyer \email{rohmeyer@small-projects.de} (gMCP author) [contributor]
+  \item Florian Klinglmueller \email{float@lefant.net} (gMCP author) [contributor]
 }
 
 }
