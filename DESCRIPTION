@@ -2,7 +2,7 @@ Package: gMCPmini
 Title: Graph Based Multiple Comparison Procedures (Minimized Version without Java Dependency)
 Version: 0.8-15
 Authors@R: c(
-    person("Yalin", "Zhu", role = c("aut", "cre"), email = "yalin.zhu@merck.com", 
+    person("Yalin", "Zhu", role = c("aut", "cre"), email = "yalin.zhu@merck.com",
            comment = c(ORCID = "0000-0003-3830-8660")),
     person("Yilong", "Zhang", role = c("aut")),
     person("Xuan", "Deng", role = c("aut"), email = "xuan.deng@merck.com"),
@@ -11,31 +11,32 @@ Authors@R: c(
            comment = c(ORCID = "0000-0002-0250-5673")),
     person("Kornelius", "Rohmeyer", role = c("ctb"),  email = "rohmeyer@small-projects.de",
            comment = "gMCP author"),
-	  person("Florian", "Klinglmueller", role = c("ctb"), email = "float@lefant.net",
+    person("Florian", "Klinglmueller", role = c("ctb"), email = "float@lefant.net",
            comment = "gMCP author")
     )
 Description: Selected functions from the 'gMCP' package to support 'gsDesign'
     and remove the Java dependency. The package version is the same as the
     'gMCP' package version.
-Depends: R (>= 3.6.0)
 License: GPL (>= 2)
 URL: https://allenzhuaz.github.io/gMCPmini/, https://github.com/allenzhuaz/gMCPmini
 BugReports: https://github.com/allenzhuaz/gMCPmini/issues
 Encoding: UTF-8
 VignetteBuilder: knitr
+Depends: R (>= 3.6.0)
 Imports:
     ggplot2,
+    graphics,
     grDevices,
     grid,
-    graphics,
     MASS,
     methods,
     mvtnorm,
     stats,
     utils
 Suggests:
-    gsDesign,
+    covr,
     dplyr,
+    gsDesign,
     gt,
     kableExtra,
     knitr,
