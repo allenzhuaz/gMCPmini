@@ -341,83 +341,8 @@ call2char <- function(call) {
   paste(capture.output(print(call)), collapse="\n")
 }
 
-createGMCPCall <- function(graph, pvalues, test, correlation, alpha=0.05,
-		approxEps=TRUE, eps=10^(-3), ..., upscale=FALSE, useC=FALSE,
-		verbose=FALSE, keepWeights=TRUE, adjPValues=TRUE) {
-	command <- dputGraph(graph, "graph")
-	command <- paste(command, "pvalues <- ",dput2(unname(pvalues)),"\n", sep="")
-	if (!missing(correlation)) {
-		command <- paste(command, dputMatrix(correlation, name="cr", indent=12),"\n", sep="")
-	}
-	command <- paste(command, "gMCP(graph, pvalues", sep="")
-	if (!missing(test)) {
-		command <- paste(command, ", test=\"",test,"\"", sep="")
-	}
-	if (upscale) {
-	  command <- paste(command, ", upscale=TRUE", sep="")
-	}
-	if (!missing(correlation)) {
-		command <- paste(command, ", correlation=cr", sep="")
-	}
-	command <- paste(command, ", alpha=",dput2(alpha), sep="")
-	command <- paste(command, ")\n", sep="")
-	return(command)
-}
 
-#TODO: Set rejected.
-dputGraph <- function(g, name="graph") {
-	# Entangled graphs and recursive calls:
-	if ("entangledMCP" %in% class(g)) {
-		s <- c()
-		i <- 1
-		for (graph in g@subgraphs) {
-			s <- paste(s, dputGraph(graph, paste("subgraph",i,sep="")), "\n", sep="")
-			i <- i + 1
-		}
-		s <- paste(s, "weights <- ",dput2(unname(g@weights)),"\n", sep="")
-		s <- paste(s, name, " <- new(\"entangledMCP\", subgraphs=list(", paste(paste("subgraph",1:length(g@subgraphs),sep=""), collapse=", "), "), weights=weights)\n", sep="")
-		return(s)
-	}
-	# Normal graphs:
-	s <- dputMatrix(g@m, name="m", indent=11, rowNames=TRUE)
-	s <- paste(s, "weights <- ",dput2(unname(g@weights)),"\n", sep="")
-	s <- paste(s, name, " <- new(\"graphMCP\", m=m, weights=weights)\n", sep="")
-	return(s)
-}
 
-dputMatrix <- function(m, name, indent=6, rowNames=FALSE) {
-  if (isTRUE(indent)) {
-    indent <- 6
-    if (!missing(name)) {
-      indent <- 10+nchar(name)
-    }
-  }
-	s <- "rbind("
-	if (!missing(name)) s <- paste(name,"<- rbind(")
-	for (i in 1:(dim(m)[1])) {
-		nameLater <- FALSE
-		if (any(make.names(row.names(m))!=row.names(m))) {
-			rowNames <- FALSE
-			nameLater <- TRUE
-		}
-		rName <- ifelse(rowNames, paste(row.names(m)[i],"=",sep=""), "")
-		s <- paste(s,
-			ifelse(i==1,"",paste(rep(" ",indent),collapse="")),
-			rName,
-			dput2(unname(m[i,])),
-			ifelse(i==dim(m)[1],")\n",",\n"),
-			sep="")
-	}
-	if (nameLater) {
-		if (missing(name)) {
-			warning("Can't set row names if no name for matrix is given.")
-			return(s)
-		}
-		s <- paste(s,
-				"row.names(",name,") <- ", dput2(row.names(m)), "\n", sep="")
-	}
-	return(s)
-}
 
 dput2 <- function(x) {
 	paste(capture.output(dput(x)), collapse=" ")
