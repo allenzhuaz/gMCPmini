@@ -108,7 +108,6 @@ See vignette **Multiplicity graphs formatting using ggplot2**
 for explanation of formatting.
 }
 \examples{
-library(tidyr)
 # Defaults: note clockwise ordering
 hGraph(5)
 # Add colors (default is 3 gray shades)
