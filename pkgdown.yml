@@ -3,7 +3,7 @@ pkgdown: 2.0.3
 pkgdown_sha: ~
 articles:
   GraphicalMultiplicity: GraphicalMultiplicity.html
-last_built: 2022-06-03T06:31Z
+last_built: 2022-06-03T14:15Z
 urls:
   reference: https://allenzhuaz.github.io/gMCPmini/reference
   article: https://allenzhuaz.github.io/gMCPmini/articles
