@@ -195,7 +195,10 @@ hGraph <- function(
     names(md) <- seq_len(nrow(m))
     md$from <- seq_len(nrow(md))
     md <- reshape(data = md, varying = seq_len(nrow(m)), v.names = "w", idvar = "from", timevar = "to", direction = "long")
-    md <- md[md$w > 0, , drop = FALSE]
+    md <- md[(md$w > 0) & (md$w <= 1), , drop = FALSE]
+    if(any(md$w < 0) | any(md$w > 1)){
+      message("Note: The transition weights contain negative value or value beyond 1, which have been ignored. Please set eligible weights between 0 and 1")
+    }
 
     # Get ellipse center centers for transitions
     df1 <- df[, c("x", "y"), drop = FALSE]
