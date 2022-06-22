@@ -79,16 +79,22 @@ unadjusted p-values.</p>
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>graph</dt>
 <dd><p>A graph of class <code>graphMCP</code>.</p></dd>
+
+
 <dt>pvalues</dt>
 <dd><p>A numeric vector specifying the p-values for the graph based
 MCP. Note the assumptions in the details section for the parametric tests,
 when a correlation is specified.</p></dd>
+
+
 <dt>test</dt>
 <dd><p>Should be either <code>"Bonferroni"</code>, <code>"Simes"</code> or <code>"parametric"</code>.
 If not specified by default the Bonferroni-based test procedure is used if no
 correlation is specified or the algorithm from Bretz et al. 2011 if a
 correlation is specified. If <code>test</code> is set to <code>"Simes"</code> the weighted
 Simes test will be performed for each subset of hypotheses.</p></dd>
+
+
 <dt>correlation</dt>
 <dd><p>Optional correlation matrix.  If the weighted Simes test
 is performed, it is checked whether type I error rate can be ensured and a
@@ -98,15 +104,25 @@ statistics for which the correlation is (partially) known. In that case a
 weighted parametric closed test is performed (also see
 <code><a href="generatePvals.html">generatePvals</a></code>). Unknown values can be set to NA. (See details
 for more information)</p></dd>
+
+
 <dt>alpha</dt>
 <dd><p>A numeric specifying the maximal allowed type one error rate.</p></dd>
+
+
 <dt>approxEps</dt>
 <dd><p>A boolean specifying whether epsilon values should be
 substituted with the value given in the parameter <code>eps</code>.</p></dd>
+
+
 <dt>eps</dt>
 <dd><p>A numeric scalar specifying a value for epsilon edges.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Test specific arguments can be given here.</p></dd>
+
+
 <dt>upscale</dt>
 <dd><p>Logical. If <code>upscale=FALSE</code> then for each intersection
 of hypotheses (i.e. each subgraph) a weighted test is performed at the
@@ -115,26 +131,37 @@ where sum(w) is the sum of all node weights in this subset.
 If <code>upscale=TRUE</code> all weights are upscaled, so that sum(w)=1.</p>
 <p>For backward compatibility the default value is TRUE if a the parameter <code>test</code>
 is missing, but parameter <code>correlation</code> is specified or if <code>test=="Bretz2011"</code>.</p></dd>
+
+
 <dt>useC</dt>
 <dd><p>Logical scalar. If <code>TRUE</code> neither adjusted p-values nor
 intermediate graphs are returned, but the calculation is sped up by using
 code written in C. THIS CODE IS NOT FOR PRODUCTIVE USE YET!  If approxEps is
 <code>FALSE</code> and the graph contains epsilon edges, a warning is thrown and
 <code>useC</code> will be ignored.</p></dd>
+
+
 <dt>verbose</dt>
 <dd><p>Logical scalar. If <code>TRUE</code> verbose output is generated.</p></dd>
+
+
 <dt>keepWeights</dt>
 <dd><p>Logical scalar. If <code>FALSE</code> the weight of a node
 without outgoing edges is set to 0 if it is removed.  Otherwise it keeps its
 weight.</p></dd>
+
+
 <dt>adjPValues</dt>
 <dd><p>Logical scalar. If <code>FALSE</code> no adjusted p-values will
 be calculated.  Especially for the weighted Simes test this will result in
 significantly less calculations in most cases.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>An object of class <code>gMCPResult</code>, more specifically a list with
+    
+
+<p>An object of class <code>gMCPResult</code>, more specifically a list with
 elements</p><dl><dt><code>graphs</code></dt>
 <dd><p>list of graphs</p></dd>
 
@@ -365,7 +392,7 @@ stepdown procedure and other closed-testing procedures. Biometrical Journal
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p><p>Developed by Yalin Zhu, Yilong Zhang, Xuan Deng, Keaven Anderson, Nan Xiao. Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3. <br>Copyright © 2022 Merck &amp; Co., Inc., Rahway, NJ, USA and its affiliates. All rights reserved.</p>
+  <p></p><p>Developed by Yalin Zhu, Yilong Zhang, Xuan Deng, Keaven Anderson, Nan Xiao. Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4. <br>Copyright © 2022 Merck &amp; Co., Inc., Rahway, NJ, USA and its affiliates. All rights reserved.</p>
 </div>
 
 <div class="pkgdown-footer-right">

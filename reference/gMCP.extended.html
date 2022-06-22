@@ -71,11 +71,15 @@
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>graph</dt>
 <dd><p>A graph of class <code>graphMCP</code>.</p></dd>
+
+
 <dt>pvalues</dt>
 <dd><p>A numeric vector specifying the p-values for the graph based
 MCP. Note the assumptions in the description of the selected test (if there are any -
 for example <code>test=bonferroni.test</code> has no further assumptions, but
 <code>test=parametric.test</code> assumes p-values from a multivariate normal distribution).</p></dd>
+
+
 <dt>test</dt>
 <dd><p>A weighted test function.</p>
 <p>The package gMCP provides the following weighted test functions:</p><dl><dt>bonferroni.test</dt>
@@ -95,29 +99,44 @@ for example <code>test=bonferroni.test</code> has no further assumptions, but
 
 
 </dl><p>To provide your own test function see <code>?weighted.test.function</code>.</p></dd>
+
+
 <dt>alpha</dt>
 <dd><p>A numeric specifying the maximal allowed type one error rate.</p></dd>
+
+
 <dt>eps</dt>
 <dd><p>A numeric scalar specifying a value for epsilon edges.</p></dd>
+
+
 <dt>upscale</dt>
 <dd><p>Logical. If <code>upscale=FALSE</code> then for each intersection
 of hypotheses (i.e. each subgraph) a weighted test is performed at the
 possibly reduced level alpha of sum(w)*alpha,
 where sum(w) is the sum of all node weights in this subset.
 If <code>upscale=TRUE</code> all weights are upscaled, so that sum(w)=1.</p></dd>
+
+
 <dt>verbose</dt>
 <dd><p>Logical scalar. If <code>TRUE</code> verbose output is generated
 during sequentially rejection steps.</p></dd>
+
+
 <dt>adjPValues</dt>
 <dd><p>Logical scalar. If <code>FALSE</code> no adjusted p-values will
 be calculated. Especially for the weighted Simes test this will result in
 significantly less calculations in most cases.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Test specific arguments can be given here.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>An object of class <code>gMCPResult</code>, more specifically a list with
+    
+
+<p>An object of class <code>gMCPResult</code>, more specifically a list with
 elements</p><dl><dt><code>graphs</code></dt>
 <dd><p>list of graphs</p></dd>
 
@@ -374,7 +393,7 @@ stepdown procedure and other closed-testing procedures. Biometrical Journal
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p><p>Developed by Yalin Zhu, Yilong Zhang, Xuan Deng, Keaven Anderson, Nan Xiao. Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3. <br>Copyright © 2022 Merck &amp; Co., Inc., Rahway, NJ, USA and its affiliates. All rights reserved.</p>
+  <p></p><p>Developed by Yalin Zhu, Yilong Zhang, Xuan Deng, Keaven Anderson, Nan Xiao. Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4. <br>Copyright © 2022 Merck &amp; Co., Inc., Rahway, NJ, USA and its affiliates. All rights reserved.</p>
 </div>
 
 <div class="pkgdown-footer-right">

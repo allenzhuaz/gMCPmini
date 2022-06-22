@@ -76,9 +76,13 @@ multiple test procedures.</p>
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>object</dt>
 <dd><p>A graph of class <code><a href="graphMCP-class.html">graphMCP</a></code>.</p></dd>
+
+
 <dt>pvalues</dt>
 <dd><p>A numeric vector specifying the p-values for the sequentially
 rejective MTP.</p></dd>
+
+
 <dt>confint</dt>
 <dd><p>One of the following: A character string <code>"normal"</code>,
 <code>"t"</code> or a function that calculates the confidence intervals.  If
@@ -86,23 +90,39 @@ rejective MTP.</p></dd>
 <code>confint</code> is a function it must be of signature <code>("character",
 "numeric")</code>, where the first parameter is the hypothesis name and the second
 the marginal confidence level (see examples).</p></dd>
+
+
 <dt>alternative</dt>
 <dd><p>A character string specifying the alternative hypothesis,
 must be "greater" or "less".</p></dd>
+
+
 <dt>estimates</dt>
 <dd><p>Point estimates for the parameters of interest.</p></dd>
+
+
 <dt>df</dt>
 <dd><p>Degree of freedom as numeric.</p></dd>
+
+
 <dt>alpha</dt>
 <dd><p>The overall alpha level as numeric scalar.</p></dd>
+
+
 <dt>mu</dt>
 <dd><p>The numerical parameter vector under null hypothesis.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A matrix with columns giving lower confidence limits, point
+    
+
+<p>A matrix with columns giving lower confidence limits, point
 estimates and upper confidence limits for each parameter. These will be
-labeled as "lower bound", "estimate" and "upper bound". <!-- %(1-level)/2 and 1 - -->(1-level)/2 in % (by default 2.5% and 97.5%).</p>
+labeled as "lower bound", "estimate" and "upper bound". <!-- %(1-level)/2 and 1 - --></p>
+
+
+<p>(1-level)/2 in % (by default 2.5% and 97.5%).</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
@@ -159,7 +179,7 @@ Statistics in Medicine 2009 vol. 28 issue 4 page 586-604.
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p><p>Developed by Yalin Zhu, Yilong Zhang, Xuan Deng, Keaven Anderson, Nan Xiao. Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3. <br>Copyright © 2022 Merck &amp; Co., Inc., Rahway, NJ, USA and its affiliates. All rights reserved.</p>
+  <p></p><p>Developed by Yalin Zhu, Yilong Zhang, Xuan Deng, Keaven Anderson, Nan Xiao. Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4. <br>Copyright © 2022 Merck &amp; Co., Inc., Rahway, NJ, USA and its affiliates. All rights reserved.</p>
 </div>
 
 <div class="pkgdown-footer-right">

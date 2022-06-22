@@ -74,34 +74,49 @@ for each elementary hypotheses within each intersection hypotheses</p>
 <dd><p>graph defined as a matrix, each element defines how much of the
 local alpha reserved for the hypothesis corresponding to its row index is
 passed on to the hypothesis corresponding to its column index</p></dd>
+
+
 <dt>w</dt>
 <dd><p>vector of weights, defines how much of the overall alpha is
 initially reserved for each elementary hypothesis</p></dd>
+
+
 <dt>cr</dt>
 <dd><p>correlation matrix if p-values arise from one-sided tests with
 multivariate normal distributed test statistics for which the correlation is
 partially known. Unknown values can be set to NA. (See details for more
 information)</p></dd>
+
+
 <dt>p</dt>
 <dd><p>vector of observed unadjusted p-values, that belong to
 test-statistics with a joint multivariate normal null distribution with
 (partially) known correlation matrix <code>cr</code></p></dd>
+
+
 <dt>adjusted</dt>
 <dd><p>logical, if TRUE (default) adjusted p-values for the closed
 test are returned, else a matrix of p-values adjusted only for each
 intersection hypothesis is returned</p></dd>
+
+
 <dt>hint</dt>
 <dd><p>if intersection hypotheses weights have already been computed
 (output of <code><a href="generateWeights.html">generateWeights</a></code>) can be passed here otherwise will
 be computed during execution</p></dd>
+
+
 <dt>upscale</dt>
 <dd><p>if <code>FALSE</code> (default) the p-values are additionally
 adjusted for the case that non-exhaustive weights are specified. (See
 details)</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>If adjusted is set to true returns a vector of adjusted p-values.
+    
+
+<p>If adjusted is set to true returns a vector of adjusted p-values.
 Any elementary null hypothesis is rejected if its corresponding adjusted
 p-value is below the predetermined alpha level. For adjusted set to false a
 matrix with p-values adjusted only within each intersection hypotheses is
@@ -194,7 +209,7 @@ weighted Bonferroni, Simes or parametric tests - to appear</p>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p><p>Developed by Yalin Zhu, Yilong Zhang, Xuan Deng, Keaven Anderson, Nan Xiao. Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3. <br>Copyright © 2022 Merck &amp; Co., Inc., Rahway, NJ, USA and its affiliates. All rights reserved.</p>
+  <p></p><p>Developed by Yalin Zhu, Yilong Zhang, Xuan Deng, Keaven Anderson, Nan Xiao. Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4. <br>Copyright © 2022 Merck &amp; Co., Inc., Rahway, NJ, USA and its affiliates. All rights reserved.</p>
 </div>
 
 <div class="pkgdown-footer-right">
