@@ -30,8 +30,8 @@
 #' @param yradius vertical ellipse diameter on which ellipses are drawn
 #' @param x x coordinates for hypothesis ellipses if elliptical arrangement is not wanted
 #' @param y y coordinates for hypothesis ellipses if elliptical arrangement is not wanted
-#' @param wchar character for alphaHypotheses in ellipses, default use Unicode escape sequence "\u03b1" as the Greek letter alpha.
-#' Refer to https://en.wikipedia.org/wiki/List_of_Unicode_characters for a more comprehensive character list.
+#' @param wchar character for alphaHypotheses in ellipses; defaults to the Unicode escape sequence \code{\\u03b1} (Greek letter alpha).
+#' See \href{https://en.wikipedia.org/wiki/List_of_Unicode_characters}{list of Unicode characters} for a more comprehensive character list.
 #' @return A `ggplot` object with a multi-layer multiplicity graph
 #'
 #' @examples
@@ -70,7 +70,7 @@
 #' @importFrom grid unit
 #' @importFrom grDevices palette
 #' @importFrom methods new show callNextMethod validObject
-#' @importFrom stats qt qnorm uniroot
+#' @importFrom stats qt qnorm uniroot reshape
 #' @importFrom graphics legend
 #' @importFrom utils capture.output
 #' @rdname hGraph
