@@ -93,7 +93,8 @@ hGraph(
 
 \item{y}{y coordinates for hypothesis ellipses if elliptical arrangement is not wanted}
 
-\item{wchar}{character for alphaHypotheses in ellipses}
+\item{wchar}{character for alphaHypotheses in ellipses, default use Unicode escape sequence "\u03b1" as the Greek letter alpha.
+Refer to https://en.wikipedia.org/wiki/List_of_Unicode_characters for a more comprehensive character list.}
 }
 \value{
 A `ggplot` object with a multi-layer multiplicity graph
