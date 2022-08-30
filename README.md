@@ -1,3 +1,5 @@
+**NOTE: this repo has been archived, please use the [gMCPLite repo](https://github.com/Merck/gMCPLite) to contribute codes or raise issues.**
+
 # gMCPmini <img src="man/figures/logo.png" align="right" width="120" />
 
 <!-- badges: start -->
